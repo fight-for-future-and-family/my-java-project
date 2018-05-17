@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.WandaDailyReport">
+	<resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.WandaDailyReport">
+		<result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+		<result column="creative" property="creative" jdbcType="VARCHAR" />
+		<result column="payment_amount" property="paymentAmount" jdbcType="DOUBLE" />
+		<result column="hulaiAmount" property="hulaiAmount" jdbcType="DOUBLE" />
+		<result column="ds" property="ds" jdbcType="DOUBLE" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="is_typing" property="isTyping" jdbcType="VARCHAR" />
+		<result column="is_exists" property="isExists" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="saveWandaDailysReport" parameterType="java.util.List">
+		insert into wanda_daily_report
+		(series_name, snid, gameid, creative, payment_amount, ds, is_typing, is_exists, remark, create_time)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.seriesName}, #{item.snid}, #{item.gameid}, #{item.creative}, #{item.paymentAmount}, #{item.ds}, #{item.isTyping}, #{item.isExists}, #{item.remark}, #{item.createTime})
+		</foreach>
+	</insert>
+	
+	<insert id="saveWandaDailyReport" parameterType="com.hoolai.bi.report.model.entity.WandaDailyReport" >
+	  	insert into wanda_daily_report (series_name,creative,payment_amount,ds,remark,is_typing,is_exists) 
+		values(#{seriesName},#{creative},#{paymentAmount},#{ds},#{remark},#{isTyping},#{isExists})
+	</insert>
+	
+	<select id="selectDailyData" parameterType="com.hoolai.bi.report.model.entity.WandaDailyReport"  resultMap="BaseResultMap">
+	  	select series_name, creative, sum(round(payment_amount,2)) as payment_amount, ds, remark 
+	  	from wanda_daily_report where 1=1
+	  	<if test="seriesName != null and seriesName !='' ">
+	  		and series_name=#{seriesName} 
+	  	</if>
+	  	<if test="ds != null and ds !='' " >
+	  		and ds=#{ds} 
+	  	</if>
+	  	<if test="creative != null and creative !='' " >
+	  		and creative=#{creative} 
+	  	</if>
+	  	and is_typing='1'
+	  	group by series_name, creative, ds
+	</select>
+	
+	<update id="updateWandaDailyReport" parameterType="com.hoolai.bi.report.model.entity.WandaDailyReport" >
+	  	update wanda_daily_report 
+	  	set payment_amount=#{paymentAmount}
+	  	<if test="remark != null and remark !=''" >
+	  		,remark=#{remark} 
+	  	</if>
+	  	where series_name=#{seriesName} and ds=#{ds} and creative=#{creative} and is_typing='1' and is_exists=#{isExists}
+  	</update>
+  	
+  	<select id="selectGwCreativeDailyBysource" parameterType="com.hoolai.bi.report.model.entity.GamesCreative" resultMap="BaseResultMap">
+		SELECT series_name,creative,payment_amount/c.rate AS payment_amount,ds,b.snid AS snid,b.gameid AS gameid FROM (
+			SELECT series_name,creative,SUM(payment_amount) AS payment_amount,ds,snid,gameid FROM (
+				SELECT #{seriesName} AS series_name,'官网' AS creative,source,payment_amount,DAY AS ds,snid,gameid FROM source_daily_report 
+				WHERE snid=#{snid} AND gameid=#{gameid} AND UPPER(source) IN 
+				(SELECT UPPER(source) AS source FROM guanwang_creative WHERE series_name=#{seriesName}) AND DAY=#{ds}
+				UNION ALL
+				SELECT #{seriesName} AS series_name,'安卓' AS creative,source,payment_amount,DAY AS ds,snid,gameid FROM source_daily_report 
+				WHERE snid=#{snid} AND gameid=#{gameid} AND UPPER(source) NOT IN 
+				(SELECT UPPER(source) AS source FROM guanwang_creative WHERE series_name=#{seriesName}) AND DAY=#{ds}
+				)a GROUP BY series_name,ds,creative,snid,gameid ORDER BY ds
+			)b LEFT OUTER JOIN (
+			SELECT * FROM games WHERE snid=#{snid} AND gameid=#{gameid}
+		)c ON b.snid=c.snid AND b.gameid=c.gameid
+  	</select>
+	
+	<select id="selectGameCreativeDailyBysource" parameterType="com.hoolai.bi.report.model.entity.GamesCreative" resultMap="BaseResultMap">
+		select series_name,snid,gameid,creative,sum(payment_amount)/rate as payment_amount, #{ds} as ds FROM (
+		select series_name,c.snid,c.gameid,creative,websites_sign,source,
+		payment_amount,d.rate from (
+		select series_name,a.snid as snid,a.gameid as gameid,
+		case when creative='官网' and websites_sign!='' and source like concat('%',upper(websites_sign),'%') then '官网' 
+		when creative='官网' and websites_sign=''  then '官网'
+		when creative='官网' and websites_sign!='' and source not like concat('%',upper(websites_sign),'%') then '安卓'
+		when creative='安卓' then '安卓'
+		when creative='IOS' then 'IOS'
+		when creative='海外' then '海外'
+		when creative='页游' THEN '页游'
+		end creative,
+		websites_sign,source,
+		case when payment_amount is null then '0' else payment_amount end payment_amount from (
+		select * from games_creative where snid=#{snid} and gameid=#{gameid}
+		) a left outer join (
+		select * from source_daily_report where snid=#{snid} and gameid=#{gameid} and DAY=#{ds}
+		) b on a.snid=b.snid and a.gameid=b.gameid
+		) c left outer join (
+		select snid,gameid,rate from games where snid=#{snid} and gameid=#{gameid}
+		) d on c.snid=d.snid and c.gameid=d.gameid
+		) e group by series_name,snid,gameid,creative
+	</select>
+	
+	<select id="selectSourceDaily" parameterType="map" resultMap="BaseResultMap">
+		select series_name,creative,sum(payment_amount) as payment_amount from wanda_daily_report 
+		where ds>=#{beginDate} <![CDATA[ and ds<=#{endDate} ]]>
+		group by series_name,creative order by payment_amount desc
+	</select>
+	
+	<select id="selectSeriesList" parameterType="map" resultMap="BaseResultMap">
+		SELECT c.series_name AS series_name,c.creative AS creative,rate,ROUND(payment_amount,2)AS payment_amount,onlinedate,ds,
+		ROUND(hulai,2) AS hulaiAmount FROM (
+		SELECT a.series_name AS series_name,a.creative AS creative,rate,CONCAT(#{beginDate},'至',#{endDate}) AS ds,SUM(ROUND(payment_amount,2))AS payment_amount,
+		SUM(ROUND(payment_amount*rate/100,2))AS hulai FROM(
+		SELECT series_name,creative,SUBSTRING(ds,-10,7)AS ds,SUM(ROUND(payment_amount,2)) AS payment_amount FROM wanda_daily_report 
+		WHERE ds>=#{beginDate} <![CDATA[ and ds<=#{endDate} ]]> and series_name =#{seriesName}
+		GROUP BY series_name,creative,ds
+		)a LEFT OUTER JOIN (
+		SELECT * FROM games_creative_rate
+		)b ON a.series_name=b.series_name AND a.creative=b.creative
+		WHERE ((b.ds='')OR (a.ds=b.ds))
+		GROUP BY series_name,creative,rate,ds
+		)c LEFT OUTER JOIN(
+		SELECT * FROM games_onlinedate
+		)d ON c.series_name=d.series_name AND c.creative=d.creative
+		GROUP BY series_name,creative,rate,onlinedate
+	</select>
+	
+	<select id="selectFirstTen" parameterType="map" resultMap="BaseResultMap">
+		SELECT series_name,SUM(payment_amount) AS payment_amount,SUM(hulaiAmount) AS hulaiAmount FROM (
+		SELECT c.series_name AS series_name,c.creative AS creative,rate,ROUND(payment_amount,2)AS payment_amount,onlinedate,ds,
+		ROUND(hulai,2) AS hulaiAmount FROM (
+		SELECT a.series_name AS series_name,a.creative AS creative,rate,CONCAT(#{beginDate},'至',#{endDate}) AS ds,SUM(ROUND(payment_amount,2))AS payment_amount,
+		SUM(ROUND(payment_amount*rate/100,2))AS hulai FROM(
+		SELECT series_name,creative,SUBSTRING(ds,-10,7)AS ds,SUM(ROUND(payment_amount,2)) AS payment_amount FROM wanda_daily_report 
+		WHERE ds>=#{beginDate} <![CDATA[ and ds<=#{endDate} ]]>
+		GROUP BY series_name,creative,ds
+		)a LEFT OUTER JOIN (
+		SELECT * FROM games_creative_rate
+		)b ON a.series_name=b.series_name AND a.creative=b.creative
+		WHERE ((b.ds='')OR (a.ds=b.ds))
+		GROUP BY series_name,creative,rate,ds
+		)c LEFT OUTER JOIN(
+		SELECT * FROM games_onlinedate
+		)d ON c.series_name=d.series_name AND c.creative=d.creative
+		GROUP BY series_name,creative,rate,onlinedate
+		)e GROUP BY series_name ORDER BY hulaiAmount DESC 
+		<if test="endNum != null and endNum !=''" >
+			limit 0,${endNum}
+		</if>
+		<if test="endNum == null or endNum ==''" >
+			limit 0,10
+		</if>
+	</select>
+	
+	<select id="selectOther" parameterType="map" resultMap="BaseResultMap">
+	SELECT '其他' AS series_name,SUM(payment_amount) AS payment_amount,SUM(hulaiAmount) AS hulaiAmount FROM (
+		SELECT series_name,SUM(payment_amount) AS payment_amount,SUM(hulaiAmount) AS hulaiAmount FROM (
+		SELECT c.series_name AS series_name,c.creative AS creative,rate,ROUND(payment_amount,2)AS payment_amount,onlinedate,ds,
+		ROUND(hulai,2) AS hulaiAmount FROM (
+		SELECT a.series_name AS series_name,a.creative AS creative,rate,CONCAT(#{beginDate},'至',#{endDate}) AS ds,SUM(ROUND(payment_amount,2))AS payment_amount,
+		SUM(ROUND(payment_amount*rate/100,2))AS hulai FROM(
+		SELECT series_name,creative,SUBSTRING(ds,-10,7)AS ds,SUM(ROUND(payment_amount,2)) AS payment_amount FROM wanda_daily_report 
+		WHERE ds>=#{beginDate} <![CDATA[ and ds<=#{endDate} ]]>
+		GROUP BY series_name,creative,ds
+		)a LEFT OUTER JOIN (
+		SELECT * FROM games_creative_rate
+		)b ON a.series_name=b.series_name AND a.creative=b.creative
+		WHERE ((b.ds='')OR (a.ds=b.ds))
+		GROUP BY series_name,creative,rate,ds
+		)c LEFT OUTER JOIN(
+		SELECT * FROM games_onlinedate
+		)d ON c.series_name=d.series_name AND c.creative=d.creative
+		GROUP BY series_name,creative,rate,onlinedate
+		)e GROUP BY series_name ORDER BY hulaiAmount DESC limit 10,200
+	)f
+	</select>
+	
+	<select id="selectWandaExists" parameterType="com.hoolai.bi.report.model.entity.WandaDailyReport" resultType="int">
+	  	select count(1) from wanda_daily_report where series_name=#{seriesName} AND ds=#{ds} and creative=#{creative}
+	  	and is_typing='1'
+	</select>
+	
+</mapper>

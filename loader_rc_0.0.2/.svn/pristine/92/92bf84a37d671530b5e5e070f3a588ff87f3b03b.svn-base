@@ -1,0 +1,36 @@
+#local root dir
+localRootDir=/data/scribe
+
+#metrics
+metrics=counter
+
+#hdfs root dir
+hdfsRootDir=/user/hive/warehouse/rawdata
+
+#load local file thread numbers
+threadNum=32
+
+#timeout (unit:hour)
+timeout=10
+
+#From today on a couple of days ahead
+loadForwardDays=3
+
+#delete data before a couple of days
+delForwardDays=7
+
+#hdfs file lzo suffix
+lzoSuffix=.lzo
+
+#lzo class
+lzoClass=com.hadoop.compression.lzo.LzopCodec
+
+checkNumCmd=ps -ef | grep /opt/load/loader.jar | grep -v grep | wc -l
+
+jdbc.driverClass=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.85.114:3306/reporting?characterEncoding=UTF-8
+jdbc.username=root
+jdbc.password=hoolai
+
+memcache.host=oraclebi
+memcache.port=11211

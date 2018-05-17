@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+			<item value="Github Issues"/>
+		</list>
+		<list key="issueManagementUrl">
+			<item value="${project.url}/issues"/>
+		</list>
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="D:\工作相关\IP地址转换\temp\presto-example-udf-master"/>
+			<item value="D:\工作相关\IP地址转换\temp\presto-third-functions-0.5.1"/>
+			<item value="C:\ip\geoip-dbip-rest-api-master"/>
+			<item value="D:\工作相关\IP地址转换\geoip-dbip-rest-api-master"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item value="All Catalogs" key="catalog"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="ipresolve_new"/>
+			<item value="IpResolve0321"/>
+			<item value="IpResolveHdfs"/>
+			<item value="IpResolve"/>
+			<item value="ipResolve"/>
+			<item value="ipResolve7"/>
+			<item value="iptest"/>
+			<item value="HooLaiIpResolve"/>
+			<item value="IP---Rresolve"/>
+			<item value="hlbi_ip_resolve"/>
+			<item value="loader-rc_0.0.2"/>
+			<item value="kafka-test"/>
+			<item value="report"/>
+			<item value="bi_loader_2.0.1"/>
+			<item value="hdfs_put_delete"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="ipresolve_new"/>
+			<item value="IpResolve0321"/>
+			<item value="IpResolveHdfs"/>
+			<item value="IpResolve"/>
+			<item value="ipResolve"/>
+			<item value="ipResolve7"/>
+			<item value="iptest"/>
+			<item value="HooLaiIpResolve"/>
+			<item value="IP---Rresolve"/>
+			<item value="hlbi_ip_resolve"/>
+			<item value="loader-rc_0.0.2"/>
+			<item value="kafka-test"/>
+			<item value="report"/>
+			<item value="bi_loader_2.0.1"/>
+			<item value="hdfs_put_delete"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+			<item value="1.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+		</list>
+		<list key="groupId">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+</section>

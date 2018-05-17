@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;dbip-api/src/main/webapp/WEB-INF/db/dbip-city-2017-09.csv.gz&apos; to &apos;dbip-city-latest.csv.gz&apos;" description="Rename resource &apos;dbip-city-2017-09.csv.gz&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/WEB-INF/db/dbip-city-2017-09.csv.gz" name="dbip-city-latest.csv.gz" stamp="1505447622659" updateReferences="true"/>&#x0A;&#x0A;</session>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    <id column="date" property="date" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="adv_install" property="advInstall" jdbcType="BIGINT" />
+    <result column="adv_cost" property="advCost" jdbcType="DOUBLE" />
+    <result column="d0_payUser" property="d0Payuser" jdbcType="BIGINT" />
+    <result column="pay_rate" property="payRate" jdbcType="DOUBLE" />
+    <result column="d0_payment" property="d0Payment" jdbcType="DOUBLE" />
+    <result column="d1_payment" property="d1Payment" jdbcType="DOUBLE" />
+    <result column="d3_payment" property="d3Payment" jdbcType="DOUBLE" />
+    <result column="d7_payment" property="d7Payment" jdbcType="DOUBLE" />
+    <result column="d30_payment" property="d30Payment" jdbcType="DOUBLE" />
+    <result column="d0_ROI" property="d0Roi" jdbcType="DOUBLE" />
+    <result column="d1_ROI" property="d1Roi" jdbcType="DOUBLE" />
+    <result column="d3_ROI" property="d3Roi" jdbcType="DOUBLE" />
+    <result column="d7_ROI" property="d7Roi" jdbcType="DOUBLE" />
+    <result column="d30_ROI" property="d30Roi" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    date, id, snid, gameid, adv_install, adv_cost, d0_payUser, pay_rate, d0_payment, 
+    d1_payment, d3_payment, d7_payment, d30_payment, d0_ROI, d1_ROI, d3_ROI, d7_ROI, 
+    d30_ROI, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    select 
+    <include refid="Base_Column_List" />
+    from analysis_gdt
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    delete from analysis_gdt
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    insert into analysis_gdt (date, id, snid, 
+      gameid, adv_install, adv_cost, 
+      d0_payUser, pay_rate, d0_payment, 
+      d1_payment, d3_payment, d7_payment, 
+      d30_payment, d0_ROI, d1_ROI, 
+      d3_ROI, d7_ROI, d30_ROI, 
+      create_time)
+    values (#{date,jdbcType=VARCHAR}, #{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, 
+      #{gameid,jdbcType=VARCHAR}, #{advInstall,jdbcType=BIGINT}, #{advCost,jdbcType=DOUBLE}, 
+      #{d0Payuser,jdbcType=BIGINT}, #{payRate,jdbcType=DOUBLE}, #{d0Payment,jdbcType=DOUBLE}, 
+      #{d1Payment,jdbcType=DOUBLE}, #{d3Payment,jdbcType=DOUBLE}, #{d7Payment,jdbcType=DOUBLE}, 
+      #{d30Payment,jdbcType=DOUBLE}, #{d0Roi,jdbcType=DOUBLE}, #{d1Roi,jdbcType=DOUBLE}, 
+      #{d3Roi,jdbcType=DOUBLE}, #{d7Roi,jdbcType=DOUBLE}, #{d30Roi,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    insert into analysis_gdt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="advInstall != null" >
+        adv_install,
+      </if>
+      <if test="advCost != null" >
+        adv_cost,
+      </if>
+      <if test="d0Payuser != null" >
+        d0_payUser,
+      </if>
+      <if test="payRate != null" >
+        pay_rate,
+      </if>
+      <if test="d0Payment != null" >
+        d0_payment,
+      </if>
+      <if test="d1Payment != null" >
+        d1_payment,
+      </if>
+      <if test="d3Payment != null" >
+        d3_payment,
+      </if>
+      <if test="d7Payment != null" >
+        d7_payment,
+      </if>
+      <if test="d30Payment != null" >
+        d30_payment,
+      </if>
+      <if test="d0Roi != null" >
+        d0_ROI,
+      </if>
+      <if test="d1Roi != null" >
+        d1_ROI,
+      </if>
+      <if test="d3Roi != null" >
+        d3_ROI,
+      </if>
+      <if test="d7Roi != null" >
+        d7_ROI,
+      </if>
+      <if test="d30Roi != null" >
+        d30_ROI,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="advInstall != null" >
+        #{advInstall,jdbcType=BIGINT},
+      </if>
+      <if test="advCost != null" >
+        #{advCost,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Payuser != null" >
+        #{d0Payuser,jdbcType=BIGINT},
+      </if>
+      <if test="payRate != null" >
+        #{payRate,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Payment != null" >
+        #{d0Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d1Payment != null" >
+        #{d1Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d3Payment != null" >
+        #{d3Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d7Payment != null" >
+        #{d7Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d30Payment != null" >
+        #{d30Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Roi != null" >
+        #{d0Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d1Roi != null" >
+        #{d1Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d3Roi != null" >
+        #{d3Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d7Roi != null" >
+        #{d7Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d30Roi != null" >
+        #{d30Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    update analysis_gdt
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="advInstall != null" >
+        adv_install = #{advInstall,jdbcType=BIGINT},
+      </if>
+      <if test="advCost != null" >
+        adv_cost = #{advCost,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Payuser != null" >
+        d0_payUser = #{d0Payuser,jdbcType=BIGINT},
+      </if>
+      <if test="payRate != null" >
+        pay_rate = #{payRate,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Payment != null" >
+        d0_payment = #{d0Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d1Payment != null" >
+        d1_payment = #{d1Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d3Payment != null" >
+        d3_payment = #{d3Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d7Payment != null" >
+        d7_payment = #{d7Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d30Payment != null" >
+        d30_payment = #{d30Payment,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Roi != null" >
+        d0_ROI = #{d0Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d1Roi != null" >
+        d1_ROI = #{d1Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d3Roi != null" >
+        d3_ROI = #{d3Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d7Roi != null" >
+        d7_ROI = #{d7Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="d30Roi != null" >
+        d30_ROI = #{d30Roi,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT" >
+    update analysis_gdt
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      adv_install = #{advInstall,jdbcType=BIGINT},
+      adv_cost = #{advCost,jdbcType=DOUBLE},
+      d0_payUser = #{d0Payuser,jdbcType=BIGINT},
+      pay_rate = #{payRate,jdbcType=DOUBLE},
+      d0_payment = #{d0Payment,jdbcType=DOUBLE},
+      d1_payment = #{d1Payment,jdbcType=DOUBLE},
+      d3_payment = #{d3Payment,jdbcType=DOUBLE},
+      d7_payment = #{d7Payment,jdbcType=DOUBLE},
+      d30_payment = #{d30Payment,jdbcType=DOUBLE},
+      d0_ROI = #{d0Roi,jdbcType=DOUBLE},
+      d1_ROI = #{d1Roi,jdbcType=DOUBLE},
+      d3_ROI = #{d3Roi,jdbcType=DOUBLE},
+      d7_ROI = #{d7Roi,jdbcType=DOUBLE},
+      d30_ROI = #{d30Roi,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause_vo">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and date >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and date <= #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+  <sql id="Vo_Where_Clause_model">
+		<where>
+				<if test="id != null ">
+					 <![CDATA[ and id = #{id} ]]>
+				</if>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="date != null">
+					 <![CDATA[ and date = #{date} ]]>
+				</if>
+		</where>
+	</sql>
+	
+	<select id="getByGameId" resultMap="BaseResultMap" parameterType="com.hoolai.bi.report.model.entity.AnalysisGDT">
+	  select 
+       <include refid="Base_Column_List" />
+      from analysis_gdt
+       <if test="_parameter != null">
+		  <include refid="Vo_Where_Clause_model" />
+	 </if>
+	</select>
+	
+	<select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.AnalysisGDTVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from analysis_gdt
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause_vo" />
+		</if>
+  </select>
+</mapper>

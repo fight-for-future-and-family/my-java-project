@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.GamesCreative">
+	<resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.GamesCreative">
+		<result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+		<result column="snid" property="snid" jdbcType="VARCHAR" />
+		<result column="gameid" property="gameid" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="DOUBLE" />
+		<result column="websites_sign" property="websitesSign" jdbcType="DOUBLE" />
+	</resultMap>
+	<resultMap id="GamesCreativeRateMap" type="com.hoolai.bi.report.model.entity.GamesCreativeRate">
+		<result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+		<result column="creative" property="creative" jdbcType="VARCHAR" />
+		<result column="rate" property="rate" jdbcType="DOUBLE" />
+		<result column="ds" property="ds" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectGames" parameterType="com.hoolai.bi.report.model.entity.GamesCreativeRate" resultMap="BaseResultMap">
+		select * from games_creative
+		where series_name=#{seriesName}
+	</select>
+	
+	<select id="selectGameNameList" resultMap="BaseResultMap">
+		select distinct series_name from games_creative
+	</select>
+	
+	<select id="selectCreativeRate" parameterType="com.hoolai.bi.report.model.entity.WandaDailyReport" resultMap="GamesCreativeRateMap">
+		select * from games_creative_rate 
+		where series_name=#{seriesName} and creative=#{creative}
+	</select>
+	
+	<update id="updateGamesCreativeRate" parameterType="com.hoolai.bi.report.model.entity.GamesCreativeRate">
+		update games_creative_rate 
+		set rate=#{rate}
+		where series_name=#{seriesName} and creative=#{creative} and ds=#{ds}
+	</update>
+	
+	<insert id="saveGamesCreativeRate">
+		insert into games_creative_rate
+		(series_name, creative, rate, ds)
+		values (#{seriesName}, #{creative}, #{rate}, #{ds})
+	</insert>
+	
+	<select id="selectGameCreativeRates" parameterType="com.hoolai.bi.report.model.entity.GamesCreativeRate" resultMap="GamesCreativeRateMap">
+		select * from games_creative_rate
+		where series_name=#{seriesName}
+		<if test="creative != null ">
+			and creative=#{creative}
+		</if>
+		<if test="ds != null ">
+			and ds=#{ds}
+		</if>
+	</select>
+	
+	<select id="selectGameCreative" parameterType="com.hoolai.bi.report.model.entity.GamesCreative" resultMap="BaseResultMap">
+		select * from games_creative
+		<if test="_parameter != null">
+			<where>
+				<if test="seriesName != null">
+					and series_name=#{seriesName}
+				</if>
+				<if test="snid != null">
+					and snid=#{snid}
+				</if>
+				<if test="gameid != null">
+					and gameid=#{gameid}
+				</if>
+				<if test="type != null">
+					and creative=#{type}
+				</if>
+				<if test="websitesSign != null">
+					and websites_sign=#{websitesSign}
+				</if>
+				and is_true is null limit 1
+			</where>
+		</if>
+	</select>
+
+</mapper>

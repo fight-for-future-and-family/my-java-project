@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.HourLtvSourceDailyReport" >
+	<resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.HourLtvSourceDailyReport" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+	    <result column="snid" property="snid" jdbcType="VARCHAR" />
+	    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+	    <result column="day" property="day" jdbcType="VARCHAR" />
+	    <result column="hour" property="hour" jdbcType="INTEGER" />
+	    <result column="minute" property="minute" jdbcType="INTEGER" />
+	    <result column="source" property="source" jdbcType="VARCHAR" />
+	    <result column="d0" property="d0" jdbcType="DOUBLE" />
+	    <result column="d1" property="d1" jdbcType="DOUBLE" />
+	    <result column="d2" property="d2" jdbcType="DOUBLE" />
+	    <result column="d3" property="d3" jdbcType="DOUBLE" />
+	    <result column="d4" property="d4" jdbcType="DOUBLE" />
+	    <result column="d5" property="d5" jdbcType="DOUBLE" />
+	    <result column="d6" property="d6" jdbcType="DOUBLE" />
+	    <result column="d7" property="d7" jdbcType="DOUBLE" />
+	    <result column="type" property="type" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+	    snid, gameid, day, end_day, hour, minute, source, reg, 
+			d0, d1, d2, d3, d4, d5, d6, d7, type, create_time
+	</sql>
+	<delete id="removeLtvSourceHourDaily" parameterType="com.hoolai.bi.report.model.entity.HourLtvSourceDailyReport">
+		delete from hour_ltv_source_daily_report where snid=#{snid} and gameid=#{gameid} and end_day=#{endDay} and hour=#{hour}
+	</delete>
+  
+	<sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.source != null and entity.source != ''">
+					 <![CDATA[ and source = #{entity.source} ]]>
+				</if>
+				<if test="entity.type != null and entity.type != '' ">
+					 <![CDATA[ and type = #{entity.type} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and end_day >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and end_day <= #{endDate} ]]>
+				</if>
+				<if test="beginHour != null">
+					 <![CDATA[ and hour >= #{beginHour} ]]>
+				</if>
+				<if test="endHour != null">
+					 <![CDATA[ and hour <= #{endHour} ]]>
+				</if>
+				<if test="entity.day != null">
+					<![CDATA[ and day = #{entity.day} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+  
+	<select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.HourLtvSourceDailyReportVO" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from hour_ltv_source_daily_report
+ 		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		 order by create_time desc LIMIT 1
+	</select>
+  
+	<select id="selectGameSources" parameterType="com.hoolai.bi.report.vo.SourceDailyReportVO" resultType="java.lang.String">
+		select distinct source 
+		from hour_ltv_source_daily_report
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		and source!='TOTAL'
+	</select>
+  
+	<select id="selectCount" parameterType="com.hoolai.bi.report.vo.SourceDailyReportVO" resultType="java.lang.Long">
+		select count(1)
+		from hour_ltv_source_daily_report
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<if test="searchValue != null and searchValue != ''">
+			and source like concat('%', #{searchValue}, '%')
+		</if>
+	</select>
+  
+	<select id="selectList" parameterType="com.hoolai.bi.report.vo.SourceDailyReportVO" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from hour_ltv_source_daily_report
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<if test="searchValue != null and searchValue != ''">
+        	and source like concat('%', #{searchValue}, '%')
+		</if>
+		group by source
+		${orderValue}
+		
+		
+		<![CDATA[limit #{offset}, #{rows} ]]>
+		
+		
+	</select>
+
+	<insert id="saveList" parameterType="java.util.List">
+		insert into hour_ltv_source_daily_report 
+		(snid, gameid, day, end_day, hour, minute, source, reg, 
+		d0, d1, d2, d3, d4, d5, d6, d7, type)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.snid}, #{item.gameid}, #{item.day}, #{item.endDay}, #{item.hour}, #{item.minute}, #{item.source}, #{item.reg},
+				#{item.d0}, #{item.d1}, #{item.d2}, #{item.d3}, #{item.d4}, #{item.d5}, #{item.d6}, #{item.d7}, #{item.type})
+		</foreach>
+	</insert>
+	
+</mapper>

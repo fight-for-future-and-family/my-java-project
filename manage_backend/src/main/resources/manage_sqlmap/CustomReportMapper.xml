@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.CustomReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.CustomReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="INTEGER" />
+    <result column="gameid" property="gameid" jdbcType="INTEGER" />
+    <result column="template_id" property="TemplateId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid,template_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from report_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from report_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.CustomReport" >
+    insert into report_template (id, snid, gameid, 
+     template_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=INTEGER}, #{gameid,jdbcType=INTEGER}, 
+     #{templateId,jdbcType=INTEGER}
+      )
+       <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.CustomReport" >
+    insert into report_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=INTEGER},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+     <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.CustomReport" >
+    update report_template
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=INTEGER},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.CustomReport" >
+    update report_template
+    set snid = #{snid,jdbcType=INTEGER},
+      gameid = #{gameid,jdbcType=INTEGER},
+      template_id = #{templateId,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

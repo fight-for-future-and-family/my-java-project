@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.TblGroup" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.TblGroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_id, group_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_group
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_group
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.TblGroup" >
+    insert into tbl_group (id, group_id, group_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.TblGroup" >
+    insert into tbl_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.TblGroup" >
+    update tbl_group
+    <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.TblGroup" >
+    update tbl_group
+    set group_id = #{groupId,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap type="com.hoolai.manage.vo.TblGroupVO" id="gamesMap">
+      <result column="game_id" property="gameId" jdbcType="INTEGER" />
+      <result column="sn_id" property="snId" jdbcType="INTEGER" />
+      <result column="group_name" property="entity.groupName" jdbcType="VARCHAR" />
+      <result column="group_id" property="entity.groupId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getGroupMaxId" resultType="java.lang.Long">
+     select max(group_id) from tbl_group
+  </select>
+  
+  <select id="getOldReportGameInfo" parameterType="com.hoolai.manage.vo.TblGroupVO"
+          resultMap="gamesMap">
+  <if test="snId != null and gameId !=null">
+    <![CDATA[
+    select a.game_id,b.sn_id,c.group_id,c.group_name
+	from tbl_group_game_bind a,tbl_group_sn_bind b,tbl_group c
+	where a.group_id = b.group_id and c.group_id = b.group_id and c.group_id = b.group_id
+		    and c.group_id <> 98 and c.group_id <> 99 
+    ]]>
+     and b.sn_id=#{snId} and a.game_id=#{gameId}
+     limit 0,1
+    </if>
+  </select>
+</mapper>

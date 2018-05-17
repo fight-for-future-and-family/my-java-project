@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.TblGroupSnBind" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.TblGroupSnBind" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="sn_id" property="snId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_id, sn_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_group_sn_bind
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_group_sn_bind
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.TblGroupSnBind" >
+    insert into tbl_group_sn_bind (id, group_id, sn_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{groupId,jdbcType=INTEGER}, #{snId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.TblGroupSnBind" >
+    insert into tbl_group_sn_bind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="snId != null" >
+        sn_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="snId != null" >
+        #{snId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.TblGroupSnBind" >
+    update tbl_group_sn_bind
+    <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="snId != null" >
+        sn_id = #{snId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.TblGroupSnBind" >
+    update tbl_group_sn_bind
+    set group_id = #{groupId,jdbcType=INTEGER},
+      sn_id = #{snId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="isHaveAdminAuth" parameterType="java.lang.Integer" resultType="java.lang.Long">
+     select count(1) 
+     from tbl_group_sn_bind 
+     where group_id=99
+     and sn_id = #{snId,jdbcType=INTEGER}
+  </select>
+</mapper>

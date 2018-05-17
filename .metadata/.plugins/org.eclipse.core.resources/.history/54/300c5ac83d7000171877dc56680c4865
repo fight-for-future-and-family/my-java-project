@@ -1,0 +1,82 @@
+/*��css�ļ��У�Ĭ�ϵ�htmlԪ�ؿ���ֱ��ʹ�����ƣ����ﶨ����������ҳbody���ֵ���ɫ��
+��ʮ�����Ƶ�RGB��ʾ��������ͼƬ�ܱߵİ���ɫ��Ҳ����ʹ���ĸ�url()�ķ�ʽΪbody����
+���ñ���ͼƬ*/
+html,body{
+    background-color: #551122;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    text-align: justify;
+ /*    height: 100vh; 
+	width: 100vh; */ 
+/* <!-- background-image: url("../bj.jpg");--> */
+}
+/*htmlԪ�ص�id����ʹ��#��ͷ��width��herght��ʾ����ߣ���Сʹ�����ر�ʾ��
+margin��ʾ��ʾ��ʽ��Ĭ�Ͽ���auto����Ϊ������ʾ�����趨������ɫΪred*/
+#head{
+    height: 20%;
+    margin: auto;
+    background-color: #8080c0;
+}
+#container{
+    height: 70%;
+    margin: auto;
+    background-color: yellow;
+}
+/*htmlԪ�ض���class����ʹ�õ�.��ͷ��float���øÿ��Ư�����ԣ���container��������,
+��һ����siderbar��container��������*/
+.zabbix1{
+    float: left;
+    width: 50%;
+    height: 40%;
+    background-color: #456616;
+}
+.zabbix2{
+    float: left;
+    width: 50%;
+    height: 40%;
+    background-color: #666616;
+}
+.hadoop1{
+    float: left;
+    width: 50%;
+    height: 40%;
+    background-color: #656612;
+}
+.hadoop2{
+    float: left;
+    width: 50%;
+    height: 40%;
+    background-color: #556612;
+}
+/*��Ϊmain��siderbar��container�ڣ�����������Ŀ��֮�Ͳ�Ӧ�ó���container�Ŀ��*/
+.sidebar{
+    float: right;
+    width: 50%;
+    height: 100%;
+    background-color: #556688;
+}
+/*�ײ����idֵ����С����ɫ��������ʾ*/
+#bottom{
+    height: 10%;
+    background-color: #552233;
+    margin: auto;
+}
+/*���¶���h1Ԫ�ص���ʾ������h1Ĭ���б߾�margin-top�����������Ϊ0��
+text-alignΪ�����������ʾλ�����ԣ�center�Ǿ�����ʾ��font-size�����С*/
+h1{
+    margin-top: 0px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+/*����bottom�е�h1��ʾ��ʽ��������h1������ɫΪwhite���˴�h1��ɫΪred����СҲ�ı䡣
+���ദ������ͬһ��Ԫ��ʱ���ȷ����Ч*/
+#bottom h1{
+    margin-top: 0px;
+    text-align: center;
+    color: red;
+    font-size: 50px;
+}

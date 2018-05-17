@@ -1,0 +1,10 @@
+.dataShap { display:block; margin-top:10px; margin-right:10px;overflow:hidden; font-size:12px;}
+.dataShap ul {margin:0; padding:0; zoom:1; display:block;  border:1px solid #97a0b1; border-radius:2px; background:#fff;z-index:1;position:absolute;}
+.dataShap ul li { cursor:pointer; list-style:none; float:left; text-align:center; padding:2px 2px; text-indent:-99999px;}
+.dataShap ul li.onChoose { background:#7788a2;}
+
+.dataShap ul li em { width:18px; height:10px; display:block}
+.dataShap ul li em.columnar { background:url(/images/icon_dataShap.png) left -11px; background-size:190% 220%;}
+.dataShap ul li.onChoose em.columnar { background:url(/images/icon_dataShap.png) left top;background-size:190% 220%;}
+.dataShap ul li em.linear { background:url(/images/icon_dataShap.png) -17px -11px;background-size:190% 220%;}
+.dataShap ul li.onChoose em.linear { background:url(/images/icon_dataShap.png) right top;background-size:190% 220%;}

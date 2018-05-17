@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.TotalPaymentLevel" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.TotalPaymentLevel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="stat_day" property="statDay" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="payer_num" property="payerNum" jdbcType="INTEGER" />
+    <result column="total_amount" property="totalAmount" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, stat_day, level, payer_num, total_amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from total_payment_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from total_payment_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.TotalPaymentLevel" >
+    insert into total_payment_level (id, snid, gameid, 
+      stat_day, level, payer_num, 
+      total_amount, create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{statDay,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{payerNum,jdbcType=INTEGER}, 
+      #{totalAmount,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.TotalPaymentLevel" >
+    insert into total_payment_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="statDay != null" >
+        stat_day,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="payerNum != null" >
+        payer_num,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="statDay != null" >
+        #{statDay,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="payerNum != null" >
+        #{payerNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.TotalPaymentLevel" >
+    update total_payment_level
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="statDay != null" >
+        stat_day = #{statDay,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="payerNum != null" >
+        payer_num = #{payerNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.TotalPaymentLevel" >
+    update total_payment_level
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      stat_day = #{statDay,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      payer_num = #{payerNum,jdbcType=INTEGER},
+      total_amount = #{totalAmount,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.level != null and entity.level != ''">
+					 <![CDATA[ and level = #{entity.level} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and stat_day >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and stat_day <= #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+  
+  <resultMap id="PieResultMap" type="com.hoolai.bi.report.vo.TotalPaymentLevelVO" >
+       <result column="snid" property="entity.snid" jdbcType="VARCHAR" />
+       <result column="gameid" property="entity.gameid" jdbcType="VARCHAR" />
+       <result column="level" property="entity.level" jdbcType="VARCHAR" />
+       <result column="payMentSum" property="payMentSum" jdbcType="DOUBLE" />
+       <result column="payUserSum" property="payUserSum" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <select id="selectPaymentForPieListCount" parameterType="com.hoolai.bi.report.vo.TotalPaymentLevelVO" resultType="java.lang.Long">
+    select sum(total_amount) paymentSum
+    from total_payment_level
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+  
+  <select id="selectPaymentForPieList" parameterType="com.hoolai.bi.report.vo.TotalPaymentLevelVO" resultMap="PieResultMap">
+    select snid,gameid,level,sum(total_amount) paymentSum
+    from total_payment_level
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+   group by level
+   order by paymentSum desc
+   <![CDATA[ limit 0, 10 ]]>
+  </select>
+  
+    <select id="selectPayUserForPieListCount" parameterType="com.hoolai.bi.report.vo.TotalPaymentLevelVO" resultType="java.lang.Long">
+    select sum(payer_num) payUserSum
+    from total_payment_level
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+  
+  <select id="selectPayUserForPieList" parameterType="com.hoolai.bi.report.vo.TotalPaymentLevelVO" resultMap="PieResultMap">
+    select snid,gameid,level,sum(payer_num) payUserSum
+    from total_payment_level
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+   group by level
+   order by payUserSum desc
+   <![CDATA[ limit 0, 10 ]]>
+  </select>
+  
+</mapper>

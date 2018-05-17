@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.Games" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.Games" >
+    <id column="id" property="id" jdbcType="BIGINT" />  
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="dept_id" property="deptId" jdbcType="BIGINT" />
+    <result column="month_kpi" property="monthKpi" jdbcType="DOUBLE" />
+    <result column="year_kpi" property="yearKpi" jdbcType="DOUBLE" />
+    <result column="curr_month_kpi" property="currMonthKpi" jdbcType="DOUBLE" />
+    <result column="curr_year_kpi" property="currYearKpi" jdbcType="DOUBLE" />
+    <result column="online_date" property="onlineDate" jdbcType="TIMESTAMP" />
+    <result column="install" property="install" jdbcType="BIGINT" />
+    <result column="pu" property="pu" jdbcType="BIGINT" />
+    <result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="rate" property="rate" jdbcType="DOUBLE" />
+    <result column="stats" property="stats" jdbcType="VARCHAR" />
+    <result column="time_zone" property="timeZone" jdbcType="VARCHAR" />
+    <result column="etl_trigger_time" property="etlTriggerTime" jdbcType="TIMESTAMP" />
+    <result column="etl_trigger_id" property="etlTriggerId" jdbcType="VARCHAR" />
+    <result column="etl_status" property="etlStatus" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="terminal_type" property="terminalType" jdbcType="BIGINT" />
+    <result column="system_type" property="systemType" jdbcType="BIGINT" />
+    <result column="etl_order" property="etlOrder" jdbcType="BIGINT" />
+    <result column="etl_currency" property="etlCurrency" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, name, alias, logo, remark, dept_id, month_kpi, year_kpi, curr_month_kpi, 
+    curr_year_kpi, online_date, install, pu, pay_amount, currency, rate,stats,time_zone,etl_trigger_time,
+    etl_trigger_id,etl_status,parent_id,terminal_type,system_type,etl_order ,etl_currency 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from games
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from games
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.Games" >
+    insert into games (id, snid, gameid, 
+      name, alias, logo, 
+      remark, dept_id, month_kpi, 
+      year_kpi, curr_month_kpi, curr_year_kpi, 
+      online_date, install, pu, 
+      pay_amount, currency, rate,stats,time_zone,
+      etl_trigger_time,etl_trigger_id,etl_status,parent_id,
+      terminal_type,system_type
+      )
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deptId,jdbcType=BIGINT}, #{monthKpi,jdbcType=DOUBLE}, 
+      #{yearKpi,jdbcType=DOUBLE}, #{currMonthKpi,jdbcType=DOUBLE}, #{currYearKpi,jdbcType=DOUBLE}, 
+      #{onlineDate,jdbcType=TIMESTAMP}, #{install,jdbcType=BIGINT}, #{pu,jdbcType=BIGINT}, 
+      #{payAmount,jdbcType=DOUBLE}, #{currency,jdbcType=VARCHAR}, #{rate,jdbcType=DOUBLE},
+      #{stats,jdbcType=VARCHAR},#{timeZone,jdbcType=VARCHAR},#{etlTriggerTime,jdbcType=TIMESTAMP},
+      #{etlTriggerId,jdbcType=VARCHAR},#{etlStatus,jdbcType=VARCHAR},#{parentId,jdbcType=BIGINT},
+      #{terminalType,jdbcType=BIGINT},#{systemType,jdbcType=BIGINT}
+      )
+      <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.Games" >
+    insert into games
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="alias != null" >
+        alias,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="monthKpi != null" >
+        month_kpi,
+      </if>
+      <if test="yearKpi != null" >
+        year_kpi,
+      </if>
+      <if test="currMonthKpi != null" >
+        curr_month_kpi,
+      </if>
+      <if test="currYearKpi != null" >
+        curr_year_kpi,
+      </if>
+      <if test="onlineDate != null" >
+        online_date,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="pu != null" >
+        pu,
+      </if>
+      <if test="payAmount != null" >
+        pay_amount,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="stats != null" >
+        stats,
+      </if>
+      <if test="timeZone != null" >
+        time_zone,
+      </if>
+      <if test="etlTriggerTime != null" >
+        etl_trigger_time,
+      </if>
+      <if test="etlTriggerId != null" >
+        etl_trigger_id,
+      </if>
+      <if test="etlStatus != null" >
+        etl_status,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="terminalType != null" >
+        terminal_type,
+      </if>
+      <if test="systemType != null" >
+        system_type,
+      </if>
+      <if test="etlOrder != null" >
+        etl_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="monthKpi != null" >
+        #{monthKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="yearKpi != null" >
+        #{yearKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="currMonthKpi != null" >
+        #{currMonthKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="currYearKpi != null" >
+        #{currYearKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="onlineDate != null" >
+        #{onlineDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=BIGINT},
+      </if>
+      <if test="pu != null" >
+        #{pu,jdbcType=BIGINT},
+      </if>
+      <if test="payAmount != null" >
+        #{payAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="stats != null" >
+        #{stats,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZone != null" >
+        #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="etlTriggerTime != null" >
+        #{etlTriggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etlTriggerId != null" >
+        #{etlTriggerid,jdbcType=VARCHAR},
+      </if>
+      <if test="etlStatus != null" >
+        #{etlStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="terminalType != null" >
+        #{terminalType,jdbcType=BIGINT},
+      </if>
+      <if test="systemType != null" >
+        #{systemType,jdbcType=BIGINT},
+      </if>
+      <if test="etlOrder != null" >
+        #{etlOrder,jdbcType=BIGINT},
+      </if>
+    </trim>
+    <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.Games" >
+    update games
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="monthKpi != null" >
+        month_kpi = #{monthKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="yearKpi != null" >
+        year_kpi = #{yearKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="currMonthKpi != null" >
+        curr_month_kpi = #{currMonthKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="currYearKpi != null" >
+        curr_year_kpi = #{currYearKpi,jdbcType=DOUBLE},
+      </if>
+      <if test="onlineDate != null" >
+        online_date = #{onlineDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=BIGINT},
+      </if>
+      <if test="pu != null" >
+        pu = #{pu,jdbcType=BIGINT},
+      </if>
+      <if test="payAmount != null" >
+        pay_amount = #{payAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="stats != null" >
+        stats = #{stats,jdbcType=VARCHAR},
+      </if>
+      <if test="stats != null" >
+        time_zone = #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="etlTriggerTime != null" >
+        etl_trigger_time = #{etlTriggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etlTriggerId != null" >
+        etl_trigger_id = #{etlTriggerId,jdbcType=VARCHAR},
+      </if>
+      <if test="etlStatus != null" >
+        etl_status =  #{etlStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="terminalType != null" >
+        terminal_type = #{terminalType,jdbcType=BIGINT},
+      </if>
+      <if test="systemType != null" >
+        system_type = #{systemType,jdbcType=BIGINT},
+      </if>
+       <if test="etlOrder != null" >
+        etl_order = #{etlOrder,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.Games" >
+    update games
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=BIGINT},
+      month_kpi = #{monthKpi,jdbcType=DOUBLE},
+      year_kpi = #{yearKpi,jdbcType=DOUBLE},
+      curr_month_kpi = #{currMonthKpi,jdbcType=DOUBLE},
+      curr_year_kpi = #{currYearKpi,jdbcType=DOUBLE},
+      online_date = #{onlineDate,jdbcType=TIMESTAMP},
+      install = #{install,jdbcType=BIGINT},
+      pu = #{pu,jdbcType=BIGINT},
+      pay_amount = #{payAmount,jdbcType=DOUBLE},
+      currency = #{currency,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DOUBLE},
+      stats = #{stats,jdbcType=VARCHAR},
+      time_zone = #{timeZone,jdbcType=VARCHAR},
+      etl_trigger_time = #{etlTriggerTime,jdbcType=TIMESTAMP},
+      etl_trigger_id = #{etlTriggerId,jdbcType=VARCHAR},
+      etl_status =  #{etlStatus,jdbcType=VARCHAR},,
+      parent_id = #{parentId,jdbcType=BIGINT},
+      terminal_type = #{terminalType,jdbcType=BIGINT},
+      system_type = #{systemType,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+      <where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.name != null and entity.name != ''">
+					 <![CDATA[ and name like concat('%', #{entity.name}, '%') ]]>
+				</if>
+				
+				<if test="entity.etlStatus!= null and entity.etlStatus != ''">
+					 <![CDATA[ and etl_status = #{entity.etlStatus} ]]>
+				</if>
+				
+			</if>
+			and stats = '1'  
+		</where>
+	</sql>
+  
+  <select id="selectOne" parameterType="com.hoolai.bi.report.vo.GamesVO" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from games
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		 <![CDATA[ limit 0, 1 ]]>
+	</select>
+  
+  <select id="selectAllGames" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from games order by gameid
+  </select>
+  
+   <select id="selectAllGames2" resultMap="BaseResultMap">
+     select  
+     <include refid="Base_Column_List" />
+     from games where etl_status='1' order by etl_order
+  </select>
+  
+  <select id="selectGamesByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from games
+     where stats = '1' and id in (
+     select game_id from user_game where user_id = #{userId,jdbcType=INTEGER})
+     order by convert(name using gbk) asc,install desc,pay_amount desc
+  </select>
+  
+  <select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.GamesVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from games
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+  </select>
+  
+  <select id="selectList" parameterType="com.hoolai.bi.report.vo.GamesVO" resultMap="BaseResultMap">
+		select
+		  <include refid="Base_Column_List" />
+		  from games
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<![CDATA[ order by id asc limit #{offset}, #{rows} ]]>
+	</select>
+	
+	<select id="selectCount" parameterType="com.hoolai.bi.report.vo.GamesVO" resultType="java.lang.Long">
+		select 
+		  count(*)
+		  from games u
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,9 @@
+eclipse.m2.WorkspacelifecycleMappingsLocation=D\:/Eclipse_workdirectory/.metadata/.plugins/org.eclipse.m2e.core/lifecycle-mapping-metadata.xml
+eclipse.m2.defaultRuntime=EMBEDDED
+eclipse.m2.problem.notCoveredMojoExecution=warning
+eclipse.m2.problem.outofdateProjectConfig=warning
+eclipse.m2.runtimes=apache-maven-3.2.3
+eclipse.m2.runtimesNodes/apache-maven-3.2.3/location=D\:\\Program Files\\apache-maven-3.2.3
+eclipse.m2.runtimesNodes/apache-maven-3.2.3/type=EXTERNAL
+eclipse.m2.userSettingsFile=D\:\\Program Files\\apache-maven-3.2.3\\conf\\settings.xml
+eclipse.preferences.version=1

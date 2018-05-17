@@ -1,0 +1,10 @@
+use facts;
+alter table f_game_client_day drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+alter table f_game_source_day drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+alter table paylevel_amount_cnt_new drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+alter table paylevel_amount_cnt_client_new drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+use etl;
+alter table a_user_retention_client_ltv drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+alter table a_user_retention_ltv drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+alter table a_user_retention_source_ltv drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');
+alter table role_choice_retention_ltv drop partition(snid='${snid}', gameid='${gameid}', ds='${ds}');

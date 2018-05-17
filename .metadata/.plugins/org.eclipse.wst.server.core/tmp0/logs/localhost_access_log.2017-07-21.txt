@@ -1,0 +1,15 @@
+127.0.0.1 - - [21/Jul/2017:15:56:41 +0800] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:56:43 +0800] "GET /hdfs_file_upload/ HTTP/1.1" 200 1120
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:56:43 +0800] "GET /hdfs_file_upload/picture_css/wl.css HTTP/1.1" 200 1738
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:56:43 +0800] "GET /favicon.ico HTTP/1.1" 404 1016
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:57:23 +0800] "GET /hdfs_file_upload/bushu HTTP/1.1" 200 2028
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:57:26 +0800] "GET /hdfs_file_upload/add HTTP/1.1" 200 774
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:57:26 +0800] "GET /hdfs_file_upload/wl.png HTTP/1.1" 404 1040
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:57:52 +0800] "GET /hdfs_file_upload/add HTTP/1.1" 200 774
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:57:52 +0800] "GET /hdfs_file_upload/wl.png HTTP/1.1" 404 1040
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:57:54 +0800] "GET /hdfs_file_upload/bushu HTTP/1.1" 200 2028
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:15:58:11 +0800] "GET /hdfs_file_upload/bushu HTTP/1.1" 200 2028
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:16:01:19 +0800] "GET /hdfs_file_upload/add HTTP/1.1" 200 774
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:16:01:19 +0800] "GET /hdfs_file_upload/wl.png HTTP/1.1" 404 1040
+127.0.0.1 - - [21/Jul/2017:17:50:40 +0800] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [21/Jul/2017:17:50:41 +0800] "GET /hdfs_file_upload/ HTTP/1.1" 200 1103

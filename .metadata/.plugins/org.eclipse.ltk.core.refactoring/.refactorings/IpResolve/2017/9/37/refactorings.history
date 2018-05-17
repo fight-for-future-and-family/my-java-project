@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;IpResolve/src/upload.properties&apos; to &apos;contain.properties&apos;" description="Rename resource &apos;upload.properties&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/upload.properties" name="contain.properties" stamp="1505456246921" updateReferences="true"/>
+</session>

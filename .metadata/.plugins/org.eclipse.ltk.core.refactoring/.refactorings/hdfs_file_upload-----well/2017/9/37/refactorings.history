@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;upload.properties&apos; to &apos;IpResolve/src&apos;&#x0D;&#x0A;- Original project: &apos;hdfs_file_upload-----well&apos;&#x0D;&#x0A;- Destination element: &apos;IpResolve/src&apos;&#x0D;&#x0A;- Original element: &apos;upload.properties&apos;" description="Copy file" destination="=IpResolve/src" element1="src.main.java/upload.properties" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1505456230312" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/loader-dev-2.0.1/src/main/java/com/hoolai/loader/scan/LoadScan.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.hoolai.loader.scan.LoadScan"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="loader-dev-2.0.1"/>
+</launchConfiguration>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;IP---Rresolve&apos; to &apos;IpResolveLast&apos;&#x0D;&#x0A;- Original element: &apos;IP---Rresolve&apos;&#x0D;&#x0A;- Renamed element: &apos;IP---Rresolve&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;IP---Rresolve&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=IP---Rresolve" name="IpResolveLast" references="true" stamp="1505651853217" version="1.0"/>
+</session>

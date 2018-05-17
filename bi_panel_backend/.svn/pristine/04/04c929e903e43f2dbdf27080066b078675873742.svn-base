@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.equip.EquipModelRetentionLtv" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.equip.EquipModelRetentionLtv" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="retention_day" property="retentionDay" jdbcType="INTEGER" />
+    <result column="new_equip" property="newEquip" jdbcType="INTEGER" />
+    <result column="install_equip" property="installEquip" jdbcType="INTEGER" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="install_date" property="installDate" jdbcType="VARCHAR" />
+    <result column="retention_equip" property="retentionEquip" jdbcType="INTEGER" />
+    <result column="total_payment" property="totalPayment" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, model, retention_day, new_equip, install_equip, ds, install_date, 
+    retention_equip, total_payment, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from equip_model_retention_ltv
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from equip_model_retention_ltv
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelRetentionLtv" >
+    insert into equip_model_retention_ltv (id, snid, gameid, 
+      model, retention_day, new_equip, 
+      install_equip, ds, install_date, 
+      retention_equip, total_payment, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{retentionDay,jdbcType=INTEGER}, #{newEquip,jdbcType=INTEGER}, 
+      #{installEquip,jdbcType=INTEGER}, #{ds,jdbcType=VARCHAR}, #{installDate,jdbcType=VARCHAR}, 
+      #{retentionEquip,jdbcType=INTEGER}, #{totalPayment,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelRetentionLtv" >
+    insert into equip_model_retention_ltv
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="retentionDay != null" >
+        retention_day,
+      </if>
+      <if test="newEquip != null" >
+        new_equip,
+      </if>
+      <if test="installEquip != null" >
+        install_equip,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="installDate != null" >
+        install_date,
+      </if>
+      <if test="retentionEquip != null" >
+        retention_equip,
+      </if>
+      <if test="totalPayment != null" >
+        total_payment,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="retentionDay != null" >
+        #{retentionDay,jdbcType=INTEGER},
+      </if>
+      <if test="newEquip != null" >
+        #{newEquip,jdbcType=INTEGER},
+      </if>
+      <if test="installEquip != null" >
+        #{installEquip,jdbcType=INTEGER},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="installDate != null" >
+        #{installDate,jdbcType=VARCHAR},
+      </if>
+      <if test="retentionEquip != null" >
+        #{retentionEquip,jdbcType=INTEGER},
+      </if>
+      <if test="totalPayment != null" >
+        #{totalPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelRetentionLtv" >
+    update equip_model_retention_ltv
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="retentionDay != null" >
+        retention_day = #{retentionDay,jdbcType=INTEGER},
+      </if>
+      <if test="newEquip != null" >
+        new_equip = #{newEquip,jdbcType=INTEGER},
+      </if>
+      <if test="installEquip != null" >
+        install_equip = #{installEquip,jdbcType=INTEGER},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="installDate != null" >
+        install_date = #{installDate,jdbcType=VARCHAR},
+      </if>
+      <if test="retentionEquip != null" >
+        retention_equip = #{retentionEquip,jdbcType=INTEGER},
+      </if>
+      <if test="totalPayment != null" >
+        total_payment = #{totalPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelRetentionLtv" >
+    update equip_model_retention_ltv
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      retention_day = #{retentionDay,jdbcType=INTEGER},
+      new_equip = #{newEquip,jdbcType=INTEGER},
+      install_equip = #{installEquip,jdbcType=INTEGER},
+      ds = #{ds,jdbcType=VARCHAR},
+      install_date = #{installDate,jdbcType=VARCHAR},
+      retention_equip = #{retentionEquip,jdbcType=INTEGER},
+      total_payment = #{totalPayment,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <resultMap id="EquipLtvResultMap" type="com.hoolai.bi.report.model.entity.equip.EquipLtv" >
+    <result column="install_date" property="installDate" jdbcType="VARCHAR" />
+    <result column="new_equip" property="newEquip" jdbcType="VARCHAR" />
+    <result column="sourceOrModel" property="sourceOrModel" jdbcType="INTEGER" />
+    <result column="d1" property="d1" jdbcType="DOUBLE" />
+    <result column="d2" property="d2" jdbcType="DOUBLE" />
+    <result column="d3" property="d3" jdbcType="DOUBLE" />
+    <result column="d4" property="d4" jdbcType="DOUBLE" />
+    <result column="d5" property="d5" jdbcType="DOUBLE" />
+    <result column="d6" property="d6" jdbcType="DOUBLE" />
+    <result column="d7" property="d7" jdbcType="DOUBLE" />
+  </resultMap>
+  
+   <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.model!= null and entity.model != ''">
+					 <![CDATA[ and model = #{entity.model} ]]>
+				</if>
+			</if>
+			<if test="beginDate != null">
+					 <![CDATA[ and install_date >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and install_date <= #{endDate} ]]>
+				</if>
+		</where>
+	</sql>
+  
+  <select id="selectList" parameterType="com.hoolai.bi.report.vo.EquipModelRetentionLtvVO" resultMap="EquipLtvResultMap">
+  	${orderValue}
+  	from equip_model_retention_ltv
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+		<![CDATA[ and (retention_day >= 1 and retention_day <= 7) ]]>
+	</if>
+	<if test="searchValue != null">
+	    and (install_date like concat('%', #{searchValue}, '%')
+	    or model  like concat('%', #{searchValue}, '%') )
+	 </if>
+	 <![CDATA[ 
+		group by install_date,model
+		order by install_date desc,new_equip desc
+	]]>
+	<if test="queryType == 'limit'">
+	    limit #{offset},#{rows}
+	 </if>
+  </select>
+  
+  <select id="selectCount" parameterType="com.hoolai.bi.report.vo.EquipModelRetentionLtvVO" resultType="java.lang.Long">
+	select count(1) from
+	(select install_date,model from equip_model_retention_ltv
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+		and (install_date like concat('%', #{searchValue}, '%')
+	    or model  like concat('%', #{searchValue}, '%') )
+	</if>
+	group by install_date,model
+	) a
+</select>
+  
+</mapper>

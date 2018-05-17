@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.OldReportUser" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.OldReportUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="last_login" property="lastLogin" jdbcType="TIMESTAMP" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="init_pwd" property="initPwd" jdbcType="VARCHAR" />
+    <result column="exclude" property="exclude" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, username, password, email, role_id, last_login, realname, init_pwd, exclude
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.OldReportUser" >
+    insert into user (id, userid, username, 
+      password, email, role_id, 
+      last_login, realname, init_pwd, 
+      exclude)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{lastLogin,jdbcType=TIMESTAMP}, #{realname,jdbcType=VARCHAR}, #{initPwd,jdbcType=VARCHAR}, 
+      #{exclude,jdbcType=VARCHAR})
+      <selectKey resultType="int" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.OldReportUser" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="lastLogin != null" >
+        last_login,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="initPwd != null" >
+        init_pwd,
+      </if>
+      <if test="exclude != null" >
+        exclude,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null" >
+        #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="initPwd != null" >
+        #{initPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="exclude != null" >
+        #{exclude,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    <selectKey resultType="int" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.OldReportUser" >
+    update user
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null" >
+        last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="initPwd != null" >
+        init_pwd = #{initPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="exclude != null" >
+        exclude = #{exclude,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where email = #{email,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.OldReportUser" >
+    update user
+    set userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      realname = #{realname,jdbcType=VARCHAR},
+      init_pwd = #{initPwd,jdbcType=VARCHAR},
+      exclude = #{exclude,jdbcType=VARCHAR}
+    where email = #{email,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getUserByEmail" resultMap="BaseResultMap" parameterType="com.hoolai.manage.vo.OldReportUserVO">
+     select *
+     from user
+     where email=#{entity.email,jdbcType=VARCHAR}
+      <![CDATA[ limit 0, 1 ]]>
+  </select>
+  
+  <select id="getMaxUserId" resultType="java.lang.Long">
+     select max(userid)
+     from user u
+  </select>
+  
+  <delete id="removeByEmail" parameterType="java.lang.String">
+     delete from user
+     where email = #{email,jdbcType=VARCHAR}
+  </delete>
+  
+</mapper>

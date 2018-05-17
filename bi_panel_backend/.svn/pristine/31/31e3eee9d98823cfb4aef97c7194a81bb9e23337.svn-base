@@ -1,0 +1,48 @@
+package com.hoolai.bi.report.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.hoolai.bi.report.dao.RealTimeGameClientidDao;
+import com.hoolai.bi.report.model.entity.RealTimeGameClient;
+import com.hoolai.bi.report.vo.RealTimeGameClientVo;
+import com.hoolai.dao.impl.GenericDaoImpl;
+@Repository
+public class RealTimeGameClientidDaoImpl   extends GenericDaoImpl<RealTimeGameClient, Long>  implements RealTimeGameClientidDao {
+
+	
+
+	@Override
+	public int saveRealTimeClientidDataList(
+			List<RealTimeGameClient> realtTimeGameClientid) {
+		return this.sqlSessionTemplate.insert("saveRealTimeClientidDataList", realtTimeGameClientid);
+	}
+
+	@Override
+	public List<RealTimeGameClientVo> getSelectGamesClientidList(
+			RealTimeGameClientVo realTimeGameClientidVo) {
+		
+		return this.sqlSessionTemplate.selectList("getSelectGamesClientidList",realTimeGameClientidVo);
+	}
+
+	@Override
+	public long getSelectGamesClientidCount(
+			RealTimeGameClientVo realTimeGameClientidVo) {
+		return this.sqlSessionTemplate.selectOne("getSelectGamesClientidCount",realTimeGameClientidVo);
+	}
+
+	@Override
+	public void deleteRealTimeClientData(RealTimeGameClientVo realTimeGameClientidVo) {
+		
+		 this.sqlSessionTemplate.selectOne("deleteRealTimeClientData",realTimeGameClientidVo);
+	}
+
+	@Override
+	public long getSelectCountdata(RealTimeGameClientVo realTimeGameClientidVo) {
+		return this.sqlSessionTemplate.selectOne("getSelectCountdata",realTimeGameClientidVo);
+	}
+
+	
+
+}

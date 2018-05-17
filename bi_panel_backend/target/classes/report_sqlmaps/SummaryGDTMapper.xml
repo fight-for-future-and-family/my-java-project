@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.SummaryGDT" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    <id column="date" property="date" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="exposure" property="exposure" jdbcType="BIGINT" />
+    <result column="click_count" property="clickCount" jdbcType="BIGINT" />
+    <result column="click_rate" property="clickRate" jdbcType="DOUBLE" />
+    <result column="install" property="install" jdbcType="BIGINT" />
+    <result column="conversion_rate" property="conversionRate" jdbcType="DOUBLE" />
+    <result column="all_cost" property="allCost" jdbcType="DOUBLE" />
+    <result column="d0_cost" property="d0Cost" jdbcType="DOUBLE" />
+    <result column="cpc" property="cpc" jdbcType="DOUBLE" />
+    <result column="cpa" property="cpa" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    date, id, snid, gameid, exposure, click_count, click_rate, install, conversion_rate, 
+    all_cost, d0_cost, cpc, cpa, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    select 
+    <include refid="Base_Column_List" />
+    from summary_gdt
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    delete from summary_gdt
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    insert into summary_gdt (date, id, snid, 
+      gameid, exposure, click_count, 
+      click_rate, install, conversion_rate, 
+      all_cost, d0_cost, cpc, 
+      cpa, create_time)
+    values (#{date,jdbcType=VARCHAR}, #{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, 
+      #{gameid,jdbcType=VARCHAR}, #{exposure,jdbcType=BIGINT}, #{clickCount,jdbcType=BIGINT}, 
+      #{clickRate,jdbcType=DOUBLE}, #{install,jdbcType=BIGINT}, #{conversionRate,jdbcType=DOUBLE}, 
+      #{allCost,jdbcType=DOUBLE}, #{d0Cost,jdbcType=DOUBLE}, #{cpc,jdbcType=DOUBLE}, 
+      #{cpa,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    insert into summary_gdt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="exposure != null" >
+        exposure,
+      </if>
+      <if test="clickCount != null" >
+        click_count,
+      </if>
+      <if test="clickRate != null" >
+        click_rate,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="conversionRate != null" >
+        conversion_rate,
+      </if>
+      <if test="allCost != null" >
+        all_cost,
+      </if>
+      <if test="d0Cost != null" >
+        d0_cost,
+      </if>
+      <if test="cpc != null" >
+        cpc,
+      </if>
+      <if test="cpa != null" >
+        cpa,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure != null" >
+        #{exposure,jdbcType=BIGINT},
+      </if>
+      <if test="clickCount != null" >
+        #{clickCount,jdbcType=BIGINT},
+      </if>
+      <if test="clickRate != null" >
+        #{clickRate,jdbcType=DOUBLE},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=BIGINT},
+      </if>
+      <if test="conversionRate != null" >
+        #{conversionRate,jdbcType=DOUBLE},
+      </if>
+      <if test="allCost != null" >
+        #{allCost,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Cost != null" >
+        #{d0Cost,jdbcType=DOUBLE},
+      </if>
+      <if test="cpc != null" >
+        #{cpc,jdbcType=DOUBLE},
+      </if>
+      <if test="cpa != null" >
+        #{cpa,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    update summary_gdt
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure != null" >
+        exposure = #{exposure,jdbcType=BIGINT},
+      </if>
+      <if test="clickCount != null" >
+        click_count = #{clickCount,jdbcType=BIGINT},
+      </if>
+      <if test="clickRate != null" >
+        click_rate = #{clickRate,jdbcType=DOUBLE},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=BIGINT},
+      </if>
+      <if test="conversionRate != null" >
+        conversion_rate = #{conversionRate,jdbcType=DOUBLE},
+      </if>
+      <if test="allCost != null" >
+        all_cost = #{allCost,jdbcType=DOUBLE},
+      </if>
+      <if test="d0Cost != null" >
+        d0_cost = #{d0Cost,jdbcType=DOUBLE},
+      </if>
+      <if test="cpc != null" >
+        cpc = #{cpc,jdbcType=DOUBLE},
+      </if>
+      <if test="cpa != null" >
+        cpa = #{cpa,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT" >
+    update summary_gdt
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      exposure = #{exposure,jdbcType=BIGINT},
+      click_count = #{clickCount,jdbcType=BIGINT},
+      click_rate = #{clickRate,jdbcType=DOUBLE},
+      install = #{install,jdbcType=BIGINT},
+      conversion_rate = #{conversionRate,jdbcType=DOUBLE},
+      all_cost = #{allCost,jdbcType=DOUBLE},
+      d0_cost = #{d0Cost,jdbcType=DOUBLE},
+      cpc = #{cpc,jdbcType=DOUBLE},
+      cpa = #{cpa,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause_vo">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and date >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and date <= #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+  <sql id="Vo_Where_Clause_model">
+		<where>
+				<if test="id != null ">
+					 <![CDATA[ and id = #{id} ]]>
+				</if>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="date != null">
+					 <![CDATA[ and date = #{date} ]]>
+				</if>
+		</where>
+	</sql>
+	
+	<select id="getByGameId" resultMap="BaseResultMap" parameterType="com.hoolai.bi.report.model.entity.SummaryGDT">
+	  select 
+       <include refid="Base_Column_List" />
+      from summary_gdt
+       <if test="_parameter != null">
+		  <include refid="Vo_Where_Clause_model" />
+	 </if>
+	</select>
+	
+	<select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.SummaryGDTVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from summary_gdt
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause_vo" />
+		</if>
+  </select>
+</mapper>

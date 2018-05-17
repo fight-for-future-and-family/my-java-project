@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+.dataTables_wrapper .dataTables_filter {
+	margin-left: 10px;
+	z-index: 1;
+	top: -40px;
+	position: absolute;
+}
+
+#caption {
+	font-style: normal;
+	text-align: left;
+	top: 5px;
+	margin-right: 20px;
+	float: right;
+}
+
+#caption span.ui-selected {
+	background: #56C887;
+	color: white;
+}
+
+#caption span.last {
+	border-right: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+}
+
+#caption span {
+	float: left;
+	margin: 5px auto;
+	width: 85px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 27px;
+	border-left: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+}
+
+.zhibiao {
+	width: 100%;
+	height: 350px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+.row-details.row-details-close {
+	background: url("/images/datatable-row-openclose.png") no-repeat 0 0;
+}
+
+.row-details {
+	margin-top: 3px;
+	display: inline-block;
+	cursor: pointer;
+	width: 14px;
+	height: 14px;
+}
+
+.detail-table td {
+	min-width: 130px;
+}
+
+.table-striped.row-details-td {
+	min-width: 110px;
+	text-align: left;
+	padding-left: 30px;
+}
+
+.row-details.row-details-open {
+	background: url("/images/datatable-row-openclose.png") no-repeat 0 -23px !important;
+}
+
+.table-striped .details-tr {
+	background-color: #52C784 !important;
+	width: 100%;
+	padding: 2px;
+}
+
+.table-striped .details {
+	background-color: #eee !important;
+	width: 100%;
+}
+
+.table-striped.details td,.table-striped.details th {
+	background-color: none !important;
+	border: 0;
+	text-align: center;
+	min-width: 120px;
+	min-height: 35px;
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+}

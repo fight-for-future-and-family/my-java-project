@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.ChannelCpa" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.ChannelCpa" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="real_active" property="realActive" jdbcType="INTEGER" />
+    <result column="real_regist" property="realRegist" jdbcType="INTEGER" />
+    <result column="day1" property="day1" jdbcType="DOUBLE" />
+    <result column="day3" property="day3" jdbcType="DOUBLE" />
+    <result column="day7" property="day7" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ds, snid, gameid, channel_id, channel_name, real_active, real_regist, day1, day3, 
+    day7, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_cpa
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_cpa
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.ChannelCpa" >
+    insert into channel_cpa (id, ds, snid, 
+      gameid, channel_id, channel_name, 
+      real_active, real_regist, day1, 
+      day3, day7, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{ds,jdbcType=VARCHAR}, #{snid,jdbcType=VARCHAR}, 
+      #{gameid,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{realActive,jdbcType=INTEGER}, #{realRegist,jdbcType=INTEGER}, #{day1,jdbcType=DOUBLE}, 
+      #{day3,jdbcType=DOUBLE}, #{day7,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.ChannelCpa" >
+    insert into channel_cpa
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="realActive != null" >
+        real_active,
+      </if>
+      <if test="realRegist != null" >
+        real_regist,
+      </if>
+      <if test="day1 != null" >
+        day1,
+      </if>
+      <if test="day3 != null" >
+        day3,
+      </if>
+      <if test="day7 != null" >
+        day7,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="realActive != null" >
+        #{realActive,jdbcType=INTEGER},
+      </if>
+      <if test="realRegist != null" >
+        #{realRegist,jdbcType=INTEGER},
+      </if>
+      <if test="day1 != null" >
+        #{day1,jdbcType=DOUBLE},
+      </if>
+      <if test="day3 != null" >
+        #{day3,jdbcType=DOUBLE},
+      </if>
+      <if test="day7 != null" >
+        #{day7,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.ChannelCpa" >
+    update channel_cpa
+    <set >
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="realActive != null" >
+        real_active = #{realActive,jdbcType=INTEGER},
+      </if>
+      <if test="realRegist != null" >
+        real_regist = #{realRegist,jdbcType=INTEGER},
+      </if>
+      <if test="day1 != null" >
+        day1 = #{day1,jdbcType=DOUBLE},
+      </if>
+      <if test="day3 != null" >
+        day3 = #{day3,jdbcType=DOUBLE},
+      </if>
+      <if test="day7 != null" >
+        day7 = #{day7,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.ChannelCpa" >
+    update channel_cpa
+    set ds = #{ds,jdbcType=VARCHAR},
+      snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      real_active = #{realActive,jdbcType=INTEGER},
+      real_regist = #{realRegist,jdbcType=INTEGER},
+      day1 = #{day1,jdbcType=DOUBLE},
+      day3 = #{day3,jdbcType=DOUBLE},
+      day7 = #{day7,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

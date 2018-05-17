@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.MonthReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.MonthReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="install" property="install" jdbcType="BIGINT" />
+    <result column="payment_amount" property="paymentAmount" jdbcType="DOUBLE" />
+    <result column="mau" property="mau" jdbcType="INTEGER" />
+    <result column="mnu" property="mnu" jdbcType="INTEGER" />
+    <result column="arpu" property="arpu" jdbcType="DOUBLE" />
+    <result column="arppu" property="arppu" jdbcType="DOUBLE" />
+    <result column="pu" property="pu" jdbcType="INTEGER" />
+    <result column="pay_rate" property="payRate" jdbcType="REAL" />
+    <result column="new_pu" property="newPu" jdbcType="INTEGER" />
+    <result column="new_pay_amount" property="newPayAmount" jdbcType="DOUBLE" />
+    <result column="install_pu" property="installPu" jdbcType="INTEGER" />
+    <result column="install_pay_amount" property="installPayAmount" jdbcType="DOUBLE" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, install, payment_amount, mau, mnu, arpu, arppu, pu, pay_rate, new_pu, 
+    new_pay_amount, install_pu, install_pay_amount, month, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from month_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from month_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.MonthReport" >
+    insert into month_report (id, snid, gameid, 
+      install, payment_amount, mau, 
+      mnu, arpu, arppu, pu, 
+      pay_rate, new_pu, new_pay_amount, 
+      install_pu, install_pay_amount, month, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{install,jdbcType=BIGINT}, #{paymentAmount,jdbcType=DOUBLE}, #{mau,jdbcType=INTEGER}, 
+      #{mnu,jdbcType=INTEGER}, #{arpu,jdbcType=DOUBLE}, #{arppu,jdbcType=DOUBLE}, #{pu,jdbcType=INTEGER}, 
+      #{payRate,jdbcType=REAL}, #{newPu,jdbcType=INTEGER}, #{newPayAmount,jdbcType=DOUBLE}, 
+      #{installPu,jdbcType=INTEGER}, #{installPayAmount,jdbcType=DOUBLE}, #{month,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.MonthReport" >
+    insert into month_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="paymentAmount != null" >
+        payment_amount,
+      </if>
+      <if test="mau != null" >
+        mau,
+      </if>
+      <if test="mnu != null" >
+        mnu,
+      </if>
+      <if test="arpu != null" >
+        arpu,
+      </if>
+      <if test="arppu != null" >
+        arppu,
+      </if>
+      <if test="pu != null" >
+        pu,
+      </if>
+      <if test="payRate != null" >
+        pay_rate,
+      </if>
+      <if test="newPu != null" >
+        new_pu,
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount,
+      </if>
+      <if test="installPu != null" >
+        install_pu,
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=BIGINT},
+      </if>
+      <if test="paymentAmount != null" >
+        #{paymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="mau != null" >
+        #{mau,jdbcType=INTEGER},
+      </if>
+      <if test="mnu != null" >
+        #{mnu,jdbcType=INTEGER},
+      </if>
+      <if test="arpu != null" >
+        #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="arppu != null" >
+        #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="pu != null" >
+        #{pu,jdbcType=INTEGER},
+      </if>
+      <if test="payRate != null" >
+        #{payRate,jdbcType=REAL},
+      </if>
+      <if test="newPu != null" >
+        #{newPu,jdbcType=INTEGER},
+      </if>
+      <if test="newPayAmount != null" >
+        #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPu != null" >
+        #{installPu,jdbcType=INTEGER},
+      </if>
+      <if test="installPayAmount != null" >
+        #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.MonthReport" >
+    update month_report
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=BIGINT},
+      </if>
+      <if test="paymentAmount != null" >
+        payment_amount = #{paymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="mau != null" >
+        mau = #{mau,jdbcType=INTEGER},
+      </if>
+      <if test="mnu != null" >
+        mnu = #{mnu,jdbcType=INTEGER},
+      </if>
+      <if test="arpu != null" >
+        arpu = #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="arppu != null" >
+        arppu = #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="pu != null" >
+        pu = #{pu,jdbcType=INTEGER},
+      </if>
+      <if test="payRate != null" >
+        pay_rate = #{payRate,jdbcType=REAL},
+      </if>
+      <if test="newPu != null" >
+        new_pu = #{newPu,jdbcType=INTEGER},
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPu != null" >
+        install_pu = #{installPu,jdbcType=INTEGER},
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.MonthReport" >
+    update month_report
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      install = #{install,jdbcType=BIGINT},
+      payment_amount = #{paymentAmount,jdbcType=DOUBLE},
+      mau = #{mau,jdbcType=INTEGER},
+      mnu = #{mnu,jdbcType=INTEGER},
+      arpu = #{arpu,jdbcType=DOUBLE},
+      arppu = #{arppu,jdbcType=DOUBLE},
+      pu = #{pu,jdbcType=INTEGER},
+      pay_rate = #{payRate,jdbcType=REAL},
+      new_pu = #{newPu,jdbcType=INTEGER},
+      new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      install_pu = #{installPu,jdbcType=INTEGER},
+      install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      month = #{month,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.month != null and entity.month != ''">
+					 <![CDATA[ and month = #{entity.month} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and month >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and month <= #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+  <select id="selectOne" parameterType="com.hoolai.bi.report.vo.MonthReportVO" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from month_report
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		 <![CDATA[ limit 0, 1 ]]>
+	</select>
+  
+  <select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.MonthReportVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from month_report
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+  </select>
+</mapper>

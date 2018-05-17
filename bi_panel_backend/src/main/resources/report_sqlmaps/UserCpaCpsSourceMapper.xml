@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="source_id" property="sourceId" jdbcType="BIGINT" />
+    <result column="allot_user_id" property="allotUserId" jdbcType="BIGINT" />
+    <result column="allot_user_name" property="allotUserName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, source_id, allot_user_id, allot_user_name, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_cpa_cps_source
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_cpa_cps_source
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+    insert into user_cpa_cps_source (id, user_id, source_id, 
+      allot_user_id, allot_user_name, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{sourceId,jdbcType=BIGINT}, 
+      #{allotUserId,jdbcType=BIGINT}, #{allotUserName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <insert id="insertCpaEntity" parameterType="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+    insert into user_cpa_source (id, user_id, source_id, 
+      allot_user_id, allot_user_name, update_time
+      )
+    values (#{id}, #{userId}, #{sourceId}, 
+      #{allotUserId}, #{allotUserName}, #{updateTime}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+    insert into user_cpa_cps_source
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sourceId != null" >
+        source_id,
+      </if>
+      <if test="allotUserId != null" >
+        allot_user_id,
+      </if>
+      <if test="allotUserName != null" >
+        allot_user_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=BIGINT},
+      </if>
+      <if test="allotUserId != null" >
+        #{allotUserId,jdbcType=BIGINT},
+      </if>
+      <if test="allotUserName != null" >
+        #{allotUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+    update user_cpa_cps_source
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceId != null" >
+        source_id = #{sourceId,jdbcType=BIGINT},
+      </if>
+      <if test="allotUserId != null" >
+        allot_user_id = #{allotUserId,jdbcType=BIGINT},
+      </if>
+      <if test="allotUserName != null" >
+        allot_user_name = #{allotUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.UserCpaCpsSource" >
+    update user_cpa_cps_source
+    set user_id = #{userId,jdbcType=BIGINT},
+      source_id = #{sourceId,jdbcType=BIGINT},
+      allot_user_id = #{allotUserId,jdbcType=BIGINT},
+      allot_user_name = #{allotUserName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="removeAuth" parameterType="com.hoolai.bi.report.vo.UserCpaCpsSourceVO">
+       delete from user_cpa_cps_source
+       where user_id = #{entity.userId,jdbcType=BIGINT} 
+       and source_id = #{entity.sourceId,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="removeCpaAuth" parameterType="com.hoolai.bi.report.vo.UserCpaCpsSourceVO">
+       delete from user_cpa_source
+       where user_id = #{entity.userId,jdbcType=BIGINT} 
+       and source_id = #{entity.sourceId,jdbcType=BIGINT}
+  </delete>
+  
+  <select id="selectBySource" parameterType="com.hoolai.bi.report.vo.UserCpaCpsSourceVO" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from user_cpa_cps_source
+      where user_id = #{entity.userId,jdbcType=BIGINT} 
+      and source_id = #{entity.sourceId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectByCpaSource" parameterType="com.hoolai.bi.report.vo.UserCpaCpsSourceVO" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from user_cpa_source
+      where user_id = #{entity.userId,jdbcType=BIGINT} 
+      and source_id = #{entity.sourceId,jdbcType=BIGINT}
+  </select>
+</mapper>

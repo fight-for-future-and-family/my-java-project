@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.CustomReportCache" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.CustomReportCache" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="row_id" property="rowId" jdbcType="INTEGER" />
+    <result column="col_name" property="colName" jdbcType="VARCHAR" />
+    <result column="col_value" property="colValue" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, task_id, row_id, col_name, col_value, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_data_cache
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from task_data_cache
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.CustomReportCache" >
+    insert into task_data_cache (id, task_id, row_id, 
+      col_name, col_value, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, #{rowId,jdbcType=INTEGER}, 
+      #{colName,jdbcType=VARCHAR}, #{colValue,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.CustomReportCache" >
+    insert into task_data_cache
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="rowId != null" >
+        row_id,
+      </if>
+      <if test="colName != null" >
+        col_name,
+      </if>
+      <if test="colValue != null" >
+        col_value,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="rowId != null" >
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="colName != null" >
+        #{colName,jdbcType=VARCHAR},
+      </if>
+      <if test="colValue != null" >
+        #{colValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.CustomReportCache" >
+    update task_data_cache
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="rowId != null" >
+        row_id = #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="colName != null" >
+        col_name = #{colName,jdbcType=VARCHAR},
+      </if>
+      <if test="colValue != null" >
+        col_value = #{colValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.CustomReportCache" >
+    update task_data_cache
+    set task_id = #{taskId,jdbcType=BIGINT},
+      row_id = #{rowId,jdbcType=INTEGER},
+      col_name = #{colName,jdbcType=VARCHAR},
+      col_value = #{colValue,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectAllParamsName" parameterType="java.lang.Long" resultType="java.lang.String">
+      	select distinct(col_name) as col_name from task_data_cache
+		where task_id = #{taskId}
+  </select>
+  
+  <resultMap id="ResultMap" type="com.hoolai.bi.report.vo.CustomReportCacheVO" >
+    <result column="col_name" property="columnCode" jdbcType="VARCHAR" />
+    <result column="column_name" property="columnName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectAllParamsNameMap" parameterType="java.lang.Long" resultMap="ResultMap">
+       select c.col_name,d.column_name from 
+		(
+		select a.*,b.template_id from 
+		(select distinct(col_name) as col_name,task_id from task_data_cache where task_id = #{taskId}) a
+		join report_task b
+		on a.task_id = b.id) c
+		join report_template_columns d
+		on c.template_id = d.template_id and c.col_name = d.column_code
+  </select>
+  
+  <select id="selectValuesList" parameterType="com.hoolai.bi.report.vo.CustomReportCacheVO" resultType="java.util.Map">
+      	${valueSqlStr}
+  </select>
+  
+  <select id="countValuesList" parameterType="com.hoolai.bi.report.vo.CustomReportCacheVO" resultType="int">
+      	${valueSqlStr}
+  </select>
+  
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.DRelationship" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.DRelationship" >
+    <result column="sn_id" property="snId" jdbcType="VARCHAR" />
+    <result column="client_id" property="clientId" jdbcType="VARCHAR" />
+    <result column="game_id" property="gameId" jdbcType="VARCHAR" />
+    <result column="ds" property="ds" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hoolai.manage.model.DRelationship" >
+    insert into d_Relationship (sn_id, client_id, game_id, 
+      ds)
+    values (#{snId,jdbcType=VARCHAR}, #{clientId,jdbcType=VARCHAR}, #{gameId,jdbcType=VARCHAR}, 
+      #{ds,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.DRelationship" >
+    insert into d_Relationship
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="snId != null" >
+        sn_id,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="snId != null" >
+        #{snId,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

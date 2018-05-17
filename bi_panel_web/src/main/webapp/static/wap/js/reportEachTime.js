@@ -1,0 +1,964 @@
+$(function(){
+	
+	
+	$(document).ready(function() {
+	    $.reportEachTime.init();
+	    $.timeZone.showTimeZone();
+	});
+	
+	var todayArr_install = new Array();
+    var todayArr_dau = new Array();
+    var todayArr_amount = new Array();
+    var todayArr_arpu = new Array();
+    var todayArr_arppu = new Array();
+    var todayArr_equips = new Array();
+    
+    var yesterdayArr_install = new Array();
+    var yesterdayArr_dau = new Array();
+    var yesterdayArr_amount = new Array();
+    var yesterdayArr_arpu = new Array();
+    var yesterdayArr_arppu = new Array();
+    var yesterdayArr_equips = new Array();
+   
+    
+    
+    var todayCountArr = [0,0,0,0,0,0,0];
+    var yesterdayCountArr = [0,0,0,0,0,0,0];
+   
+    
+    var predictDataArr = new Array();
+    
+    var game = null;
+    
+	 var today = null;
+	 var yesterday = null;
+	
+
+	$.reportEachTime={
+		init:function(){
+			$.reportEachTime.initEvent();
+			$.reportEachTime.submit();
+			$.reportEachTime.queryData();
+			
+			$("#select").hide();
+		},
+		initEvent:function(){
+			$("#query").click(function(){
+				$.reportEachTime.submit();
+		    });
+			
+			$(".detail-nav li").each(function(i,n){
+				$(n).click(function(){
+					$.reportEachTime.redict($(n).attr("id"));
+				});
+			});
+			
+			$("#layout-t span").click(function(){
+				$.reportEachTime.redict($(this).attr("view"));
+			});
+			
+			$("input[name=data_radio_in]").change(function(){
+				$.reportEachTime.brokenChartTable();
+			});
+			
+			$.reportEachTime.dataTypeChange();
+			$.reportEachTime.dateSelectChange();
+			$("#channel").change(function(){
+				$.reportEachTime.change($.reportEachTime);
+			});
+		
+			
+			
+		},
+		redict:function(view){
+			var snid = $("input[name='snid']").val();
+			var gameId = $("input[name='gameId']").val();
+			window.location.href='/panel_bi/wap/gameView/toWapGameDatasView.ac?view='+view+'&snid='+snid+'&gameId='+gameId;
+		},
+		dateSelectChange:function(){
+			var dateArr = $.date.getBeforeTodayDate(0);
+			$("#beginTime_rt").text(dateArr[0]);
+			$("#endTime_rt").text(dateArr[1]);
+			$("input[name='beginTime']").val(dateArr[0]);
+			$("input[name='endTime']").val(dateArr[1]);
+			$(".template_cache").hide();
+			$($("[css='dateSelect']")).each(function(i,n){
+				$(n).click(function(){
+					$("[css='dateSelect']").removeClass("ui-selected");
+					$(n).addClass("ui-selected");
+					
+					var dateArr = $.date.getBeforeTodayDate(Number($(n).attr("val")));
+					$("#beginTime_rt").text(dateArr[0]);
+					$("#endTime_rt").text(dateArr[1]);
+					
+					
+					$("input[name='beginTime']").val(dateArr[0]);
+					$("input[name='endTime']").val(dateArr[1]);
+
+//					$("[css='tabs']").removeClass("ui-selected");
+//					$("[css='tabs']").first().addClass("ui-selected");
+					
+					$('#dt2_wrapper').remove(); 
+					$('#dt6_wrapper').remove(); 
+					$('#dt7_wrapper').remove(); 
+					$('#dt3_wrapper').remove(); 
+					$('#dt1_wrapper').remove(); 
+					$("#tabs-6").hide();
+					$("#tabs-2").show();
+					$("#tabs-7").hide();
+					$("#tabs-3").hide();
+					$("#tabs-1").hide();
+					$.reportEachTime.queryData();
+				});
+			});
+		},
+		dataTypeChange:function(){
+			$("#tabs-2").hide();
+			$("#tabs-6").hide();
+			$("#tabs-7").hide();
+			$("#tabs-3").hide();
+			$("#tabs-1").hide();
+			$("#select").hide();
+			$($("[css='tabs']")).each(function(i,n){
+				$(n).click(function(){
+					$("[css='tabs']").removeClass("ui-selected");
+					$(n).addClass("ui-selected");
+//					
+					
+					$("#tabs-2").hide();
+					$("#tabs-6").hide();
+					$("#tabs-7").hide();
+					$("#tabs-3").hide();
+					$("#tabs-1").hide();
+					$("#select").hide();
+					if($(n).attr("val")=='tabs-6'){
+						if(isCanTotalSubmit){
+							$.reportEachTime.total_DataSubmit();
+						}
+						$("#tabs-6").show();
+					}else if($(n).attr("val")=='tabs-7'){
+						if(isCanHourSubmit){
+							$.reportEachTime.hour_DataSubmit();
+						}
+						$("#tabs-7").show();
+						
+					}else if($(n).attr("val")=='tabs-3'){
+						//if(isCanSourceSubmit){
+							//$.reportEachTime.sourceDataSubmit();
+						//}
+						$.reportEachTime.change();
+						$("#tabs-3").show();
+						$("#select").show();
+					}else if($(n).attr("val")=='tabs-1'){
+						//if(isCanClientSubmit){
+							$.reportEachTime.clientDataSubmit();
+						//}
+						
+						$("#tabs-1").show();
+					}else{
+						$("#tabs-2").show();
+					}
+				});
+			});
+		},
+		submit:function(){
+			var ps = $.reportEachTime.checkParam();
+			if(ps == null){
+				return;
+		    }
+			$.ajax({
+				  type: "POST",
+				  url: "/panel_bi/gameRealTime/getReportEachTime.ac",
+				  data: $.param(ps),
+				  dataType: "json",
+				  success: function(data){
+                     //今天 
+					 var d =  new Date();
+                     today = $.date.getDateFullStr(d);
+                     //昨天
+                     d.setDate(d.getDate()-1);
+                     yesterday = $.date.getDateFullStr(d);
+                     $.reportEachTime.initData();
+                     game = data.game;
+                     
+                   //数据排列顺序 今天/昨天
+                     $.each(data.reports,function(i,v){
+                    	 if(v.day == today){
+                    		 predictDataArr.push({
+                    			 hour:v.times,
+                    			 ispredict:v.ispredict
+                    		 });
+                    	
+                			 $.reportEachTime.processData(todayCountArr,todayArr_equips,todayArr_install,todayArr_dau,todayArr_amount,todayArr_arpu,todayArr_arppu,v);
+                    	 }else if(v.day == yesterday){
+                    		 $.reportEachTime.processData(yesterdayCountArr,yesterdayArr_equips,yesterdayArr_install,yesterdayArr_dau,yesterdayArr_amount,yesterdayArr_arpu,yesterdayArr_arppu,v);
+                    	 }
+                     });
+                     
+                     $.reportEachTime.brokenTable();
+                    // $.reportEachTime.brokenChartTable();
+				  }
+				});
+		},
+		//鎬昏
+		queryData:function(){
+			var ps = $.gameUtil.checkParam();
+			if(ps == null){
+				return;
+		    }
+			
+			$.ajax({
+				  type: "POST",
+				  url: "/panel_bi/wap/gameView/getGameTotalRealTime.ac",
+				  data: $.param(ps),
+				  dataType: "json",
+				  success: function(data){
+					    game = data.game;
+					    $("#tabs-2").show();
+					    $("[css='tabs']").removeClass("ui-selected");
+					   // $("[css='tabs']").first().addClass("ui-selected");
+					    $.reportEachTime.brokenTable_noClient(data.noClientResultList);
+				    	isCanTotalSubmit = true;
+				    	isCanHourSubmit = true;
+				    	isCanSourceSubmit = true;
+				    	isCanClientSubmit = true;
+				    	
+				  }
+				});
+		},
+		brokenTable_noClient:function(reports){
+			$('#dt2_wrapper').remove();
+			var pay_count = 0,install_count = 0,dau_count=0,pu_count = 0,arpu = 0,arppu = 0;
+			
+			var table2 = $(".template_cache .table_2").clone(true);
+			table2.attr("id","dt2");
+			
+			$.each(reports,function(i,v){
+				
+				
+				var trTemp = $("tbody tr",table2).first().clone(true);
+				
+				$("td.date",trTemp).text(v.start_time.substring(0,5)+"~"+v.finish_time.substring(0,5));
+				$("td.install",trTemp).text(v.dnu);
+				$("td.yesterday_install",trTemp).text(v.yesterday_dnu == null ? 0 : v.yesterday_dnu);
+				$("td.equips",trTemp).text(v.equips);
+				$("td.yesterday_equips",trTemp).text(v.yesterday_equips == null ? 0 : v.yesterday_equips);
+				$("td.dau",trTemp).text(v.dau_total);
+				$("td.yesterday_dau",trTemp).text(v.yesterday_dau_total == null ? 0 : v.yesterday_dau_total);
+				$("td.pay",trTemp).text(v.total_amount);
+				$("td.yesterday_pay",trTemp).text(v.yesterday_total_amount == null ? 0 : v.yesterday_total_amount);
+//				$("td.pu",trTemp).text(v.payer);
+				$("td.arpu",trTemp).text(Math.round(v.total_amount/v.dau_total*100)/100);
+				$("td.yesterday_arpu",trTemp).text(v.yesterday_dau_total == null ? 0 : Math.round(v.yesterday_total_amount/v.yesterday_dau_total*100)/100);
+				
+				$("td.arppu",trTemp).text(Math.round(v.total_amount/v.payer*100)/100);
+				$("td.yesterday_arppu",trTemp).text(v.yesterday_payer == null ? 0 : Math.round(v.yesterday_total_amount/v.yesterday_payer*100)/100);
+				
+				
+				$('tbody',table2).append(trTemp); 
+			});
+			
+			arpu = dau_count == 0 ? 0 : Math.round(pay_count/dau_count*100)/100;
+			arppu = pu_count == 0 ? 0 : Math.round(pay_count/pu_count*100)/100;
+			
+			table2.removeClass("table_2").addClass("display");
+			$("tbody tr",table2).first().remove();
+			
+			$('#data2').append(table2); 
+			
+			$.biDataTables.dataTables2($('#dt2'));
+			
+			$('#dt2 tbody tr').click(function (){
+		        $(this).toggleClass('highlight');
+		    });
+			
+		//	return [install_count,dau_count,pay_count,arpu,arppu];
+		},
+		//鎸夊皬鏃�
+		hour_DataSubmit:function(){
+			var ps = $.gameUtil.checkParam();
+			if(ps == null){
+				return;
+		    }
+			$.ajax({
+				  type: "POST",
+				  url: "/panel_bi/gameRealTime/getGameHourRealTime.ac",
+				  data: $.param(ps),
+				  dataType: "json",
+				  success: function(data){
+					  $.reportEachTime.brokenTable_HourData(data.reports);
+					  $("[css='dateSelect']").removeClass("ui-selected");
+				  }
+				});
+		},
+		brokenTable_HourData:function(reports){
+			$('#dt7_wrapper').remove();
+			
+			var table7 = $(".template_cache .table_7").clone(true);
+			table7.attr("id","dt7");
+			
+			$.each(reports,function(i,v){
+				var trTemp = $("tbody tr",table7).first().clone(true);
+				$("td.date",trTemp).text(v.start_time.substring(0,5)+"~"+v.finish_time.substring(0,5));
+				$("td.install",trTemp).text(v.dnu);
+				$("td.yesterday_install",trTemp).text(v.yesterday_dnu == null ? 0 : v.yesterday_dnu);
+				$("td.equips",trTemp).text(v.equips);
+				$("td.yesterday_equips",trTemp).text(v.yesterday_equips == null ? 0 : v.yesterday_equips);
+				$("td.dau",trTemp).text(v.dau_total);
+				$("td.yesterday_dau",trTemp).text(v.yesterday_dau_total == null ? 0 : v.yesterday_dau_total);
+				$("td.pay",trTemp).text(v.total_amount);
+				$("td.yesterday_pay",trTemp).text(v.yesterday_total_amount == null ? 0 : v.yesterday_total_amount);
+//				$("td.pu",trTemp).text(v.payer);
+				$("td.arpu",trTemp).text(Math.round(v.dau_total == 0 ? 0 : v.total_amount/v.dau_total*100)/100);
+				$("td.yesterday_arpu",trTemp).text(v.yesterday_dau_total == 0 ? 0 : v.yesterday_dau_total == null ? 0 : Math.round(v.yesterday_total_amount/v.yesterday_dau_total*100)/100);
+				
+				$("td.arppu",trTemp).text(Math.round(v.payer == 0 ? 0 : v.total_amount/v.payer*100)/100);
+				$("td.yesterday_arppu",trTemp).text(v.yesterday_payer == 0 ? 0 : v.yesterday_payer == null ? 0 : Math.round(v.yesterday_total_amount/v.yesterday_payer*100)/100);
+				
+				$('tbody',table7).append(trTemp); 
+			});
+			table7.removeClass("table_7").addClass("display");
+			$("tbody tr",table7).first().remove();
+			
+			$('#data7').append(table7); 
+			
+			$.biDataTables.dataTables2($('#dt7'));
+			
+			$('#dt7 tbody tr').click(function (){
+		        $(this).toggleClass('highlight');
+		    });
+			
+		},
+		
+		//鎬昏姹囨��
+		total_DataSubmit:function(){
+			var ps = $.gameUtil.checkParam();
+			if(ps == null){
+				return;
+		    }
+			$.ajax({
+				  type: "POST",
+				  url: "/panel_bi/gameRealTime/getGameTotalRealTime.ac",
+				  data: $.param(ps),
+				  dataType: "json",
+				  success: function(data){
+					  $.reportEachTime.brokenTable_TotalData(data.reports);
+				  }
+				});
+		},
+		brokenTable_TotalData:function(reports){
+			$('#dt6_wrapper').remove();
+			
+			var table6 = $(".template_cache .table_6").clone(true);
+			table6.attr("id","dt6");
+			
+			$.each(reports,function(i,v){
+				var trTemp = $("tbody tr",table6).first().clone(true);
+				$("td.date",trTemp).text(v.start_time.substring(0,5)+"~"+v.finish_time.substring(0,5));
+				$("td.install",trTemp).text(v.dnu);
+				$("td.yesterday_install",trTemp).text(v.yesterday_dnu == null ? 0 : v.yesterday_dnu);
+				$("td.equips",trTemp).text(v.equips);
+				$("td.yesterday_equips",trTemp).text(v.yesterday_equips == null ? 0 :v.yesterday_equips);
+				$("td.dau",trTemp).text(v.dau);
+				$("td.yesterday_dau",trTemp).text(v.yesterday_dau == null ? 0 : v.yesterday_dau);
+				$("td.pay",trTemp).text(v.total_amount);
+				$("td.yesterday_pay",trTemp).text(v.yesterday_total_amount == null ? 0 : v.yesterday_total_amount);
+				$("td.arpu",trTemp).text(Math.round(v.dau == 0 ? 0 : v.total_amount/v.dau*100)/100);
+				$("td.yesterday_arpu",trTemp).text(v.yesterday_dau == 0 ? 0 : Math.round(v.yesterday_dau == null ? 0 :v.yesterday_total_amount/v.yesterday_dau*100)/100);
+				
+				$("td.arppu",trTemp).text(Math.round(v.payer == 0 ?  0 : v.total_amount/v.payer*100)/100);
+				$("td.yesterday_arppu",trTemp).text(v.yesterday_payer ==0 ? 0 : Math.round(v.yesterday_payer == null ? 0 : v.yesterday_total_amount/v.yesterday_payer*100)/100);
+				$('tbody',table6).append(trTemp); 
+			});
+			table6.removeClass("table_6").addClass("display");
+			$("tbody tr",table6).first().remove();
+			
+			$('#data6').append(table6); 
+			
+			$.biDataTables.dataTables2($('#dt6'));
+			
+			$('#dt6 tbody tr').click(function (){
+		        $(this).toggleClass('highlight');
+		    });
+			
+		},
+		checkParam:function(){
+			var type = $("input[name='data_radio_in']").val();
+			if(type == null || type == ''){
+				type='install';
+			}
+			var gameId = $("input[name='gameId']").val();
+		    var snid = $("input[name='snid']").val();
+			$("input[name=data_radio_in]:eq(0)").attr("checked",'checked'); 
+			var ps={
+					type:type,
+					snid:snid,
+					gameId:gameId
+			}
+			return ps;
+		},
+		initData:function(){
+			todayArr_install = new Array();
+			todayArr_equips = new Array();
+		    todayArr_dau = new Array();
+		    todayArr_amount = new Array();
+		    todayArr_arpu = new Array();
+		    todayArr_arppu = new Array();
+		  
+		    
+		    
+		    yesterdayArr_install = new Array();
+		    yesterdayArr_equips = new Array();
+		    yesterdayArr_dau = new Array();
+		    yesterdayArr_amount = new Array();
+		    yesterdayArr_arpu = new Array();
+		    yesterdayArr_arppu = new Array();
+		  
+		    
+		    predictDataArr = new Array();
+		    
+			for(var i=0;i<24;i++){
+				todayArr_install.push('-');
+				todayArr_dau.push('-');
+				todayArr_amount.push('-');
+				todayArr_arpu.push('-');
+				todayArr_arppu.push('-');
+				todayArr_equips.push('-');
+				
+				
+				yesterdayArr_install.push('-');
+			    yesterdayArr_dau.push('-');
+			    yesterdayArr_amount.push('-');
+			    yesterdayArr_arpu.push('-');
+			    yesterdayArr_arppu.push('-');
+			    yesterdayArr_equips.push('-');
+			   
+			}
+		    
+		    todayCountArr = [0,0,0,0,0,0,0];
+		    yesterdayCountArr = [0,0,0,0,0,0,0];
+		  
+		},
+		processData:function(todayCountArr,todayArr_equips,todayArr_install,todayArr_dau,todayArr_amount,todayArr_arpu,todayArr_arppu,v){
+			if(todayCountArr != null){
+				todayCountArr[0] += v.dnu;
+				todayCountArr[1] += v.equips;
+		   		todayCountArr[2] += v.dau_total;
+		   		todayCountArr[3] += v.total_amount;
+		   		todayCountArr[4] += v.total_amount/v.dau_total;//废弃
+		   		todayCountArr[5] += v.total_amount/v.payer;///废弃
+		   		todayCountArr[6] += v.payer_total;
+			}
+   		 
+	   		if(todayArr_install != null){
+	   			var time = parseInt(v.start_time.substring(0,2));
+	   			todayArr_install[time]=(v.dnu);
+	   			todayArr_equips[time]=(v.equips);
+	      		todayArr_dau[time]=(v.dau_total);
+	      		todayArr_amount[time]=(v.total_amount);
+	      		if(v.dau_total == 0){
+	      			todayArr_arpu[time]=0;
+	      		}else{
+	      			todayArr_arpu[time]=(Math.round((v.total_amount/v.dau_total)*100)/100);
+	      		}
+	      		if(v.dau_total == 0){
+	      			todayArr_arppu[time] = 0;
+	      		}else{
+	      			todayArr_arppu[time]=(Math.round((v.total_amount/v.payer_total)*100)/100);
+	      		}
+	   	    }
+		},
+		brokenTable:function(){
+			$("#dt").remove();
+			
+			var table = $(".template_cache .dataTable_temp").clone(true);
+			table.attr("id", "dt");
+			table.attr("class", "table hour_data_table");
+			
+			var tr = $(".first", table);
+			$.reportEachTime.writeTr(tr,todayCountArr,true);
+			
+			tr = $(".second", table);
+			$.reportEachTime.writeTr(tr,yesterdayCountArr,false);
+			
+	
+			$("#data").append(table);
+		},
+		writeTr:function(tr,todayCountArr,isToday){
+			for(var i=0;i<=5;i++){
+				var td = isToday ? $(".bold", tr).first().clone(true) : $("td", tr).first().clone(true);
+				if(i<4){
+					$(td).text(Math.round(todayCountArr[i]*100)/100);
+				}else if(i == 4){
+					if(todayCountArr[2] == 0){
+						$(td).text(0);
+					}else{
+						$(td).text(Math.round(todayCountArr[3]/todayCountArr[2]*100)/100);
+					}
+				}else if(i == 5){
+					if(todayCountArr[6] == 0){
+						$(td).text(0);
+					}else{
+						$(td).text(Math.round(todayCountArr[3]/todayCountArr[6]*100)/100);
+					}
+				}
+				
+				tr.append(td);
+			}
+			$("td",tr).eq(1).remove();
+		},
+		processTableOrChartData:function(){
+			var type = $('input:radio[name="data_radio_in"]:checked').val();
+			var arr_today = new Array();
+			var arr_yes = new Array();
+		
+			var subtext = '单位（个）';
+			if('install' == type){
+				arr_today = todayArr_install;
+				arr_yes = yesterdayArr_install;
+			
+				subtext = '单位（个）';
+			}else if('dau' == type){
+				arr_today = todayArr_dau;
+				arr_yes = yesterdayArr_dau;
+				
+				subtext = '单位（个）';
+			}else if('payment' == type){
+				arr_today = todayArr_amount;
+				arr_yes = yesterdayArr_amount;
+				
+				subtext = '单位（'+game.currency+'）';
+			}else if('arpu' == type){
+				arr_today = todayArr_arpu;
+				arr_yes = yesterdayArr_arpu;
+			
+				subtext = '单位（'+game.currency+'）';
+			}else if('arppu' == type){
+				arr_today = todayArr_arppu;
+				arr_yes = yesterdayArr_arppu;
+				
+				subtext = '单位（'+game.currency+'）';
+			}
+			var ret = {
+					arr_today:arr_today,
+					arr_yes:arr_yes,
+				
+					subtext:subtext
+			};
+			
+			return ret;
+		},
+		brokenChartTable:function(){
+            $("#dt_chart_wrapper").remove();
+		
+			var table = $(".template_cache .chart_table_templete").clone(true);
+			table.attr("id", "dt_chart");
+			table.attr("class", "table data_table");
+			$("#chart_data").append(table);
+			
+			var tr = $("thead tr", table);
+			var td = $("td", tr).first();
+			$(td).text("灏忔椂");
+			
+			var ret = $.reportEachTime.processTableOrChartData();
+			
+			for(var i=0;i<24;i++){
+				var tr = $("tbody tr", table).first().clone(true);
+				$("td", tr).eq(0).text(i);
+				$("td", tr).eq(1).text(ret.arr_today[i] == null ? '-' :  ret.arr_today[i]);
+				$("td", tr).eq(2).text(ret.arr_yes[i] == null ? '-' : ret.arr_yes[i]);
+			
+				table.append(tr);
+			}
+			$("tbody tr", table).eq(0).remove();
+			
+			$('#dt_chart').DataTable({
+				"sPaginationType" : "simple_numbers",
+	            "dom" : 'T<"clear"><"top">rt<"bottom"ip><"clear">' ,
+	            "bDestroy" : true,
+	            "bPaginate" : true,
+	            "bInfo" : true,
+				"bSort" : true,
+				"bScrollCollapse" : true,
+				"bScrollInfinite" : true,
+			    "bFilter" : false,
+			    "paging": true, //缈婚〉鍔熻兘
+			    "lengthChange": false, //鏀瑰彉姣忛〉鏄剧ず鏁版嵁鏁伴噺
+			    "searching": false, //杩囨护鍔熻兘
+			    "ordering": true, //鎺掑簭鍔熻兘
+			    "order": [[ 0, "asc" ]],
+			    "processing": true,
+	            "lengthMenu": [ 10, 20, 50, 100],
+			    "pageLength": 5,
+			    "language":{
+			    	"url": "/dataTables/chinese_chart.json"
+			    },
+			    tableTools: {
+			    	"sSwfPath": "/dataTables/extensions/TableTools/swf/copy_csv_xls.swf",
+	                                         "aButtons":[ 
+	                            { 
+	                               "sExtends": "xls", 
+	                               "sButtonText": "下载数据" 
+	                             }]
+		        }
+				}
+			  );
+				
+			   table.removeClass().addClass('table table-striped');
+		},
+		sourceDataSubmit:function(){
+			var ps = $.gameUtil.checkParam();
+			if(ps == null){
+				return;
+		    }
+			$('#dt3_wrapper').remove();
+			var selected = [];
+			var rate = $("#gameRate").val();
+			
+			var table= $(".template_cache .table_3").clone(true);
+			table.attr("id", "dt3");
+			$('#data3').append(table);
+			
+			$('#dt3').dataTable( {
+		        "processing": true,
+		        "serverSide": true,
+		        ajax: {
+				          data: function(d){
+				        	  d.id=ps.id;
+				        	  d.gameId=ps.gameId;
+				        	  d.snid=ps.snid;
+				        	  d.indicators=ps.indicators;
+				        	  d.queryType=ps.queryType;
+				        	  d.beginTime=ps.beginTime;
+				        	  d.endTime=ps.endTime;
+				        	  d.source=ps.source;
+				        	  d.clientid=ps.clientid;
+				        	  d.view=ps.view;
+				          },
+						  type: "POST",
+						  url:"/panel_bi/gameRealTime/getGameRealTimeHourSourceView.ac"
+		              },
+		        "pageLength": 10,
+			    "language":{
+			    	"url": "/dataTables/chinese.json"
+			    },
+		        "deferRender": true,
+			    "sPaginationType" : "full_numbers",
+		        "dom" : '<"clear"><"top">frt<"bottom"ip><"clear">' ,
+				"bSort" : false,
+			    "bFilter" : true,
+			    "paging": true, //缈婚〉鍔熻兘
+			    "lengthChange": false,//鏀瑰彉姣忛〉鏄剧ず鏁版嵁鏁伴噺
+			    "searching": false, //杩囨护鍔熻兘
+			    "ordering": true, //鎺掑簭鍔熻兘
+			    "order": [[ 0, "asc" ]],
+			    rowCallback:function(row, data) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('highlight');
+                    }
+                },
+                columns: [
+							{"data": null},
+							{"data": "install_creative"},
+							{"data": "dnu"},
+							//{"data": "yesterday_dnu"},
+							{"data": null},
+							{"data": "equips"},
+							{"data": null},
+							{"data": "dau"},
+							{"data": null},
+							{"data": "total_amount"},
+							{"data": null},
+//							{"data": "payer"},
+//							{"data": "yesterday_payer"},
+							{"data": null},
+							{"data": null},
+							{"data": null},
+							{"data": null}
+	                  ],
+            columnDefs: [
+						{
+						    targets: 0,
+						    render: function (a, b, v, d) {
+						         return v.start_time.substring(0,5)+ '~' +v.finish_time.substring(0,5);
+						      }
+						   },
+						{
+						    targets: 3,
+						    render: function (a, b, v, d) {
+						         return v.yesterday_dnu == '' || v.yesterday_dnu==null ||v.yesterday_dnu == 0.0 ? 0 :v.yesterday_dnu;
+						      }
+						   },
+						   {
+							    targets: 5,
+							    render: function (a, b, v, d) {
+							         return v.yesterday_equips == '' || v.yesterday_equips==null ||v.yesterday_equips == 0.0 ? 0 :v.yesterday_equips;
+							      }
+							},
+						   {
+							    targets: 7,
+							    render: function (a, b, v, d) {
+							         return v.yesterday_dau == '' || v.yesterday_dau==null ||v.yesterday_dau == 0.0 ? 0 :v.yesterday_dau;
+							      }
+						   },
+						 {
+						    targets: 9,
+						    render: function (a, b, v, d) {
+						         return v.yesterday_total_amount == '' || v.yesterday_total_amount==null ||v.yesterday_total_amount == 0.0 ? 0 :v.yesterday_total_amount;
+						      }
+						 },
+					   
+	                      {
+	                        targets: 10,
+	                        render: function (a, b, v, d) {
+	                             return v.dau == '' || v.dau == null || v.dau == 0 ? 0 : Math.round((v.total_amount/v.dau)*100)/100;
+	                          }
+	                       },
+	                       {
+		                        targets: 11,
+		                        render: function (a, b, v, d) {
+		                             return  v.yesterday_dau == '' || v.yesterday_dau == null || v.yesterday_dau == 0  ? 0 : Math.round((v.yesterday_total_amount/v.yesterday_dau)*100)/100;
+		                          } 
+		                    },
+		                    {
+		                        targets: 12,
+		                        render: function (a, b, v, d) {
+		                             return v.payer == '' || v.payer == null || v.payer == 0  ? 0 :  Math.round((v.total_amount/v.payer)*100)/100;
+		                          }
+		                    },
+	                       {
+		                        targets: 13,
+		                        render: function (a, b, v, d) {
+		                             return v.yesterday_payer == '' || v.yesterday_payer == null || v.yesterday_payer == 0  ? 0 :  Math.round((v.yesterday_total_amount/v.yesterday_payer)*100)/100;
+		                          } 
+		                    }
+	                     ]
+		    });
+
+			$('#dt3').removeClass().addClass('table table-striped');
+				    
+		    $('#dt3 button').click(function (){
+		        $("#downType").val("source");
+		        $(this).attr('disabled',true);
+		        $(this).val(2);
+		        window.btnTimeout=setInterval(function(){
+					$.gameUtil.btnTimeout($('#dt3 button'),window.btnTimeout);
+				  },1000);
+		        $("#downLoadForm").submit();
+		    });
+			
+			$.gameUtil.trHighLight($('#dt3 tbody'),selected);
+			$("[css='dateSelect']").removeClass("ui-selected");
+			isCanSourceSubmit = false;
+		},
+		changeCheck:function(){
+			var ps={
+				     id:$("input[name='gamesId']").val(),
+				     gameId:$("input[name='gameId']").val(),
+				     snid:$("input[name='snid']").val(),
+				     source:$("#s_c").val(),
+				     client:$("#s_c").val()
+				};
+		      if(ps.id == null || ps.id == ''){ return null; }
+		      if(ps.gameId == null || ps.gameId == ''){ return null; }
+		      if(ps.snid == null || ps.snid == ''){ return null; }
+		      return ps;
+		},
+		change:function(exclass){
+			var ps = this.changeCheck();
+			if(ps == null){
+				return;
+			}
+		      
+			var value = $("#channel").val();
+			if(value == 'all'){
+				$("#s_c").remove();
+				exclass.submit();
+			}else if(value == 'source'){
+				$.reportEachTime.sourceDataSubmit();
+				$("#tabs-1").hide();
+				$("#tabs-3").show();
+				$("#s_c").remove();
+				$.ajax({
+					  type: "POST",
+					  url: "/panel_bi/gameRealTime/getGameSource.ac",
+					  data: $.param(ps),
+					  dataType: "json",
+					  success: function(data){
+					    var span = $("#s_c_span");
+					    var str = '<select id="s_c" style="max-width:210px"><option value="-1">请选择...</option>';
+					    $.each(data.gameSources,function(i,v){
+					    	str += '<option value="' + v +'">' + v +'</option>';
+					    });
+					    str += '</select>';
+					    span.append(str);
+					    
+					    $("#s_c").change(function(){
+					    	$.reportEachTime.sourceDataSubmit();
+						});
+					  }
+				});
+			}else if(value == 'client'){
+				$.reportEachTime.clientDataSubmit();
+				$("#tabs-3").hide();
+				$("#tabs-1").show();
+				$("#s_c").remove();
+				
+				$.ajax({
+					  type: "POST",
+					  url: "/panel_bi/gameRealTime/getGameClient.ac",
+					  data: $.param(ps),
+					  dataType: "json",
+					  success: function(data){
+					    var span = $("#s_c_span");
+					    var str = '<select id="s_c" style="max-width:210px;float:left;"><option value="-1">请选择...</option>';
+					    $.each(data.gameClients,function(i,v){
+					    	str += '<option value="' + v +'">' + v +'</option>';
+					    });
+					    str += '</select>';
+					    span.append(str);
+					    
+					    $("#s_c").change(function(){
+					    	$.reportEachTime.clientDataSubmit();
+						});
+					  }
+				});
+			}
+		},
+		clientDataSubmit:function(){
+			$("[css='dateSelect']").removeClass("ui-selected");
+			var ps = $.gameUtil.checkParam();
+			if(ps == null){
+				return;
+		    }
+			var selected = [];
+			$('#dt1_wrapper').remove();
+			
+			var rate = $("#gameRate").val();
+			
+			var table= $(".template_cache .table_1").clone(true);
+			table.attr("id", "dt1");
+			$('#data1').append(table);
+			
+			$('#dt1').dataTable( {
+		        "processing": true,
+		        "serverSide": true,
+		        ajax: {
+				          data: function(d){
+				        	  d.id=ps.id;
+				        	  d.gameId=ps.gameId;
+				        	  d.snid=ps.snid;
+				        	  d.indicators=ps.indicators;
+				        	  d.queryType=ps.queryType;
+				        	  d.beginTime=ps.beginTime;
+				        	  d.endTime=ps.endTime;
+				        	  d.source=ps.source;
+				        	  d.clientid=ps.clientid;
+				        	  d.view=ps.view;
+				          },
+						  type: "POST",
+						  url:"/panel_bi/gameRealTime/getGameRealTimeHourClientView.ac"
+		              },
+		        "pageLength": 10,
+			    "language":{
+			    	"url": "/dataTables/chinese_realTime.json"
+			    },
+		        "deferRender": true,
+			    "sPaginationType" : "full_numbers",
+		        "dom" : '<"clear"><"top">frt<"bottom"ip><"clear">' ,
+				"bSort" : false,
+			    "bFilter" : true,
+			    "paging": true, //缈婚〉鍔熻兘
+			    "lengthChange": false, //鏀瑰彉姣忛〉鏄剧ず鏁版嵁鏁伴噺
+			    "searching": false, //杩囨护鍔熻兘
+			    "ordering": true, //鎺掑簭鍔熻兘
+			    "order": [[ 0, "asc" ]],
+			    rowCallback:function(row, data) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('highlight');
+                    }
+                },
+                columns: [
+							{"data": null},
+							{"data": "clientid"},
+							{"data": "dnu"},
+							{"data": "yesterday_dnu"},
+							{"data": "dau"},
+							{"data": "yesterday_dau"},
+							{"data": "total_amount"},
+							{"data": "yesterday_total_amount"},
+							//{"data": "payer"},
+							//{"data": "yesterday_payer"},
+							{"data": null},
+							{"data": null},
+							{"data": null},
+							{"data": null}
+	                  ],
+	        columnDefs: [
+	                     
+//	                      {
+//	                        targets: 6,
+//	                        render: function (a, b, v, d) {
+//	                             return Math.round((v.total_amount/v.dau/rate)*100)/100;
+//	                          }
+//	                       },
+//	                       {
+//		                        targets: 7,
+//		                        render: function (a, b, v, d) {
+//		                             return  Math.round((v.total_amount/v.payer/rate)*100)/100;
+//		                          }
+//		                    }
+							{
+	                        targets: 0,
+	                        render: function (a, b, v, d) {
+	                             return v.start_time.substring(0,5)+ '~' +v.finish_time.substring(0,5);
+	                          }
+	                       },
+							{
+	                        targets: 8,
+	                        render: function (a, b, v, d) {
+	                             return v.dau == '' || v.dau == null || v.dau == 0 ? 0 : Math.round((v.total_amount/v.dau)*100)/100;
+	                          }
+	                       },
+	                       {
+		                        targets: 9,
+		                        render: function (a, b, v, d) {
+		                             return  v.yesterday_dau == '' || v.yesterday_dau == null || v.yesterday_dau == 0  ? 0 : Math.round((v.yesterday_total_amount/v.yesterday_dau)*100)/100;
+		                          } 
+		                    },
+		                    {
+		                        targets: 10,
+		                        render: function (a, b, v, d) {
+		                             return v.payer == '' || v.payer == null || v.payer == 0  ? 0 :  Math.round((v.total_amount/v.payer)*100)/100;
+		                          }
+		                    },
+	                       {
+		                        targets: 11,
+		                        render: function (a, b, v, d) {
+		                             return v.yesterday_payer == '' || v.yesterday_payer == null || v.yesterday_payer == 0  ? 0 :  Math.round((v.yesterday_total_amount/v.yesterday_payer)*100)/100;
+		                          } 
+		                    }
+		                   
+	                     ]
+		    });
+
+			$('#dt1').removeClass().addClass('table table-striped');
+			
+			isCanClientSubmit = false;
+			
+			$('#dt1 button').click(function (){
+			    $("#downType").val("client");
+		        $(this).attr('disabled',true);
+		        $(this).val(2);
+		        window.btnTimeout=setInterval(function(){
+					$.gameUtil.btnTimeout($('#dt1 button'),window.btnTimeout);
+				  },1000);
+		        $("#downLoadForm").submit();
+		    });
+			
+			$.gameUtil.trHighLight($('#dt1 tbody'),selected);
+		}
+		
+	};
+});
+	                    

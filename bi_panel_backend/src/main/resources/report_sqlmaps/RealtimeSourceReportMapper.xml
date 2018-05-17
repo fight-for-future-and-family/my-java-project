@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.RealtimeSourceReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.RealtimeSourceReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="createive" property="createive" jdbcType="VARCHAR" />
+    <result column="install" property="install" jdbcType="BIGINT" />
+    <result column="new_equip" property="newEquip" jdbcType="BIGINT"/>
+    <result column="install_payer" property="installPayer" jdbcType="BIGINT" />
+    <result column="install_payment" property="installPayment" jdbcType="DOUBLE" />
+    <result column="idfa" property="idfa" jdbcType="BIGINT" />
+    <result column="distinct_idfa" property="distinctIdfa" jdbcType="BIGINT" />
+    <result column="ip" property="ip" jdbcType="BIGINT" />
+    <result column="distinct_ip" property="distinctIp" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, ds, createive, install,new_equip ,install_payer, install_payment, idfa, distinct_idfa, 
+    ip, distinct_ip, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hour_realtime_source_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hour_realtime_source_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.RealtimeSourceReport" >
+    insert into hour_realtime_source_report (id, snid, gameid, 
+      ds, createive, install, new_equip,
+      install_payer, install_payment, idfa, 
+      distinct_idfa, ip, distinct_ip, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{ds,jdbcType=VARCHAR}, #{createive,jdbcType=VARCHAR}, #{install,jdbcType=BIGINT}, 
+      #{newEquip,jdbc.Type=BIGINT},
+      #{installPayer,jdbcType=BIGINT}, #{installPayment,jdbcType=DOUBLE}, #{idfa,jdbcType=BIGINT}, 
+      #{distinctIdfa,jdbcType=BIGINT}, #{ip,jdbcType=BIGINT}, #{distinctIp,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.RealtimeSourceReport" >
+    insert into hour_realtime_source_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="createive != null" >
+        createive,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="newEquip != null">
+      	new_equip,
+      </if>
+      <if test="installPayer != null" >
+        install_payer,
+      </if>
+      <if test="installPayment != null" >
+        install_payment,
+      </if>
+      <if test="idfa != null" >
+        idfa,
+      </if>
+      <if test="distinctIdfa != null" >
+        distinct_idfa,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="distinctIp != null" >
+        distinct_ip,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="createive != null" >
+        #{createive,jdbcType=VARCHAR},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=BIGINT},
+      </if>
+      <if test="newEquip !=null" >
+      	#{newEquip,jdbcType=BIGINT},
+      </if>
+      <if test="installPayer != null" >
+        #{installPayer,jdbcType=BIGINT},
+      </if>
+      <if test="installPayment != null" >
+        #{installPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="idfa != null" >
+        #{idfa,jdbcType=BIGINT},
+      </if>
+      <if test="distinctIdfa != null" >
+        #{distinctIdfa,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=BIGINT},
+      </if>
+      <if test="distinctIp != null" >
+        #{distinctIp,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.RealtimeSourceReport" >
+    update hour_realtime_source_report
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="createive != null" >
+        createive = #{createive,jdbcType=VARCHAR},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=BIGINT},
+      </if>
+      <if test="newEquip !=null">
+      	new_equip = #{newEquip,jdbcType=BIGINT},
+      </if>
+      <if test="installPayer != null" >
+        install_payer = #{installPayer,jdbcType=BIGINT},
+      </if>
+      <if test="installPayment != null" >
+        install_payment = #{installPayment,jdbcType=DOUBLE},
+      </if>
+      <if test="idfa != null" >
+        idfa = #{idfa,jdbcType=BIGINT},
+      </if>
+      <if test="distinctIdfa != null" >
+        distinct_idfa = #{distinctIdfa,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=BIGINT},
+      </if>
+      <if test="distinctIp != null" >
+        distinct_ip = #{distinctIp,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.RealtimeSourceReport" >
+    update hour_realtime_source_report
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      ds = #{ds,jdbcType=VARCHAR},
+      createive = #{createive,jdbcType=VARCHAR},
+      install = #{install,jdbcType=BIGINT},
+      install_payer = #{installPayer,jdbcType=BIGINT},
+      new_equip=#{newEquip,jdbcType=BIGINT},
+      install_payment = #{installPayment,jdbcType=DOUBLE},
+      idfa = #{idfa,jdbcType=BIGINT},
+      distinct_idfa = #{distinctIdfa,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=BIGINT},
+      distinct_ip = #{distinctIp,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   <sql id="Vo_Where_Clause">
+		<where>
+		    <if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+			</if>
+			<if test="beginDate != null">
+				<![CDATA[ and ds >= #{beginDate} ]]>
+			</if>
+			<if test="endDate != null">
+				<![CDATA[ and ds <= #{endDate} ]]>
+		   </if>
+		</where>
+	</sql>
+  
+  <select id="selectCount" parameterType="com.hoolai.bi.report.vo.RealtimeSourceReportVO" resultType="java.lang.Long">
+		select 
+		  count(*)
+		  from hour_realtime_source_report u
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<if test="searchValue != null">
+	    and (ds like concat('%', #{searchValue}, '%') or createive like concat('%', #{searchValue}, '%'))
+	 </if>
+ </select>
+ 
+ <select id="selectList" parameterType="com.hoolai.bi.report.vo.RealtimeSourceReportVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from hour_realtime_source_report
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (ds like concat('%', #{searchValue}, '%') or createive like concat('%', #{searchValue}, '%'))
+	 </if>
+	 ${orderValue}
+	 <![CDATA[limit #{offset}, #{rows} ]]>
+  </select>
+</mapper>

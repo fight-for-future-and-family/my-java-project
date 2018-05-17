@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.AdminOpMonitorStandard" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.AdminOpMonitorStandard" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="INTEGER" />
+    <result column="op_code" property="opCode" jdbcType="VARCHAR" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="op_user_name" property="opUserName" jdbcType="VARCHAR" />
+    <result column="item_id" property="itemId" jdbcType="BIGINT" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="item_num" property="itemNum" jdbcType="INTEGER" />
+    <result column="apply_user_name" property="applyUserName" jdbcType="VARCHAR" />
+    <result column="use_desc" property="useDesc" jdbcType="VARCHAR" />
+    <result column="be_operated_user_name" property="beOperatedUserName" jdbcType="VARCHAR" />
+    <result column="be_operated_user_role" property="beOperatedUserRole" jdbcType="VARCHAR" />
+    <result column="upload_user_id" property="uploadUserId" jdbcType="BIGINT" />
+    <result column="upload_user_name" property="uploadUserName" jdbcType="VARCHAR" />
+    <result column="op_date" property="opDate" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, month, clientid, op_code, snid, gameid, game_name, op_user_name, item_id, item_name, 
+    item_num, apply_user_name, use_desc, be_operated_user_name, be_operated_user_role, 
+    upload_user_id, upload_user_name,op_date, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin_op_monitor_standard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from admin_op_monitor_standard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.AdminOpMonitorStandard" >
+    insert into admin_op_monitor_standard (id, month, clientid, 
+      op_code, snid, gameid, 
+      game_name, op_user_name, item_id, 
+      item_name, item_num, apply_user_name, 
+      use_desc, be_operated_user_name, be_operated_user_role, 
+      upload_user_id, upload_user_name, op_date,create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{month,jdbcType=VARCHAR}, #{clientid,jdbcType=INTEGER}, 
+      #{opCode,jdbcType=VARCHAR}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{gameName,jdbcType=VARCHAR}, #{opUserName,jdbcType=VARCHAR}, #{itemId,jdbcType=BIGINT}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemNum,jdbcType=INTEGER}, #{applyUserName,jdbcType=VARCHAR}, 
+      #{useDesc,jdbcType=VARCHAR}, #{beOperatedUserName,jdbcType=VARCHAR}, #{beOperatedUserRole,jdbcType=VARCHAR}, 
+      #{uploadUserId,jdbcType=BIGINT}, #{uploadUserName,jdbcType=VARCHAR}, #{opDate,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.AdminOpMonitorStandard" >
+    insert into admin_op_monitor_standard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="opCode != null" >
+        op_code,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="gameName != null" >
+        game_name,
+      </if>
+      <if test="opUserName != null" >
+        op_user_name,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="itemNum != null" >
+        item_num,
+      </if>
+      <if test="applyUserName != null" >
+        apply_user_name,
+      </if>
+      <if test="useDesc != null" >
+        use_desc,
+      </if>
+      <if test="beOperatedUserName != null" >
+        be_operated_user_name,
+      </if>
+      <if test="beOperatedUserRole != null" >
+        be_operated_user_role,
+      </if>
+      <if test="uploadUserId != null" >
+        upload_user_id,
+      </if>
+      <if test="uploadUserName != null" >
+        upload_user_name,
+      </if>
+      <if test="opDate != null" >
+        op_date,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="opCode != null" >
+        #{opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameName != null" >
+        #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="opUserName != null" >
+        #{opUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNum != null" >
+        #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="applyUserName != null" >
+        #{applyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="useDesc != null" >
+        #{useDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="beOperatedUserName != null" >
+        #{beOperatedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="beOperatedUserRole != null" >
+        #{beOperatedUserRole,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadUserId != null" >
+        #{uploadUserId,jdbcType=BIGINT},
+      </if>
+      <if test="uploadUserName != null" >
+        #{uploadUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="opDate != null" >
+        #{opDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.AdminOpMonitorStandard" >
+    update admin_op_monitor_standard
+    <set >
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="opCode != null" >
+        op_code = #{opCode,jdbcType=VARCHAR},
+      </if>
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameName != null" >
+        game_name = #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="opUserName != null" >
+        op_user_name = #{opUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNum != null" >
+        item_num = #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="applyUserName != null" >
+        apply_user_name = #{applyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="useDesc != null" >
+        use_desc = #{useDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="beOperatedUserName != null" >
+        be_operated_user_name = #{beOperatedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="beOperatedUserRole != null" >
+        be_operated_user_role = #{beOperatedUserRole,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadUserId != null" >
+        upload_user_id = #{uploadUserId,jdbcType=BIGINT},
+      </if>
+      <if test="uploadUserName != null" >
+        upload_user_name = #{uploadUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="opDate != null" >
+        op_date = #{opDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.AdminOpMonitorStandard" >
+    update admin_op_monitor_standard
+    set month = #{month,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=INTEGER},
+      op_code = #{opCode,jdbcType=VARCHAR},
+      snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      game_name = #{gameName,jdbcType=VARCHAR},
+      op_user_name = #{opUserName,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=BIGINT},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_num = #{itemNum,jdbcType=INTEGER},
+      apply_user_name = #{applyUserName,jdbcType=VARCHAR},
+      use_desc = #{useDesc,jdbcType=VARCHAR},
+      be_operated_user_name = #{beOperatedUserName,jdbcType=VARCHAR},
+      be_operated_user_role = #{beOperatedUserRole,jdbcType=VARCHAR},
+      upload_user_id = #{uploadUserId,jdbcType=BIGINT},
+      upload_user_name = #{uploadUserName,jdbcType=VARCHAR},
+      op_date = #{opDate,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+     <where>
+     	<if test="entity!=null">
+     		<if test="entity.id != null ">
+				<![CDATA[ and id = #{entity.id} ]]>
+			</if>
+			<if test="entity.snid != null and entity.snid != ''">
+				<![CDATA[ and snid = #{entity.snid} ]]>
+			</if>
+			<if test="entity.gameid != null and entity.gameid != ''">
+				<![CDATA[ and gameid = #{entity.gameid} ]]>
+			</if>
+			<if test="entity.clientid != null and entity.clientid != ''">
+				<![CDATA[ and clientid = #{entity.clientid} ]]>
+			</if>
+			<if test="entity.month != null and entity.month != ''">
+				<![CDATA[ and month = #{entity.month} ]]>
+			</if>
+			<if test="entity.opCode != null and entity.opCode != ''">
+				<![CDATA[ and op_code = #{entity.opCode} ]]>
+			</if>
+     	</if>
+     </where>
+  </sql>
+  
+  <select id="getByCode" parameterType="com.hoolai.bi.report.vo.AdminOpMonitorStandardVO" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from admin_op_monitor_standard
+  	<if test="_parameter != null">
+		  <include refid="Vo_Where_Clause" />
+	 </if>
+  </select>
+  
+  <select id="selectList" parameterType="com.hoolai.bi.report.vo.AdminOpMonitorStandardVO" resultMap="BaseResultMap">
+    select 
+  	<include refid="Base_Column_List"/>
+  	from admin_op_monitor_standard
+  	<if test="_parameter != null">
+		  <include refid="Vo_Where_Clause" />
+	 </if>
+	 <if test="searchValue != null">
+	    and (
+	    clientid like concat('%', #{searchValue}, '%') or 
+	    op_code like concat('%', #{searchValue}, '%') or
+	    op_user_name like concat('%', #{searchValue}, '%') or
+	    item_id like concat('%', #{searchValue}, '%') or
+	    item_name like concat('%', #{searchValue}, '%') or
+	    apply_user_name like concat('%', #{searchValue}, '%') or
+	    be_operated_user_name like concat('%', #{searchValue}, '%') or
+	    be_operated_user_role like concat('%', #{searchValue}, '%') or
+	    op_date like concat('%', #{searchValue}, '%')
+	    )
+	</if>
+	 <if test="queryType == 'limit'">
+	 ${orderValue}
+	 limit #{offset},#{rows}
+	 </if>
+  </select>
+  
+  <select id="selectCount" parameterType="com.hoolai.bi.report.vo.AdminOpMonitorStandardVO" resultType="java.lang.Long">
+    select count(1) from (
+    select 
+  	<include refid="Base_Column_List"/>
+  	from admin_op_monitor_standard
+  	<if test="_parameter != null">
+		  <include refid="Vo_Where_Clause" />
+	 </if>
+	 <if test="searchValue != null">
+	    and (
+	    clientid like concat('%', #{searchValue}, '%') or 
+	    op_code like concat('%', #{searchValue}, '%') or
+	    op_user_name like concat('%', #{searchValue}, '%') or
+	    item_id like concat('%', #{searchValue}, '%') or
+	    item_name like concat('%', #{searchValue}, '%') or
+	    apply_user_name like concat('%', #{searchValue}, '%') or
+	    be_operated_user_name like concat('%', #{searchValue}, '%') or
+	    be_operated_user_role like concat('%', #{searchValue}, '%') or
+	    op_date like concat('%', #{searchValue}, '%')
+	    )
+	</if>
+	)a
+  </select>
+  
+</mapper>

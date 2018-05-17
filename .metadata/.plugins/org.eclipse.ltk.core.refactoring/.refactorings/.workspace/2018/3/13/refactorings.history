@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;presto-third-functions&apos;" deleteContents="true" description="Delete resource &apos;presto-third-functions&apos;" element1="/presto-third-functions" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1522322040976"/>
+</session>

@@ -1,0 +1,86 @@
+package com.hoolai.bi.report.service.impl;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hoolai.bi.report.dao.RealTimeGameClientidDao;
+import com.hoolai.bi.report.dao.RealTimeGameSourceDao;
+import com.hoolai.bi.report.model.entity.RealTimeGameClient;
+import com.hoolai.bi.report.model.entity.RealTimeGameSource;
+import com.hoolai.bi.report.service.RealTimeGameSourceService;
+import com.hoolai.bi.report.vo.RealTimeGameSourceVo;
+import com.hoolai.dao.GenericDao;
+import com.hoolai.dao.pagination.AbstractObjectVO;
+import com.hoolai.dao.pagination.Pagination;
+import com.jian.service.impl.GenericServiceImpl;
+import com.jian.service.pagination.PaginationResult;
+@Service
+public class RealTimeGameSourceServiceImpl  extends GenericServiceImpl<RealTimeGameSource, Long> implements RealTimeGameSourceService {
+
+	@Autowired
+	private RealTimeGameSourceDao entityDao;
+	
+	@Override
+    public GenericDao<RealTimeGameSource, Long> getGenricDao() {
+            return this.entityDao;
+    }
+	
+	@Override
+	public int saveRealTimeSourceDataList(
+			List<RealTimeGameSource> realTimeGameSource) {
+		
+		return entityDao.saveRealTimeSourceDataList(realTimeGameSource);
+	}
+
+	@Override
+	public List<RealTimeGameSourceVo> getSelectGamesSourceList(
+			RealTimeGameSourceVo realTimeGameSourceVo) {
+		Pagination pagination = new Pagination();
+		pagination.setPageOffset(realTimeGameSourceVo.getOffset());
+		pagination.setPageSize(Long.valueOf(realTimeGameSourceVo.getRows()).intValue());
+		
+		if(!StringUtils.isEmpty(realTimeGameSourceVo.getOrderCol())){
+			realTimeGameSourceVo.setOrderValue("order by "+realTimeGameSourceVo.getOrderCol() + " " +realTimeGameSourceVo.getOrderType());
+		}else{
+			realTimeGameSourceVo.setOrderValue("order by finish_time desc");
+		}
+		
+		
+		return entityDao.getSelectGamesSourceList(realTimeGameSourceVo);
+	}
+
+	@Override
+	public long getSelectGamesSourceCount(
+			RealTimeGameSourceVo realTimeGameSourceVo) {
+		return entityDao.getSelectGamesSourceCount(realTimeGameSourceVo);
+	}
+
+	@Override
+	public void deleteRealTimeSourceData(
+			RealTimeGameSourceVo realTimeGameSourceVo) {
+			entityDao.deleteRealTimeSourceData(realTimeGameSourceVo);
+	}
+
+	@Override
+	public long getSelectCountSourcedata(
+			RealTimeGameSourceVo realTimeGameSourceVo) {
+		return entityDao.getSelectCountSourcedata(realTimeGameSourceVo);
+	}
+
+	@Override
+	public List<RealTimeGameSourceVo> getSelectGamesSourceIconList(
+			RealTimeGameSourceVo realTimeGameSourceVo) {
+		return entityDao.getSelectGamesSourceIconList(realTimeGameSourceVo);
+	}
+
+	@Override
+	public String getSelectMaxDau(RealTimeGameSourceVo realTimeGameSourceVo) {
+
+		return entityDao.getSelectMaxDau(realTimeGameSourceVo);
+	}
+
+	
+}

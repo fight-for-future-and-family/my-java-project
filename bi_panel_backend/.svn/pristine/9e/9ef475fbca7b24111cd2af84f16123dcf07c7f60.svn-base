@@ -1,0 +1,24 @@
+package com.hoolai.bi.report.service;
+
+import java.util.List;
+
+import com.hoolai.bi.report.model.entity.RealTimeGameClient;
+import com.hoolai.bi.report.vo.RealTimeGameClientVo;
+import com.jian.service.GenericService;
+
+public interface RealTimeGameClientidService   extends GenericService<RealTimeGameClient, Long>{
+
+	
+		//保存分服实时数据
+		int saveRealTimeClientidDataList(List<RealTimeGameClient> realtTimeGameClientid);
+		
+		//查询分服
+		List<RealTimeGameClientVo> getSelectGamesClientidList(RealTimeGameClientVo realTimeGameClientidVo);
+		
+		long getSelectGamesClientidCount(RealTimeGameClientVo realTimeGameClientidVo);
+		
+		void deleteRealTimeClientData(RealTimeGameClientVo realTimeGameClientidVo);
+		
+		//查询表中是否有数据
+		long getSelectCountdata(RealTimeGameClientVo realTimeGameClientidVo);
+}

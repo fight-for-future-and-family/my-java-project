@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.equip.EquipVersionDau" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.equip.EquipVersionDau" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="dau" property="dau" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, ds, version, dau, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from equip_version_dau
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from equip_version_dau
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.equip.EquipVersionDau" >
+    insert into equip_version_dau (id, snid, gameid, 
+      ds, version, dau, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{ds,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{dau,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.equip.EquipVersionDau" >
+    insert into equip_version_dau
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="dau != null" >
+        dau,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="dau != null" >
+        #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.equip.EquipVersionDau" >
+    update equip_version_dau
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="dau != null" >
+        dau = #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.equip.EquipVersionDau" >
+    update equip_version_dau
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      ds = #{ds,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      dau = #{dau,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+			</if>
+			<if test="beginDate != null">
+				<![CDATA[ and ds >= #{beginDate} ]]>
+			</if>
+			<if test="endDate != null">
+				<![CDATA[ and ds <= #{endDate} ]]>
+			</if>
+		</where>
+	</sql>
+	
+	<resultMap id="EquipVersionResultMap" type="com.hoolai.bi.report.model.entity.equip.EquipVersionDauResult" >
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="v1" property="v1" jdbcType="INTEGER" />
+    <result column="v2" property="v2" jdbcType="INTEGER" />
+    <result column="v3" property="v3" jdbcType="INTEGER" />
+    <result column="v4" property="v4" jdbcType="INTEGER" />
+    <result column="v5" property="v5" jdbcType="INTEGER" />
+    <result column="other" property="other" jdbcType="INTEGER" />
+  </resultMap>
+	
+	<select id="selectTop5Version" parameterType="com.hoolai.bi.report.vo.EquipVersionDauVO" resultType="java.lang.String">
+		select version,sum(dau) dau
+		from equip_version_dau
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		group by version 
+		order by dau desc
+		limit 0,5
+	</select>
+	
+	<select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.EquipVersionDauVO" resultMap="BaseResultMap">
+		select 
+		 <include refid="Base_Column_List" />
+		from equip_version_dau
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+	</select>
+	
+	<select id="selectList" parameterType="com.hoolai.bi.report.vo.EquipVersionDauVO" resultMap="EquipVersionResultMap">
+		${versionStr}
+		from equip_version_dau
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		group by ds
+		${orderValue})a
+		<if test="queryType == 'limit'">
+	    	limit #{offset},#{rows}
+		</if>
+	</select>
+	
+	<select id="selectCount" parameterType="com.hoolai.bi.report.vo.EquipVersionDauVO" resultType="java.lang.Long">
+	select count(distinct ds)
+	from equip_version_dau
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	</select>
+</mapper>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.ReportingEachTimeNC" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.ReportingEachTimeNC" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="VARCHAR" />
+    <result column="dau" property="dau" jdbcType="INTEGER" />
+    <result column="install" property="install" jdbcType="INTEGER" />
+    <result column="pay_users" property="payUsers" jdbcType="INTEGER" />
+    <result column="pay_times" property="payTimes" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="ispredict" property="ispredict" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, ds, times, dau, install, pay_users, pay_times, amount, ispredict, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from reporting_noclient_eachtime
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reporting_noclient_eachtime
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.ReportingEachTimeNC" >
+    insert into reporting_noclient_eachtime (id, snid, gameid, 
+      ds, times, dau, install, 
+      pay_users, pay_times, amount, 
+      ispredict, create_time)
+    values (#{id,jdbcType=INTEGER}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{ds,jdbcType=VARCHAR}, #{times,jdbcType=VARCHAR}, #{dau,jdbcType=INTEGER}, #{install,jdbcType=INTEGER}, 
+      #{payUsers,jdbcType=INTEGER}, #{payTimes,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, 
+      #{ispredict,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.ReportingEachTimeNC" >
+    insert into reporting_noclient_eachtime
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="times != null" >
+        times,
+      </if>
+      <if test="dau != null" >
+        dau,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="payUsers != null" >
+        pay_users,
+      </if>
+      <if test="payTimes != null" >
+        pay_times,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="ispredict != null" >
+        ispredict,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=VARCHAR},
+      </if>
+      <if test="dau != null" >
+        #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=INTEGER},
+      </if>
+      <if test="payUsers != null" >
+        #{payUsers,jdbcType=INTEGER},
+      </if>
+      <if test="payTimes != null" >
+        #{payTimes,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="ispredict != null" >
+        #{ispredict,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.ReportingEachTimeNC" >
+    update reporting_noclient_eachtime
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        times = #{times,jdbcType=VARCHAR},
+      </if>
+      <if test="dau != null" >
+        dau = #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=INTEGER},
+      </if>
+      <if test="payUsers != null" >
+        pay_users = #{payUsers,jdbcType=INTEGER},
+      </if>
+      <if test="payTimes != null" >
+        pay_times = #{payTimes,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="ispredict != null" >
+        ispredict = #{ispredict,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.ReportingEachTimeNC" >
+    update reporting_noclient_eachtime
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      ds = #{ds,jdbcType=VARCHAR},
+      times = #{times,jdbcType=VARCHAR},
+      dau = #{dau,jdbcType=INTEGER},
+      install = #{install,jdbcType=INTEGER},
+      pay_users = #{payUsers,jdbcType=INTEGER},
+      pay_times = #{payTimes,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      ispredict = #{ispredict,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="today != null">
+					 <![CDATA[ and (ds = #{today} or ds = #{yesterday} 
+					 or ds=#{last7Day} or ds=#{lastMonthSToday})]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+  
+  <select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.ReportingEachTimeNCVO" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from reporting_noclient_eachtime
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	order by ds desc,times asc
+  </select>
+  
+</mapper>

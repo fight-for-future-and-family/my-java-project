@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.SeriesAll" >
+	<resultMap id="SeriesAllMap" type="com.hoolai.bi.report.model.entity.SeriesAll" >
+		<result column="seriesid" property="seriesid" jdbcType="INTEGER" />
+    	<result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    	<result column="dnu" property="dnu" jdbcType="INTEGER" />
+    	<result column="install" property="install" jdbcType="INTEGER" />
+    	<result column="payment_amount" property="paymentAmount" jdbcType="DOUBLE" />
+    	<result column="dau" property="dau" jdbcType="INTEGER" />
+    	<result column="payer" property="payer" jdbcType="INTEGER" />
+    	<result column="equipment" property="equipment" jdbcType="INTEGER" />
+    	<result column="arpu" property="arpu" jdbcType="DOUBLE" />
+    	<result column="arppu" property="arppu" jdbcType="DOUBLE" />
+    	<result column="data_type" property="dataType" jdbcType="INTEGER" />
+    	<result column="beginDate" property="beginDate" jdbcType="VARCHAR" />
+    	<result column="endDate" property="endDate" jdbcType="VARCHAR" />
+    	<result column="ds" property="ds" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="SeriesGameMap" type="com.hoolai.bi.report.model.entity.SeriesGame" >
+		<result column="seriesid" property="seriesid" jdbcType="INTEGER" />
+    	<result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    	<result column="snid" property="snid" jdbcType="VARCHAR" />
+    	<result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    	<result column="dnu" property="dnu" jdbcType="INTEGER" />
+    	<result column="install" property="install" jdbcType="INTEGER" />
+    	<result column="payment_amount" property="paymentAmount" jdbcType="DOUBLE" />
+    	<result column="dau" property="dau" jdbcType="INTEGER" />
+    	<result column="payer" property="payer" jdbcType="INTEGER" />
+    	<result column="equipment" property="equipment" jdbcType="INTEGER" />
+    	<result column="arpu" property="arpu" jdbcType="DOUBLE" />
+    	<result column="arppu" property="arppu" jdbcType="DOUBLE" />
+    	<result column="data_type" property="dataType" jdbcType="INTEGER" />
+    	<result column="beginDate" property="beginDate" jdbcType="VARCHAR" />
+    	<result column="endDate" property="endDate" jdbcType="VARCHAR" />
+    	<result column="ds" property="ds" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List_SeriesAll" >
+		seriesid, series_name, dnu, install, payment_amount, dau,
+		payer, equipment, arpu, arppu, data_type, beginDate, endDate, ds
+	</sql>
+	
+	<sql id="Base_Column_List_SeriesGame" >
+		seriesid, game_name, snid, gameid, dnu, install, payment_amount, dau,
+		payer, equipment, arpu, arppu, data_type, beginDate, endDate, ds
+	</sql>
+	
+	<sql id="Vo_Where_Clause">
+		<where>
+			<if test="seriesid != null and seriesid != ''">
+				<![CDATA[ and seriesid = #{seriesid} ]]>
+			</if>
+			<if test="dataType != null and dataType != ''">
+				<![CDATA[ and data_type = #{dataType} ]]>
+			</if>
+			<if test="beginDate != null and beginDate != ''">
+				<![CDATA[ and beginDate >= #{beginDate} ]]>
+			</if>
+			<if test="endDate != null and endDate != ''">
+				<![CDATA[ and endDate <= #{endDate} ]]>
+			</if>
+			<if test="ds != null and ds != ''">
+				<![CDATA[ and ds = #{ds} ]]>
+			</if>
+			<if test="isAll == null or isAll == ''">
+				and beginDate=endDate
+			</if>
+			<if test="isAll != null and isAll != ''">
+				and beginDate!=endDate
+			</if>
+		</where>
+	</sql>
+	
+	<delete id="removeAllBySeriesid" parameterType="java.lang.String">
+		delete from series_all where seriesid=#{seriesid}
+	</delete>
+	
+	<delete id="removeGamesBySeriesid" parameterType="java.lang.String">
+		delete from series_game where seriesid=#{seriesid}
+	</delete>
+	
+	<select id="selectSeriesAll" parameterType="com.hoolai.bi.report.model.entity.SeriesAll" resultMap="SeriesAllMap" >
+		select distinct a.seriesid, a.series_name, a.dnu, a.install, b.payment_amount, a.dau, 
+		a.payer, a.equipment, round(b.payment_amount/a.dau,2) as arpu, round(b.payment_amount/a.payer,2) as arppu, 
+		data_type, a.beginDate, a.endDate, a.ds from (
+			select 
+			seriesid, series_name, dnu, install, payment_amount, dau,
+			payer, equipment, arpu, arppu, data_type, beginDate, endDate, ds
+			from series_all 
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause" />
+			</if>
+			
+		)a left outer join (
+			select sum(payment_amount) as payment_amount,seriesid,beginDate,endDate from (
+				select round(payment_amount/rate,2) as payment_amount,seriesid,beginDate,endDate from ( 
+					select DISTINCT payment_amount,dau,payer,seriesid,beginDate,endDate,snid,gameid from series_game
+					<if test="_parameter != null">
+						<include refid="Vo_Where_Clause" />
+					</if>
+				)c left outer join ( 
+					select snid,gameid,rate,name from games 
+				)d on c.snid=d.snid and c.gameid=d.gameid
+			)e group by seriesid,beginDate,endDate
+		)b on a.seriesid=b.seriesid and a.beginDate=b.beginDate and a.endDate=b.endDate 
+		where b.seriesid is not null
+	</select>
+	
+	<select id="selectSeriesGame" parameterType="com.hoolai.bi.report.model.entity.SeriesGame" resultMap="SeriesGameMap">
+		select distinct seriesid, b.name as game_name, a.snid as snid, a.gameid as gameid, dnu, install,
+				round(payment_amount/rate, 2) as payment_amount, dau, payer, equipment, 
+				arpu, arppu, data_type, beginDate, endDate, ds from (
+			select 
+			<include refid="Base_Column_List_SeriesGame" />
+			from series_game
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause" />
+			</if>
+		) a left outer join (
+			select snid,gameid,rate,name from games
+		) b on a.snid=b.snid and a.gameid=b.gameid
+		order by dnu desc 
+	</select>
+	
+	<insert id="saveSeriesAllList" parameterType="java.util.List">
+		insert into series_all
+		(seriesid, series_name, dnu, install, payment_amount, dau,
+		payer, equipment, arpu, arppu, data_type, beginDate, endDate, ds)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.seriesid}, #{item.seriesName}, #{item.dnu}, #{item.install}, #{item.paymentAmount}, #{item.dau},
+				#{item.payer}, #{item.equipment}, #{item.arpu}, #{item.arppu}, 
+				#{item.dataType}, #{item.beginDate}, #{item.endDate}, #{item.ds})
+		</foreach>
+	</insert>
+	
+	<insert id="saveSeriesGameList" parameterType="java.util.List">
+		insert into series_game
+		(seriesid, game_name, snid, gameid, dnu, install, payment_amount, dau,
+		payer, equipment, arpu, arppu, data_type, beginDate, endDate, ds)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.seriesid}, #{item.gameName}, #{item.snid}, #{item.gameid}, #{item.dnu}, #{item.install}, #{item.paymentAmount}, #{item.dau},
+				#{item.payer}, #{item.equipment}, #{item.arpu}, #{item.arppu}, 
+				#{item.dataType}, #{item.beginDate}, #{item.endDate}, #{item.ds})
+		</foreach>
+	</insert>
+	
+</mapper>

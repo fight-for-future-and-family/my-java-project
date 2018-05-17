@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;hdfs_file_upload/WebContent/test.html&apos; to &apos;test.jsp&apos;" description="Rename resource &apos;test.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/test.html" name="test.jsp" stamp="1495418633108" updateReferences="true"/>
+</session>

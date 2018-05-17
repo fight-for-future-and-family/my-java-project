@@ -1,0 +1,31 @@
+package com.hoolai.bi.report.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.hoolai.bi.report.dao.UserLoginLogDao;
+import com.hoolai.bi.report.model.entity.UserLoginLog;
+import com.hoolai.bi.report.model.entity.UserOperationLog;
+import com.hoolai.dao.impl.GenericDaoImpl;
+
+@Repository
+public class UserLoginLogDaoImpl extends GenericDaoImpl<UserLoginLog, Long>
+		implements UserLoginLogDao {
+	
+	@Override
+	public String namespace() {
+		return UserLoginLog.class.getName();
+	}
+
+	@Override
+	public int saveLoginLogs(UserLoginLog userLoginLog) {
+		return this.sqlSessionTemplate.insert(this.namespace()+".insertSelective", userLoginLog);
+	}
+
+	@Override
+	public int saveOperationLogs(UserOperationLog userOperationLog) {
+		return this.sqlSessionTemplate.insert(this.namespace()+".insertOperationLog", userOperationLog);
+	}
+	
+	
+	
+}

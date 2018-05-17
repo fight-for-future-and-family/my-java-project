@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.CustomReportTask" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.CustomReportTask" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="INTEGER" />
+    <result column="gameid" property="gameid" jdbcType="INTEGER" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_code" property="taskCode" jdbcType="VARCHAR" />
+    <result column="execute_time" property="executeTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="execute_user_id" property="executeUserId" jdbcType="BIGINT" />
+    <result column="execute_user_name" property="executeUserName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="record_count" property="recordCount" jdbcType="INTEGER" />
+    <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
+    <result column="template_id" property="templateId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, task_name, task_code, execute_time, end_time, execute_user_id, 
+    execute_user_name, status, record_count, interval_time, template_id,create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from report_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from report_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.CustomReportTask" >
+    insert into report_task (id, snid, gameid, 
+      task_name, task_code, execute_time, 
+      end_time, execute_user_id, execute_user_name, 
+      status, record_count, interval_time, template_id,
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=INTEGER}, #{gameid,jdbcType=INTEGER}, 
+      #{taskName,jdbcType=VARCHAR}, #{taskCode,jdbcType=VARCHAR}, #{executeTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{executeUserId,jdbcType=BIGINT}, #{executeUserName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{recordCount,jdbcType=INTEGER}, #{intervalTime,jdbcType=INTEGER}, 
+      #{templateId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP})
+      <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.CustomReportTask" >
+    insert into report_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="taskCode != null" >
+        task_code,
+      </if>
+      <if test="executeTime != null" >
+        execute_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="executeUserId != null" >
+        execute_user_id,
+      </if>
+      <if test="executeUserName != null" >
+        execute_user_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="recordCount != null" >
+        record_count,
+      </if>
+      <if test="intervalTime != null" >
+        interval_time,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=INTEGER},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="executeTime != null" >
+        #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executeUserId != null" >
+        #{executeUserId,jdbcType=BIGINT},
+      </if>
+      <if test="executeUserName != null" >
+        #{executeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="recordCount != null" >
+        #{recordCount,jdbcType=INTEGER},
+      </if>
+      <if test="intervalTime != null" >
+        #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.CustomReportTask" >
+    update report_task
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=INTEGER},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        task_code = #{taskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="executeTime != null" >
+        execute_time = #{executeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executeUserId != null" >
+        execute_user_id = #{executeUserId,jdbcType=BIGINT},
+      </if>
+      <if test="executeUserName != null" >
+        execute_user_name = #{executeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="recordCount != null" >
+        record_count = #{recordCount,jdbcType=INTEGER},
+      </if>
+      <if test="intervalTime != null" >
+        interval_time = #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.CustomReportTask" >
+    update report_task
+    set snid = #{snid,jdbcType=INTEGER},
+      gameid = #{gameid,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_code = #{taskCode,jdbcType=VARCHAR},
+      execute_time = #{executeTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      execute_user_id = #{executeUserId,jdbcType=BIGINT},
+      execute_user_name = #{executeUserName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      record_count = #{recordCount,jdbcType=INTEGER},
+      interval_time = #{intervalTime,jdbcType=INTEGER},
+      template_id = #{templateId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.taskCode!= null and entity.taskCode != ''">
+					 <![CDATA[ and task_code = #{entity.taskCode} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+  <sql id="Vo_Where_Clause_like">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.taskCode!= null and entity.taskCode != '' and templateCode != null and templateCode != ''">
+					 <![CDATA[ and ( (task_code = #{entity.taskCode} and  status <> 0)]]>
+				</if>
+				<if test="entity.taskCode!= null and entity.taskCode != '' and templateCode != null and templateCode != ''">
+				<![CDATA[ or (task_code like concat('%', #{templateCode}, '%') and status = 2)) ]]>
+			</if>
+			</if>
+		</where>
+	</sql>
+  
+  <select  id="selectList" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultMap="BaseResultMap">
+  	select a.* from (
+	  	select   
+	  	<include refid="Base_Column_List" />
+	  	from report_task
+	  	<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<if test="searchValue != null">
+		    and (task_name like concat('%', #{searchValue}, '%') 
+		    or task_code like concat('%', #{searchValue}, '%')
+		    or execute_user_name like concat('%', #{searchValue}, '%')
+		    or id like concat('%', #{searchValue}, '%'))
+		</if>
+	)a left outer join (
+		select distinct template_id from report_template_columns
+	) b on a.template_id = b.template_id where b.template_id is not null
+	order by id desc
+  	limit #{offset},#{rows}
+   </select>
+   
+   <select  id="selectManagerList" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultMap="BaseResultMap">
+  	select   
+  	<include refid="Base_Column_List" />
+  	from report_task
+	<if test="searchValue != null">
+	    where (task_name like concat('%', #{searchValue}, '%') 
+	    or task_code like concat('%', #{searchValue}, '%')
+	    or execute_user_name like concat('%', #{searchValue}, '%')
+	    or id like concat('%', #{searchValue}, '%'))
+	</if>
+	order by id desc
+  	limit #{offset},#{rows}
+   </select>
+   
+   <select  id="selectListByTemplateId" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultMap="BaseResultMap">
+  	select   
+  	<include refid="Base_Column_List" />
+  	from report_task
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (task_name like concat('%', #{searchValue}, '%') 
+	    or task_code like concat('%', #{searchValue}, '%')
+	    or execute_user_name like concat('%', #{searchValue}, '%'))
+	</if>
+	<if test="entity.templateId!= null">
+		 <![CDATA[ and template_id = #{entity.templateId} ]]>
+	</if>
+	<if test="entity.taskName != null and entity.taskName != ''">
+		 and (task_name like concat('%', #{entity.taskName}, '%')
+		 or task_code like concat('%', #{entity.taskName}, '%'))
+	</if>
+	order by id desc
+  	limit #{offset},#{rows}
+   </select>
+   
+  <select  id="selectCount" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultType="java.lang.Long">
+  	select   count(1)
+  	from report_task
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (task_name like concat('%', #{searchValue}, '%') 
+	    or task_code like concat('%', #{searchValue}, '%')
+	    or execute_user_name like concat('%', #{searchValue}, '%'))
+	</if>
+   </select>
+   
+   <delete id="delTask" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" >
+   		delete from report_task where id=#{entity.id}
+   </delete>
+   
+   <select  id="selectManagerCount" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultType="java.lang.Long">
+  	select count(1)
+  	from report_task
+	<if test="searchValue != null">
+	    where (task_name like concat('%', #{searchValue}, '%') 
+	    or task_code like concat('%', #{searchValue}, '%')
+	    or execute_user_name like concat('%', #{searchValue}, '%')
+	    or id like concat('%', #{searchValue}, '%'))
+	</if>
+   </select>
+   
+   <select id="findTaskByTaskCode" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultMap="BaseResultMap">
+  		select   
+  	<include refid="Base_Column_List" />
+  	from report_task
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause_like" />
+	</if>
+   </select>
+   
+   <select id="selectOneByTaskCode" parameterType="com.hoolai.bi.report.vo.CustomReportTaskVO" resultMap="BaseResultMap">
+   		select <include refid="Base_Column_List" />
+   		from report_task
+   		<if test="_parameter != null">
+			<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.taskCode!= null and entity.taskCode != '' ">
+					 <![CDATA[ and task_code = #{entity.taskCode} ]]>
+				</if>
+			</if>
+			</where>
+		</if>
+   </select>
+</mapper>

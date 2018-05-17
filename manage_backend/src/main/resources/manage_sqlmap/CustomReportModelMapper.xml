@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.CustomReportModel" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.CustomReportModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="interval_time" property="intervalTime" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="is_presto" property="isPresto" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hoolai.manage.model.CustomReportModel" extends="BaseResultMap" >
+    <result column="template_sql" property="templateSql" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, code, description,interval_time, status,type, create_time, is_presto
+  </sql>
+  <sql id="Blob_Column_List" >
+    template_sql
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from report_template_model
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from report_template_model
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.CustomReportModel" >
+    insert into report_template_model (id, name, code, description,
+      interval_time, status,type, create_time, 
+      template_sql, is_presto)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{intervalTime,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{templateSql,jdbcType=LONGVARCHAR}, #{status,jdbcType=TINYINT})
+       <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.CustomReportModel" >
+    insert into report_template_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="intervalTime != null" >
+        interval_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="templateSql != null" >
+        template_sql,
+      </if>
+      <if test="isPresto != null" >
+        is_presto,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null" >
+        #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateSql != null" >
+        #{templateSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="isPresto != null" >
+        #{isPresto,jdbcType=TINYINT},
+      </if>
+    </trim>
+     <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.CustomReportModel" >
+    update report_template_model
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalTime != null" >
+        interval_time = #{intervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateSql != null" >
+        template_sql = #{templateSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="templateSql != null" >
+        template_sql = #{templateSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="isPresto != null" >
+        is_presto = #{isPresto,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hoolai.manage.model.CustomReportModel" >
+    update report_template_model
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      interval_time = #{intervalTime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      template_sql = #{templateSql,jdbcType=LONGVARCHAR},
+      is_presto = #{isPresto,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.CustomReportModel" >
+    update report_template_model
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      interval_time = #{intervalTime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_presto = #{isPresto,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <sql id="Vo_Where_Clause">
+      <where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.name != null and entity.name != ''">
+					 <![CDATA[ and name = #{entity.name} ]]>
+				</if>
+				<if test="entity.type != null">
+					 <![CDATA[ and type = #{entity.type} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="Vo_Where_Clause_1">
+      <where>
+			<if test="snid != null ">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+			<if test="gameid != null ">
+				 <![CDATA[ and gameid = #{gameid} ]]>
+			</if>
+			<if test="templateId != null ">
+				 <![CDATA[ and template_id = #{templateId} ]]>
+			</if>
+		</where>
+	</sql>
+  
+  <select id="selectList" parameterType="com.hoolai.manage.vo.CustomReportModelVO" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from 
+		(select
+		  <include refid="Base_Column_List" />
+		  from report_template_model
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>) b
+		<if test="entity.type != null and entity.type == 1">
+			right outer join
+  			(
+  				select template_id from  report_template r
+ 				<if test="_parameter != null">
+			        <include refid="Vo_Where_Clause_1" />
+				</if>
+			) a 
+			on b.id = a.template_id
+		</if>
+		<![CDATA[ order by id asc limit #{offset}, #{rows} ]]>
+	</select>
+	
+	<select id="selectCount" parameterType="com.hoolai.manage.vo.CustomReportModelVO" resultType="java.lang.Long">
+		select count(*)
+		from 
+		(select
+		  <include refid="Base_Column_List" />
+		  from report_template_model
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>) b
+		<if test="entity.type != null and entity.type == 1">
+			right outer join
+  			(
+  				select template_id from  report_template r
+ 				 <if test="_parameter != null">
+			        <include refid="Vo_Where_Clause_1" />
+				</if>
+			) a 
+			on b.id = a.template_id
+		</if>
+	</select>
+	
+  <resultMap id="VOResultMap" type="com.hoolai.manage.vo.CustomReportModelVO" >
+    <id column="id" property="entity.id" jdbcType="INTEGER" />
+    <result column="name" property="entity.name" jdbcType="VARCHAR" />
+    <result column="code" property="entity.code" jdbcType="VARCHAR" />
+    <result column="description" property="entity.description" jdbcType="VARCHAR" />
+    <result column="interval_time" property="entity.intervalTime" jdbcType="INTEGER" />
+    <result column="is_presto" property="entity.isPresto" jdbcType="INTEGER" />
+    <result column="status" property="entity.status" jdbcType="TINYINT" />
+    <result column="type" property="entity.type" jdbcType="TINYINT" />
+     <result column="template_sql" property="entity.templateSql" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="entity.createTime" jdbcType="TIMESTAMP" />
+    <result column="snid" property="snid" jdbcType="INTEGER" />
+    <result column="gameid" property="gameid" jdbcType="INTEGER" />
+    <result column="template_id" property="templateId" jdbcType="INTEGER" />
+  </resultMap>
+	
+	<select id="selectEditModel" parameterType="com.hoolai.manage.vo.CustomReportModelVO" resultMap="VOResultMap">
+		select b.*
+		<if test="entity.type != null and entity.type == 1">
+		,a.*
+		</if>
+		from 
+		(select
+		  <include refid="Base_Column_List" />,
+		  <include refid="Blob_Column_List" />
+		  from report_template_model
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>) b
+		<if test="entity.type != null and entity.type == 1">
+			right outer join
+  			(
+  				select snid,gameid,template_id from  report_template r
+ 				 <if test="_parameter != null">
+			        <include refid="Vo_Where_Clause_1" />
+				</if>
+			) a 
+			on b.id = a.template_id
+		</if>
+	</select>
+	
+	<select id="selectGameAllModel" parameterType="com.hoolai.manage.vo.CustomReportModelVO" resultMap="BaseResultMap">
+		select n.id,n.name from report_template_model n where n.`type`=0 and n.status = #{entity.status}
+         union
+        (select m.id, m.name from report_template t ,report_template_model m
+         where t.snid= #{snid} and t.gameid=#{gameid} and t.template_id = m.id and m.`type` = 1 and m.status = #{entity.status})
+	</select>
+	
+	<select id="isExist" parameterType="java.lang.String" resultType="java.lang.Long">
+		select count(1) from report_template_model
+		where code=#{code}
+	</select>
+
+</mapper>

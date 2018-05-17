@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.UserGame" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.UserGame" >
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="game_id" property="gameId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="voBaseResultMap" type="com.hoolai.bi.report.vo.UserGamesVO" >
+    <result column="user_id" property="entity.userId" jdbcType="BIGINT" />
+    <result column="game_id" property="entity.gameId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.UserGame" >
+    insert into user_game (user_id, game_id)
+    values (#{userId,jdbcType=BIGINT}, #{gameId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.UserGame" >
+    insert into user_game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="removeByUserId" parameterType="com.hoolai.bi.report.model.entity.UserGame">
+      delete from user_game
+      where user_id = #{userId}
+  </delete>
+  
+  <delete id="removeByGroupId" parameterType="com.hoolai.bi.report.vo.GamesVO" >
+  	delete from user_game
+	where 
+	game_id=#{entity.id} and
+	user_id in(
+	select gu.user_id
+	from group_users gu
+	where gu.group_id in (${gameManageUsers}))
+  </delete>
+  
+  <delete id="removeByGameId" parameterType="com.hoolai.bi.report.model.entity.UserGame">
+      delete from user_game
+      where game_id = #{gameId}
+  </delete>
+  
+  <select id="selectGameUserList" parameterType="com.hoolai.bi.report.vo.UserGamesVO" resultMap="voBaseResultMap">
+     select user_id,game_id,ug.user_bi_id ,real_name username
+     	from user_game ug ,t_bi_user tbu
+     where ug.game_id=#{entity.gameId,jdbcType=BIGINT}
+	     and ug.user_id=tbu.id
+	     GROUP BY user_id,game_id,ug.user_bi_id,username
+  </select>
+</mapper>

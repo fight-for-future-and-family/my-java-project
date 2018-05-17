@@ -1,0 +1,585 @@
+$(function(){
+		
+	$(document).ready(function() {
+	    $.gameDailyReport.init();
+	});
+	
+	var game;
+		
+	$.gameDailyReport={
+			init:function(){
+				$.gameDailyReport.initEvent();
+				$.gameDailyReport.submit();
+			},
+			initEvent:function(){
+				$("#query").click(function(){
+					$.gameDailyReport.submit();
+			    });
+				$(".detail-nav li").each(function(i,n){
+					$(n).click(function(){
+						$.gameDailyReport.redict($(n).attr("id"));
+					});
+				});
+				$("#channel").change(function(){
+					$.gameDailyReport.change($.gameDailyReport);
+				});
+				$(".tab-hd span").click(function(){
+					$.gameDailyReport.redict($(this).attr("view"));
+				});
+			},
+//			redict:function(view){
+//				window.location.href='/panel_bi/wap/gameView/toWapGameDatasView.ac?view='+view;
+//			},
+			redict:function(view){
+				var snid = $("input[name='snid']").val();
+				var gameId = $("input[name='gameId']").val();
+				window.location.href='/panel_bi/wap/gameView/toWapGameDatasView.ac?view='+view+'&snid='+snid+'&gameId='+gameId;
+			},
+			submit:function(){
+				var ps = $.gameDailyReport.checkParam();
+				if(ps == null){
+					return;
+			    }
+				
+				if($("#s_c").val() == '-99'){
+					$.gameDailyReport.brokenAjaxTable(ps);
+	    			return;
+				}
+				
+				$("#query")[0].disabled = true;
+				$('#ajax_data').hide();
+				$('#data').show();
+				
+				$.ajax({
+					  type: "POST",
+					  url: "/panel_bi/wap/gameView/getWapGameDatasView.ac",
+					  data: $.param(ps),
+					  dataType: "json",
+					  success: function(data){
+						  
+						    game = data.game;
+						    
+					    	var indicators = $('#channel').val();
+					    	
+					    	if(indicators == 'all'){
+						    	$.gameDailyReport.brokenTable(data.reports,data.report);
+					    	}else{
+						    	$.gameDailyReport.brokenTable(data.scReports,data.scReport);
+					    	}
+					    	
+					    	$("#query")[0].disabled = false;
+					  }
+				});
+			},
+			convert:function(str){
+				var ds = new Date(str).getDay().toString();
+				if(ds!="NaN"){
+					var arr = ["日","一","二","三","四","五","六"];
+					for (var i = 0; i < arr.length; i++) {
+						ds = ds.replace(i, arr[i]);
+					}
+					return str+"(周"+ds+")";
+				}else{
+					return str;
+				}
+			},
+			dataTables:function(div){
+				
+				$('.top').remove();
+				$('.bottom').remove();
+				$('.clear').remove();
+				$('.DTTT_container').remove();
+				
+				var table = div.DataTable({
+				"sPaginationType" : "full_numbers",
+	            "dom" : 'T<"top">rt<"bottom"ip><"clear">' ,
+	            "bDestroy" : true,
+	            "bPaginate" : true,
+	            "bInfo" : true,
+				"bSort" : true,
+				"bScrollCollapse" : true,
+				"bScrollInfinite" : true,
+			    "bFilter" : false,
+			    "paging": true, //翻页功能
+			    "lengthChange": false, //改变每页显示数据数量
+			    "searching": false, //过滤功能
+			    "ordering": true, //排序功能
+			    "order": [[ 0, "desc" ]],
+			    "processing": false,
+	            "lengthMenu": [ 10, 20, 50, 100],
+			    "pageLength": 10,
+			    "language":{
+			    	"url": "/dataTables/chinese.json"
+			    },
+			    tableTools: {
+			    	"sSwfPath": "/dataTables/extensions/TableTools/swf/copy_csv_xls.swf",
+	                                        "aButtons":[ 
+	                            { 
+	                               "sExtends": "xls", 
+	                               "sButtonText": "下载数据" 
+	                             }]
+		        }
+				}
+			  );
+			   div.removeClass();
+			   div.addClass('table table-striped');
+			   
+			   return table;
+			},
+			brokenTable:function(reports,report){
+				$('#caption').hide();
+				$("#dt_wrapper").remove();
+				
+				var table = $(".template_cache .dataTable").clone(true);
+				table.attr("id","dt");
+				
+				var type = $("#channel").val();
+				var trHead = $("tbody tr",table).first().clone(true);
+				if(type == 'source'  && game.terminalType == 1 && game.systemType == 0){
+					$("thead tr",table).first().remove();
+					$("tbody tr",table).first().remove();
+				}else{
+					$("thead tr",table).eq(1).remove();
+					$("tbody tr",table).eq(1).remove();
+				}
+
+				if(report!=null){
+					var trSum = $("tbody tr",table).first().clone(true);
+					$("td.day",trSum).text(report.day);
+					$("td.newEquip",trSum).text(report.newEquip);
+					$("td.dnu",trSum).text(report.dnu);
+					$("td.roleChoice",trSum).text(report.roleChoice == null ? '-' : report.roleChoice);
+					$("td.dau",trSum).text(report.dau);
+					$("td.old_dau",trSum).text((report.dau - report.dnu));
+					$("td.paymentAmount",trSum).text(Math.round((report.paymentAmount/game.rate)*100)/100);
+					$("td.pu",trSum).text(report.pu);
+					$("td.arpu",trSum).text(Math.round((report.arpu /game.rate)*100)/100);
+					$("td.arppu",trSum).text(Math.round((report.arppu/game.rate)*100)/100);
+					$("td.paymentCnt",trSum).text(report.paymentCnt);
+					$("td.payRate",trSum).text(Math.round((report.pu/report.dau*100)*100)/100+'%');
+					
+					//$("td.newPayAmount",trSum).text(Math.round((report.newPayAmount/game.rate)*100)/100);
+					//$("td.newPu",trSum).text(report.newPu);
+					$("td.newDnuUserPayRate",trSum).text(Math.round((report.installPu/report.dnu)*100*100)/100+'%');
+					$("td.newDnuUserArpu",trSum).text(Math.round(((report.installPayAmount/game.rate)/report.dnu)*100)/100);
+					
+					$("td.installPayAmount",trSum).text(Math.round((report.installPayAmount/game.rate)*100)/100);
+					$("td.installPu",trSum).text(report.installPu);
+					$("td.rollAmount",trSum).text(Math.round((report.rollAmount/game.rate)*100)/100);
+					$("td.rollPayUsers",trSum).text(report.rollPayUsers);
+					$("td.rollUsers",trSum).text(report.rollUsers);
+					$("td.pcu",trSum).text(report.pcu);
+					$("td.acu",trSum).text(Math.round(report.acu*100)/100);
+					$("td.avgUserTime",trSum).text(Math.round((report.avgUserTime/60)*100)/100+'分');
+					if(type == 'source' && game.terminalType == 1 && game.systemType == 0){
+						$("td.idfa",trSum).text(report.idfa);
+						$("td.distinctIdfa",trSum).text(report.distinctIdfa);
+						$("td.distinctIp",trSum).text(report.distinctIp);
+					}
+					trSum.css({"background-color":"rgba(255, 0, 0, 0.34902)"});
+					$("tfoot",table).append(trSum);
+				}
+				
+				$.each(reports,function(i,v){
+					
+					var trTemp = $("tbody tr",table).first().clone(true);
+					
+					$("td.day",trTemp).text($.gameDailyReport.convert(v.day));
+					var ds = new Date(v.day).getDay();
+					if(ds!="NaN"){
+						if(ds==6||ds==0){
+							$("td.day",trTemp).css("font-weight", "bold");
+						}
+					}
+					
+					$("td.newEquip",trTemp).text(v.newEquip);
+					$("td.dnu",trTemp).text(v.dnu);
+					$("td.roleChoice",trTemp).text(v.roleChoice == null ? '-' : v.roleChoice);
+					$("td.dau",trTemp).text(v.dau);
+					$("td.old_dau",trTemp).text((v.dau - v.dnu));
+					$("td.paymentAmount",trTemp).text(Math.round((v.paymentAmount/game.rate)*100)/100);
+					$("td.pu",trTemp).text(v.pu);
+					$("td.arpu",trTemp).text(Math.round((v.arpu /game.rate)*100)/100);
+					$("td.arppu",trTemp).text(Math.round((v.arppu/game.rate)*100)/100);
+					$("td.paymentCnt",trTemp).text(v.paymentCnt);
+					$("td.payRate",trTemp).text(Math.round(v.payRate * 100*100)/100+'%');
+					
+					//$("td.newPayAmount",trTemp).text(Math.round((v.newPayAmount/game.rate)*100)/100);
+					//$("td.newPu",trTemp).text(v.newPu);
+					$("td.newDnuUserPayRate",trTemp).text(v.dnu == 0 ? 0+'%' : Math.round((v.installPu/v.dnu)*100*100)/100+'%');
+					$("td.newDnuUserArpu",trTemp).text(v.dnu == 0 ? 0 : Math.round(((v.installPayAmount/game.rate)/v.dnu)*100)/100);
+					
+					$("td.installPayAmount",trTemp).text(Math.round((v.installPayAmount/game.rate)*100)/100);
+					$("td.installPu",trTemp).text(v.installPu);
+					$("td.rollAmount",trTemp).text(Math.round((v.rollAmount/game.rate)*100)/100);
+					$("td.rollPayUsers",trTemp).text(v.rollPayUsers);
+					$("td.rollUsers",trTemp).text(v.rollUsers);
+					$("td.pcu",trTemp).text(v.pcu);
+					$("td.acu",trTemp).text(Math.round(v.acu*100)/100);
+					$("td.avgUserTime",trTemp).text(Math.round((v.avgUserTime/60)*100)/100+'分');
+					
+					if(type == 'source' && game.terminalType == 1 && game.systemType == 0){
+						$("td.idfa",trTemp).text(v.idfa);
+						$("td.distinctIdfa",trTemp).text(v.distinctIdfa);
+						$("td.distinctIp",trTemp).text(v.distinctIp);
+					}
+					
+					$('tbody',table).append(trTemp); 
+				});
+				
+				table.removeClass("dataTable").addClass("display");
+				$("tbody tr",table).first().remove();
+				$('#data').append(table); 
+				
+				$.gameDailyReport.dataTables($('#dt'));
+				$('#dt tbody tr').click(function (){
+			        $(this).toggleClass('highlight');
+			    });
+			},
+			changeCheck:function(){
+				var ps={
+					     id:$("input[name='gamesId']").val(),
+					     gameId:$("input[name='gameId']").val(),
+					     snid:$("input[name='snid']").val(),
+					};
+			      if(ps.id == null || ps.id == ''){ return null; }
+			      if(ps.gameId == null || ps.gameId == ''){ return null; }
+			      if(ps.snid == null || ps.snid == ''){ return null; }
+			      return ps;
+			},
+			change:function(exclass){
+				var ps = this.changeCheck();
+				if(ps == null){
+					return;
+				}
+			      
+				var value = $("#channel").val();
+				if(value == 'all'){
+					$("#s_c").remove();
+					exclass.submit();
+				}else if(value == 'source'){
+					$("#s_c").remove();
+					$.ajax({
+						  type: "POST",
+						  url: "/panel_bi/game/getGameSource.ac",
+						  data: $.param(ps),
+						  dataType: "json",
+						  success: function(data){
+						    var span = $("#s_c_span");
+						    var str = '<select id="s_c" style="max-width:210px"><option value="-1">请选择...</option><option value="-99">所有渠道</option>';
+						    $.each(data.gameSources,function(i,v){
+						    	str += '<option value="' + v +'">' + v +'</option>';
+						    });
+						    str += '</select>';
+						    span.append(str);
+						    
+						    $("#s_c").change(function(){
+						    	exclass.submit();
+							});
+						  }
+					});
+				}else if(value == 'client'){
+					$("#s_c").remove();
+					$.ajax({
+						  type: "POST",
+						  url: "/panel_bi/game/getGameClient.ac",
+						  data: $.param(ps),
+						  dataType: "json",
+						  success: function(data){
+						    var span = $("#s_c_span");
+						    var str = '<select id="s_c" style="max-width:210px"><option value="-1">请选择...</option><option value="-99">所有服务器</option>';
+						    $.each(data.gameClients,function(i,v){
+						    	str += '<option value="' + v +'">' + v +'</option>';
+						    });
+						    str += '</select>';
+						    span.append(str);
+						    
+						    $("#s_c").change(function(){
+						    	exclass.submit();
+							});
+						  }
+					});
+				}
+			},
+			checkParam:function(){
+			  var ps={
+				     id:$("input[name='gamesId']").val(),
+				     gameId:$("input[name='gameId']").val(),
+				     snid:$("input[name='snid']").val(),
+				     channel:$("#channel").val(),
+					 beginTime:$("input[name='beginTime']").val(),
+					 endTime:$("input[name='endTime']").val(),
+					 source:$('#s_c').val(),
+					 clientid:$('#s_c').val(),
+					 view:$('#view').val()
+				};
+		      if(ps.id == null || ps.id == ''){ return null; }
+		      if(ps.gameId == null || ps.gameId == ''){ return null; }
+		      if(ps.snid == null || ps.snid == ''){ return null; }
+		      
+		      if(ps.channel == null || ps.channel == ''){
+		    	  ps.channel = 'all'; 
+		       }else if(ps.channel == 'source' && (ps.source != null && ps.source == '-1')){
+		    	   return null;
+		       }else if(ps.channel == 'client' && (ps.clientid != null && ps.clientid == '-1')){
+		    	   return null;
+		       }
+		      
+		      if((ps.endTime == null || ps.endTime == '') && (ps.beginTime == null || ps.beginTime == '')){
+		    	  var d = new Date();
+		    	  ps.endTime = $.date.getDateFullStr(d);
+		    	  $("input[name='endTime']").val(ps.endTime);
+		    	  
+		    	  // if(d.getDate() <= 3){
+			    	  d.setDate(d.getDate()- 30);
+		    	 // }else{
+			    //	  d.setDate(1);
+		    	//  }
+		    	  ps.beginTime = $.date.getDateFullStr(d);
+		    	  
+		    	  $("input[name='beginTime']").val(ps.beginTime);
+		      }else if((ps.endTime == null || ps.endTime == '') && (ps.beginTime != null && ps.beginTime != '')){
+		    	  var d = new Date(ps.beginTime);
+		    	  d.setDate(d.getDate()+ 30);
+		    	  
+		    	  ps.endTime = $.date.getDateFullStr(d);
+		    	  $("input[name='endTime']").val(ps.endTime);
+		      }else if((ps.endTime != null && ps.endTime != '') && (ps.beginTime == null || ps.beginTime == '')){
+		    	  var d = new Date(ps.endTime);
+		    	  d.setDate(d.getDate()- 30);
+		    	  
+		    	  ps.beginTime = $.date.getDateFullStr(d);
+		    	  $("input[name='beginTime']").val(ps.beginTime);
+		      }
+		      
+		      return ps;
+			},
+			brokenAjaxTable:function(ps){
+				
+				$('#caption').show();
+				$('#caption button').unbind();
+				$('#caption button').click(function (){
+			        $(this).attr('disabled',true);
+			        $(this).val(2);
+			        window.btnTimeout=setInterval(function(){
+						$.gameUtil.btnTimeout($('#caption button'),window.btnTimeout);
+					  },1000);
+			        $("#downLoadForm").submit();
+			    });
+				
+				var selected = [];
+				$('#dt_ajax_wrapper').remove();
+				
+				var type = $("#channel").val();
+				var rate = $("#gameRate").val();
+				$('#ajax_data').show();
+				$('#data').hide();
+				
+				var table = $(".template_cache .ajax_table").clone(true);
+				
+                var columns = [
+			                      {"data": "day"},
+			                      {"data": type == "source" ? "source" : "clientid"},
+			                      {"data": null},
+			                      {"data": "dnu"},
+			                      {"data": null},
+			                      {"data": "dau"},
+			                      {"data": null},
+			                      {"data": null},
+			                      {"data": "pu"},
+			                      {"data": null},
+			                      {"data": null},
+			                      {"data": "paymentCnt"},
+			                      {"data": null},
+			                      {"data": null},
+			                      {"data": null},
+			                      {"data": null},
+			                      {"data": "installPu"},
+			                      {"data": null},
+			                      {"data": "rollPayUsers"},
+			                      {"data": "rollUsers"},
+			                      {"data": "pcu"},
+			                      {"data": null},
+			                      {"data": null}
+			                  ];
+				if("source" == type && game.terminalType == 1){
+					var headTemp = $("thead tr",table).eq(1);
+					$("td.head_type",headTemp).text('渠道');
+					$("thead tr",table).first().remove();
+					
+					columns.push({
+						"data":"idfa"
+					});
+					columns.push({
+						"data":"distinctIdfa"
+					});
+					columns.push({
+						"data":"distinctIp"
+					});
+				}else{
+					var headTemp = $("thead tr",table).first();
+					$("td.head_type",headTemp).text('服务器');
+					$("thead tr",table).eq(1).remove();
+				}
+				
+				table.attr("id", "dt_ajax");
+				$('#ajax_data').append(table);
+				
+				$('#dt_ajax').dataTable( {
+			        "processing": true,
+			        "serverSide": true,
+			        ajax: {
+					          data: function(d){
+					        	  d.id=ps.id;
+					        	  d.gameId=ps.gameId;
+					        	  d.channel=ps.channel;
+					        	  d.beginTime=ps.beginTime;
+					        	  d.endTime=ps.endTime;
+					        	  d.source=ps.source;
+					        	  d.clientid=ps.clientid;
+					        	  d.view=ps.view;
+					          },
+							  type: "POST",
+							  url:"/panel_bi/wap/gameView/getWapGameDatasView.ac"
+			              },
+			        "pageLength": 10,
+				    "language":{
+				    	"url": "/dataTables/chinese.json"
+				    },
+			        "deferRender": true,
+				    "sPaginationType" : "full_numbers",
+			        "dom" : '<"clear"><"top">frt<"bottom"ip><"clear">' ,
+					"bSort" : false,
+				    "bFilter" : true,
+				    "paging": true, //翻页功能
+				    "lengthChange": false, //改变每页显示数据数量
+				    "searching": true, //过滤功能
+				    "ordering": true, //排序功能
+				    "order": [[ 0, "desc" ]],
+			        columns: columns,
+			        rowCallback:function(row, data) {
+			        	//
+                        if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                            $(row).addClass('highlight');
+                        }
+                        //
+                    },
+			        columnDefs: [
+								{targets: 0,
+									   render: function (a, b, v, d) {
+										   var ds = new Date(v.day).getDay();
+										   if(ds!="NaN"){
+											   if(ds==6||ds==0){
+												   return '<span style="font-weight:bold">'+$.gameDailyReport.convert(v.day)+'</span>';
+											   }else{
+												   return $.gameDailyReport.convert(v.day);
+											   }
+										   }else{
+											   return v.day;
+										   }
+									   }
+								},
+								{
+									targets: 2,
+			                    	render: function (a, b, v, d) {
+			                    		 return v.newEquip == null ? '-' : v.newEquip;
+			                    	}
+								},
+			                     {
+			                    	 targets: 4,
+			                    	 render: function (a, b, v, d) {
+			                    		 return v.roleChoice == null ? '-' : v.roleChoice;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 6,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return v.dau - v.dnu;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 7,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.paymentAmount/rate)*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 9,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.arpu /rate)*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 10,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.arppu /rate)*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 12,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round(v.payRate * 100*100)/100+'%';
+			                    	 }
+			                     },
+			                     /*
+			                     {
+			                    	 targets: 13,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.newPayAmount/rate)*100)/100;
+			                    	 }
+			                     },*/
+			                     {
+			                    	 targets: 13,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return v.dnu == 0 ? 0+'%' : Math.round((v.installPu/v.dnu)*100*100)/100+'%';
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 14,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return v.dnu == 0 ? 0 : Math.round((v.installPayAmount/rate/v.dnu)*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 15,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.installPayAmount/rate)*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 17,
+			                    	 orderable:false,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.rollAmount/rate)*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 21,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round(v.acu*100)/100;
+			                    	 }
+			                     },
+			                     {
+			                    	 targets: 22,
+			                    	 render: function (a, b, v, d) {
+			                    		 return Math.round((v.avgUserTime/60)*100)/100+'分';
+			                    	 }
+			                     }
+			                      
+			                     ]
+			    });
+
+				$('#dt_ajax').removeClass().addClass('table table-striped');
+				$.gameUtil.trHighLight($('#dt_ajax tbody'),selected);
+			}
+	};	
+});
+	                    

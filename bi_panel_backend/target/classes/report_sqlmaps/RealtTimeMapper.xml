@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.vo.RealTimeGameVo" >
+	<resultMap id="RealtTimeMap" type="com.hoolai.bi.report.vo.RealTimeGameVo" >
+		<result column="snid" property="snid" jdbcType="VARCHAR" />
+    	<result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    	<result column="dnu" property="dnu" jdbcType="DOUBLE" />
+    	<result column="dau" property="dau" jdbcType="DOUBLE" />
+    	<result column="dau_total" property="dau_total" jdbcType="DOUBLE" />
+    	<result column="payer" property="payer" jdbcType="DOUBLE" />
+    	<result column="total_amount" property="total_amount" jdbcType="DOUBLE" />
+    	<result column="day" property="day" jdbcType="VARCHAR" />
+    	<result column="equips" property="equips" jdbcType="DOUBLE" />
+    	<result column="today" property="today" jdbcType="VARCHAR" />
+    	<result column="yesterday" property="yesterday" jdbcType="VARCHAR" />
+    	<result column="startdate" property="startdate" jdbcType="VARCHAR" />
+    	<result column="enddate" property="enddate" jdbcType="VARCHAR" />
+    	<result column="status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="RealTimeGameMap" type="com.hoolai.bi.report.model.entity.RealTimeGame" >
+		<result column="snid" property="snid" jdbcType="VARCHAR" />
+    	<result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    	<result column="dnu" property="dnu" jdbcType="DOUBLE" />
+    	<result column="dau" property="dau" jdbcType="DOUBLE" />
+    	<result column="dau_total" property="dau_total" jdbcType="DOUBLE" />
+    	<result column="payer" property="payer" jdbcType="DOUBLE" />
+    	<result column="total_amount" property="total_amount" jdbcType="DOUBLE" />
+    	<result column="day" property="day" jdbcType="VARCHAR" />
+    	<result column="equips" property="equips" jdbcType="DOUBLE" />
+    	<result column="start_time" property="start_time" jdbcType="VARCHAR" />
+    	<result column="finish_time" property="finish_time" jdbcType="VARCHAR" />
+    	<result column="status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+	
+  	<sql id="Vo_Where_Clause_all">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and (day = #{today} or day = #{yesterday}
+					           or day=#{last7Day} or day=#{lastMonthSToday} ) ]]>
+				</if>
+		</where>
+	</sql>
+	
+	 <sql id="Vo_Where_Clause">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and day = #{day} ]]>
+				</if>
+		</where>
+	</sql>
+	
+	 <sql id="Vo_Where_Clause_2">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and day = #{yesterday} ]]>
+				</if>
+				<if test="finish_time != null">
+					 <![CDATA[ and finish_time <= #{finish_time} ]]>
+				</if>
+		</where>
+	</sql>
+	
+	 <sql id="Vo_Where_Clause_3">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and day = #{day} ]]>
+				</if>
+				<if test="finish_time != null">
+					 <![CDATA[ and finish_time <= #{finish_time} ]]>
+				</if>
+		</where>
+	</sql>
+	
+	 <sql id="Vo_Where_Clause_4">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and day = #{day} ]]>
+				</if>
+				<if test="finish_time != null">
+					 <![CDATA[ and finish_time = #{finish_time} ]]>
+				</if>
+		</where>
+	</sql>
+	 <sql id="Vo_Where_Clause_5">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and day = #{yesterday} ]]>
+				</if>
+				<if test="finish_time != null">
+					 <![CDATA[ and finish_time = #{finish_time} ]]>
+				</if>
+		</where>
+	</sql>
+	
+	<sql id="Vo_Where_Clause_is">
+		<where>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameid != null and gameid != ''">
+					 <![CDATA[ and gameid = #{gameid} ]]>
+				</if>
+				<if test="day != null">
+					 <![CDATA[ and day = #{day} ]]>
+				</if>
+				<if test="start_time != null and finish_time !=null"  >
+					 <![CDATA[ and start_time >= #{startdate} and finish_time <= #{enddate}]]>
+				</if>
+		</where>
+	</sql>
+	
+	<select id="selectRealTimeData" parameterType="com.hoolai.bi.report.model.entity.RealTimeGame" resultMap="RealTimeGameMap" >
+		select snid, gameid, dnu, dau, dau_total, payer, total_amount, day, equips, start_time, finish_time, status
+		from realtime_by_hour
+		where snid=#{snid} and gameid=#{gameid} 
+		and start_time=#{start_time} and finish_time=#{finish_time}
+		and day=#{day}
+	</select>
+	
+	<select id="getSelectGamesAllList" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultMap="RealtTimeMap">
+		select  snid,gameid,dnu,dau,payer,total_amount,day,start_time,finish_time,equips,dau_total
+		from realtime_by_hour 
+		<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_all" />
+		</if>
+	order by finish_time asc 
+	</select>
+	
+	<!--如果服务因故障停了，查询停止时间段-->
+	<select id="getSelectGamesIsDateList" parameterType="com.hoolai.bi.report.model.entity.RealTimeGame" resultMap="RealTimeGameMap">
+		select  snid,gameid,dnu,dau,payer,total_amount,day,start_time,finish_time,equips
+		from realtime_by_hour 
+		<if test="_parameter != null">
+				<include refid="Vo_Where_Clause" />
+		</if>
+		order by finish_time desc limit 1
+	</select>
+	
+	
+	<!--检测某个时段是否有数据-->
+	<select id="getSelectGamesIsList" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultMap="RealtTimeMap">
+		select  snid,gameid,dnu,dau,payer,total_amount,day,start_time,finish_time,equips
+		from realtime_by_hour 
+		<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_is" />
+		</if>
+		
+	</select>
+	
+	<select id="getSelectGamesList2" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultMap="RealtTimeMap">
+		select a.dnu,a.dau,a.total_amount,a.equips,a.payer,b.finish_time,a.day,b.dau_total
+		 from (
+			select  sum(dnu) dnu,sum(dau) dau,sum(total_amount) total_amount,sum(equips) 
+			equips,sum(payer) payer,day from realtime_by_hour  
+			
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause" />
+		</if>
+			
+			) a,
+			
+			(SELECT finish_time,dau_total from realtime_by_hour 
+			
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause" />
+		</if>
+			
+			) b
+	</select>
+	<!--总览-->
+	<select id="getSelectGamesList" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultMap="RealtTimeMap">
+			SELECT a.day,a.dnu,a.dau,a.total_amount,a.equips,a.payer,a.dau_total,a.start_time,a.finish_time,
+			b.dnu yesterday_dnu,b.dau yesterday_dau,b.total_amount yesterday_total_amount,b.equips yesterday_equips,
+			b.payer yesterday_payer,b.dau_total yesterday_dau_total
+			  FROM (
+							SELECT  DAY,SUM(dnu) dnu,SUM(dau) dau,SUM(total_amount) total_amount,SUM(equips) equips,SUM(payer) payer, 
+							MAX(dau_total) dau_total, '00:00:00' AS start_time, #{finish_time} AS finish_time 
+							
+							FROM ( SELECT * from realtime_by_hour WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{day} group by finish_time) t1 
+							
+							WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{day} 
+			) a, (
+							SELECT  DAY,SUM(dnu) dnu,SUM(dau) dau,SUM(total_amount) total_amount,SUM(equips) equips,SUM(payer) payer, 
+							MAX(dau_total) dau_total, '00:00:00' AS start_time, #{finish_time} AS finish_time 
+							
+							FROM ( SELECT * from realtime_by_hour 
+							
+								WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{yesterday}  
+								<if test="_parameter != null">
+									<![CDATA[ and finish_time <=#{finish_time} ]]>
+								</if>
+							
+							group by finish_time) t2  
+							
+							WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{yesterday} 
+							<if test="_parameter != null">
+								<![CDATA[ and finish_time <=#{finish_time} ]]>
+							</if>
+			) b 
+	</select>
+	
+	<select id="getSelectNewDate" parameterType="com.hoolai.bi.report.model.entity.RealTimeGame" resultMap="RealTimeGameMap">
+		
+		
+		select finish_time from realtime_by_hour 
+		
+		where snid=#{snid} and gameid=#{gameid} 
+	
+		and day=#{day}
+		
+		order by finish_time desc LIMIT 1;
+					
+	</select>
+	
+	<!--近2天-->
+	<select id="getSelectGamesListday2" parameterType="com.hoolai.bi.report.model.entity.RealTimeGame" resultMap="RealTimeGameMap">
+			
+			SELECT * FROM (
+				SELECT  DAY,SUM(dnu) dnu,SUM(dau) dau,SUM(total_amount) total_amount,SUM(equips) equips,SUM(payer) payer, 
+				MAX(dau_total) dau_total,MAX(payer_total)  payer_total, #{start_time} AS start_time, #{finish_time} AS finish_time 
+				
+				FROM ( SELECT * from realtime_by_hour WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{day} group by finish_time) t1  
+				
+				
+				WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{day}
+				
+				UNION ALL
+				
+				SELECT  DAY,SUM(dnu) dnu,SUM(dau) dau,SUM(total_amount) total_amount,SUM(equips) equips,SUM(payer) payer, 
+				MAX(dau_total) dau_total,MAX(payer_total)  payer_total,#{start_time} AS start_time, #{finish_time} AS finish_time 
+				
+				FROM ( SELECT * from realtime_by_hour WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{yesterday}  group by finish_time) t2
+				  
+				WHERE snid=#{snid} AND gameid=#{gameid} AND DAY=#{yesterday}
+			)a GROUP BY DAY
+					
+	</select>
+	
+	<!--总览汇总-->
+	<select id="getSelectGamesTotalList" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultMap="RealtTimeMap">
+					<!--
+
+						select t2.start_time,t2.finish_time,
+				t1.dnu,t2.dnu as yesterday_dnu,
+				t1.dau_total dau,t2.dau_total yesterday_dau,
+				t1.total_amount,t2.total_amount as yesterday_total_amount,
+				t1.equips,t2.equips as yesterday_equips,
+				t1.payer,t2.payer as yesterday_payer
+				
+				 from 
+				 
+				(select it.snid,it.gameid,e.start_time,it.finish_time,it.dau_total,
+				       case  
+				          when @preVal = it.gameid then @curVal := @curVal + it.dnu  
+				          when @preVal := it.gameid then @curVal := it.dnu 
+				       end AS dnu,
+				       case  
+				          when @preVal1 = it.gameid then @curVal1 := @curVal1 + it.dau  
+				          when @preVal1 := it.gameid then @curVal1 := it.dau
+				       end AS dau,
+				       case  
+				          when @preVal2 = it.gameid then @curVal2 := @curVal2 + it.total_amount  
+				          when @preVal2 := it.gameid then @curVal2 := it.total_amount
+				       end AS total_amount,
+					   case  
+				          when @preVal3 = it.gameid then @curVal3 := @curVal3 + it.equips  
+				          when @preVal3 := it.gameid then @curVal3 := it.equips
+				       end AS equips,
+					   	   
+				       case  
+				          when @preVal4 = it.gameid then @curVal4 := @curVal4 + it.payer  
+				          when @preVal4 := it.gameid then @curVal4 := it.payer
+				       end AS payer
+				    
+				from (select  * from realtime_by_hour   
+		
+		<if test="_parameter != null">
+						<include refid="Vo_Where_Clause_3" />
+					</if>
+		
+		group by finish_time ) it,(select start_time  from realtime_by_hour order by start_time LIMIT 1) e, (select @preVal:=null, @curVal:=null, @preVal1:=null, @curVal1:=null, @preVal2:=null, @curVal2:=null, @preVal3:=null, @curVal3:=null, 
+				@preVal4:=null, @curVal4:=null) r  
+				
+				<if test="_parameter != null">
+						<include refid="Vo_Where_Clause_3" />
+					</if>
+				group by finish_time 
+				order by it.gameid asc, it.finish_time asc)t1
+				right outer join 
+				(select it.snid,it.gameid,e.start_time,it.finish_time,it.dau_total,
+				       case  
+				          when @preVal_1 = it.gameid then @curVal1 := @curVal1 + it.dnu  
+				          when @preVal_1 := it.gameid then @curVal1 := it.dnu 
+				       end AS dnu,
+				       case  
+				          when @preVal_11 = it.gameid then @curVal11 := @curVal11 + it.dau  
+				          when @preVal_11 := it.gameid then @curVal11 := it.dau
+				       end AS dau,
+				       case  
+				          when @preVal_12 = it.gameid then @curVal12 := @curVal12 + it.total_amount  
+				          when @preVal_12 := it.gameid then @curVal12 := it.total_amount
+				       end AS total_amount,
+					   case  
+				          when @preVal_13 = it.gameid then @curVal13 := @curVal13 + it.equips  
+				          when @preVal_13 := it.gameid then @curVal13 := it.equips
+				       end AS equips,
+					   	   
+				       case  
+				          when @preVal_14 = it.gameid then @curVal14 := @curVal14 + it.payer  
+				          when @preVal_14 := it.gameid then @curVal14 := it.payer
+				       end AS payer
+				    
+				from (select  * from realtime_by_hour   
+		
+			<if test="_parameter != null">
+						<include refid="Vo_Where_Clause_2" />
+					</if>
+				
+		
+		group by finish_time ) it,(select start_time  from realtime_by_hour order by start_time LIMIT 1) e, (select @preVal_1:=null, @curVal1:=null, @preVal_11:=null, @curVal11:=null, @preVal_12:=null, @curVal12:=null, @preVal_13:=null, @curVal13:=null, @preVal_14:=null, @curVal14:=null) r  
+				
+				
+				<if test="_parameter != null">
+						<include refid="Vo_Where_Clause_2" />
+					</if>
+				
+				group by finish_time 
+				order by it.gameid asc, it.finish_time asc)t2
+				on t1.finish_time=t2.finish_time ORDER BY finish_time
+			-->
+	
+	SELECT   
+
+ CASE 
+     WHEN t2.start_time IS NULL THEN t1.start_time
+     ELSE t2.start_time
+ END AS start_time,
+ 
+ CASE 
+     WHEN t2.finish_time IS NULL THEN t1.finish_time
+     ELSE t2.finish_time
+  END AS finish_time,
+
+				t1.dnu,t2.dnu AS yesterday_dnu,
+				t1.dau_total dau,t2.dau_total yesterday_dau,
+				t1.total_amount,t2.total_amount AS yesterday_total_amount,
+				t1.equips,t2.equips AS yesterday_equips,
+				t1.payer,t2.payer AS yesterday_payer
+				
+				 FROM 
+				 
+				(SELECT it.snid,it.gameid,e.start_time,it.finish_time,it.dau_total,
+				       CASE  
+				          WHEN @preVal = it.gameid THEN @curVal := @curVal + it.dnu  
+				          WHEN @preVal := it.gameid THEN @curVal := it.dnu 
+				       END AS dnu,
+				       CASE  
+				          WHEN @preVal1 = it.gameid THEN @curVal1 := @curVal1 + it.dau  
+				          WHEN @preVal1 := it.gameid THEN @curVal1 := it.dau
+				       END AS dau,
+				       CASE  
+				          WHEN @preVal2 = it.gameid THEN @curVal2 := @curVal2 + it.total_amount  
+				          WHEN @preVal2 := it.gameid THEN @curVal2 := it.total_amount
+				       END AS total_amount,
+					   CASE  
+				          WHEN @preVal3 = it.gameid THEN @curVal3 := @curVal3 + it.equips  
+				          WHEN @preVal3 := it.gameid THEN @curVal3 := it.equips
+				       END AS equips,
+					   	   
+				       CASE  
+				          WHEN @preVal4 = it.gameid THEN @curVal4 := @curVal4 + it.payer  
+				          WHEN @preVal4 := it.gameid THEN @curVal4 := it.payer
+				       END AS payer
+				    
+				FROM (SELECT  * FROM realtime_by_hour   
+		
+				<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+			</if>  
+				
+		GROUP BY finish_time ) it,(SELECT start_time  FROM realtime_by_hour ORDER BY start_time LIMIT 1) e, (SELECT @preVal:=NULL, @curVal:=NULL, @preVal1:=NULL, @curVal1:=NULL, @preVal2:=NULL, @curVal2:=NULL, @preVal3:=NULL, @curVal3:=NULL, 
+				@preVal4:=NULL, @curVal4:=NULL) r  
+				
+				
+				<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+			</if>  
+				
+				GROUP BY finish_time 
+				ORDER BY it.gameid ASC, it.finish_time ASC)t1
+				
+				LEFT OUTER JOIN 
+				
+				(SELECT it.snid,it.gameid,e.start_time,it.finish_time,it.dau_total,
+				       CASE  
+				          WHEN @preVal_1 = it.gameid THEN @curVal1 := @curVal1 + it.dnu  
+				          WHEN @preVal_1 := it.gameid THEN @curVal1 := it.dnu 
+				       END AS dnu,
+				       CASE  
+				          WHEN @preVal_11 = it.gameid THEN @curVal11 := @curVal11 + it.dau  
+				          WHEN @preVal_11 := it.gameid THEN @curVal11 := it.dau
+				       END AS dau,
+				       CASE  
+				          WHEN @preVal_12 = it.gameid THEN @curVal12 := @curVal12 + it.total_amount  
+				          WHEN @preVal_12 := it.gameid THEN @curVal12 := it.total_amount
+				       END AS total_amount,
+					   CASE  
+				          WHEN @preVal_13 = it.gameid THEN @curVal13 := @curVal13 + it.equips  
+				          WHEN @preVal_13 := it.gameid THEN @curVal13 := it.equips
+				       END AS equips,
+					   	   
+				       CASE  
+				          WHEN @preVal_14 = it.gameid THEN @curVal14 := @curVal14 + it.payer  
+				          WHEN @preVal_14 := it.gameid THEN @curVal14 := it.payer
+				       END AS payer
+				    
+				FROM (SELECT  * FROM realtime_by_hour   
+		
+					
+				<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_2" />
+			</if>  
+				
+		
+		GROUP BY finish_time ) it,(SELECT start_time  FROM realtime_by_hour ORDER BY start_time LIMIT 1) e, (SELECT @preVal_1:=NULL, @curVal1:=NULL, @preVal_11:=NULL, @curVal11:=NULL, @preVal_12:=NULL, @curVal12:=NULL, @preVal_13:=NULL, @curVal13:=NULL, @preVal_14:=NULL, @curVal14:=NULL) r  
+				
+				
+				<if test="_parameter != null">
+					<include refid="Vo_Where_Clause_2" />
+				</if>  
+				
+				GROUP BY finish_time 
+				ORDER BY it.gameid ASC, it.finish_time ASC)t2
+				ON t1.finish_time=t2.finish_time 
+
+UNION
+
+
+SELECT 
+
+ CASE 
+     WHEN t2.start_time IS NULL THEN t1.start_time
+     ELSE t2.start_time
+ END AS start_time,
+ 
+ CASE 
+     WHEN t2.finish_time IS NULL THEN t1.finish_time
+     ELSE t2.finish_time
+  END AS finish_time,
+
+
+
+				t1.dnu,t2.dnu AS yesterday_dnu,
+				t1.dau_total dau,t2.dau_total yesterday_dau,
+				t1.total_amount,t2.total_amount AS yesterday_total_amount,
+				t1.equips,t2.equips AS yesterday_equips,
+				t1.payer,t2.payer AS yesterday_payer
+				
+				 FROM 
+				 
+				(SELECT it.snid,it.gameid,e.start_time,it.finish_time,it.dau_total,
+				       CASE  
+				          WHEN @preVal = it.gameid THEN @curVal := @curVal + it.dnu  
+				          WHEN @preVal := it.gameid THEN @curVal := it.dnu 
+				       END AS dnu,
+				       CASE  
+				          WHEN @preVal1 = it.gameid THEN @curVal1 := @curVal1 + it.dau  
+				          WHEN @preVal1 := it.gameid THEN @curVal1 := it.dau
+				       END AS dau,
+				       CASE  
+				          WHEN @preVal2 = it.gameid THEN @curVal2 := @curVal2 + it.total_amount  
+				          WHEN @preVal2 := it.gameid THEN @curVal2 := it.total_amount
+				       END AS total_amount,
+					   CASE  
+				          WHEN @preVal3 = it.gameid THEN @curVal3 := @curVal3 + it.equips  
+				          WHEN @preVal3 := it.gameid THEN @curVal3 := it.equips
+				       END AS equips,
+					   	   
+				       CASE  
+				          WHEN @preVal4 = it.gameid THEN @curVal4 := @curVal4 + it.payer  
+				          WHEN @preVal4 := it.gameid THEN @curVal4 := it.payer
+				       END AS payer
+				    
+				FROM (SELECT  * FROM realtime_by_hour   
+		
+				<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+			</if>  
+				
+		GROUP BY finish_time ) it,(SELECT start_time  FROM realtime_by_hour ORDER BY start_time LIMIT 1) e, (SELECT @preVal:=NULL, @curVal:=NULL, @preVal1:=NULL, @curVal1:=NULL, @preVal2:=NULL, @curVal2:=NULL, @preVal3:=NULL, @curVal3:=NULL, 
+				@preVal4:=NULL, @curVal4:=NULL) r  
+				
+				
+				<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+			</if>  
+				
+				GROUP BY finish_time 
+				ORDER BY it.gameid ASC, it.finish_time ASC)t1
+				RIGHT OUTER JOIN 
+				(SELECT it.snid,it.gameid,e.start_time,it.finish_time,it.dau_total,
+				       CASE  
+				          WHEN @preVal_1 = it.gameid THEN @curVal1 := @curVal1 + it.dnu  
+				          WHEN @preVal_1 := it.gameid THEN @curVal1 := it.dnu 
+				       END AS dnu,
+				       CASE  
+				          WHEN @preVal_11 = it.gameid THEN @curVal11 := @curVal11 + it.dau  
+				          WHEN @preVal_11 := it.gameid THEN @curVal11 := it.dau
+				       END AS dau,
+				       CASE  
+				          WHEN @preVal_12 = it.gameid THEN @curVal12 := @curVal12 + it.total_amount  
+				          WHEN @preVal_12 := it.gameid THEN @curVal12 := it.total_amount
+				       END AS total_amount,
+					   CASE  
+				          WHEN @preVal_13 = it.gameid THEN @curVal13 := @curVal13 + it.equips  
+				          WHEN @preVal_13 := it.gameid THEN @curVal13 := it.equips
+				       END AS equips,
+					   	   
+				       CASE  
+				          WHEN @preVal_14 = it.gameid THEN @curVal14 := @curVal14 + it.payer  
+				          WHEN @preVal_14 := it.gameid THEN @curVal14 := it.payer
+				       END AS payer
+				    
+				FROM (SELECT  * FROM realtime_by_hour   
+		
+					
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_2" />
+			</if>  
+				
+		
+		GROUP BY finish_time ) it,(SELECT start_time  FROM realtime_by_hour ORDER BY start_time LIMIT 1) e, (SELECT @preVal_1:=NULL, @curVal1:=NULL, @preVal_11:=NULL, @curVal11:=NULL, @preVal_12:=NULL, @curVal12:=NULL, @preVal_13:=NULL, @curVal13:=NULL, @preVal_14:=NULL, @curVal14:=NULL) r  
+				
+				
+				<if test="_parameter != null">
+					<include refid="Vo_Where_Clause_2" />
+				</if>  
+				
+				GROUP BY finish_time 
+				ORDER BY it.gameid ASC, it.finish_time ASC)t2
+				ON t1.finish_time=t2.finish_time 
+	</select>
+	
+	
+	
+	<!--总览按小时-->
+	<select id="getSelectGamesHourList" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultMap="RealtTimeMap">
+		<!--
+		select b.snid,b.gameid,b.start_time,b.finish_time,
+		a.equips,b.equips as yesterday_equips,
+		a.dnu,b.dnu yesterday_dnu,
+		a.dau_total,b.dau_total as yesterday_dau_total,
+		a.dau,b.dau as yesterday_dau,
+		a.payer,b.payer as yesterday_payer,
+		a.total_amount,b.total_amount as yesterday_total_amount from (
+		select  snid,gameid,equips,dnu,dau_total,dau,payer,total_amount,start_time,finish_time,day  
+		from realtime_by_hour 
+		
+		<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+		</if>
+		
+		group by  finish_time order by finish_time desc 
+		
+		) a
+		right join    
+		(select   snid,gameid,equips,dnu,dau_total,dau,payer,total_amount,start_time,finish_time,day   
+		from realtime_by_hour 
+		<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_2" />
+		</if>
+		
+		group by  finish_time order by finish_time desc)b  on a.finish_time=b.finish_time ORDER BY finish_time 
+		-->
+		
+			SELECT 
+			CASE 
+			     WHEN b.snid IS NULL THEN a.snid
+			     ELSE b.snid
+			END AS snid,
+			CASE 
+			    WHEN b.gameid IS NULL THEN a.gameid
+			    ELSE b.gameid
+			END AS gameid,
+			CASE 
+			     WHEN b.start_time IS NULL THEN a.start_time
+			     ELSE b.start_time
+			 END AS start_time,
+			 
+			 CASE 
+			     WHEN b.finish_time IS NULL THEN a.finish_time
+			     ELSE b.finish_time
+			  END AS finish_time,
+			
+			a.equips,b.equips AS yesterday_equips, 
+			a.dnu,b.dnu yesterday_dnu, a.dau_total,b.dau_total AS yesterday_dau_total, a.dau,b.dau AS yesterday_dau,
+			 a.payer,b.payer AS yesterday_payer, a.total_amount,b.total_amount AS yesterday_total_amount 
+			FROM 
+			( SELECT snid,gameid,equips,dnu,dau_total,dau,payer,total_amount,start_time,finish_time,DAY
+			 
+			FROM realtime_by_hour 
+			
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+			</if>
+			
+			GROUP BY  finish_time ORDER BY finish_time DESC )a
+			LEFT JOIN  
+			(SELECT snid,gameid,equips,dnu,dau_total,dau,payer,total_amount,start_time,finish_time,DAY FROM realtime_by_hour 
+			
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_2" />
+			</if>  
+			
+			GROUP BY  finish_time ORDER BY finish_time DESC)b
+			ON a.finish_time=b.finish_time 
+			
+			
+			UNION 
+			
+			SELECT 
+			
+			CASE 
+			     WHEN b.snid IS NULL THEN a.snid
+			     ELSE b.snid
+			END AS snid,
+			CASE 
+			    WHEN b.gameid IS NULL THEN a.gameid
+			    ELSE b.gameid
+			END AS gameid,
+			CASE 
+			     WHEN b.start_time IS NULL THEN a.start_time
+			     ELSE b.start_time
+			 END AS start_time,
+			 
+			 CASE 
+			     WHEN b.finish_time IS NULL THEN a.finish_time
+			     ELSE b.finish_time
+			  END AS finish_time,
+			
+			a.equips,b.equips AS yesterday_equips, 
+			a.dnu,b.dnu yesterday_dnu, a.dau_total,b.dau_total AS yesterday_dau_total, a.dau,b.dau AS yesterday_dau,
+			 a.payer,b.payer AS yesterday_payer, a.total_amount,b.total_amount AS yesterday_total_amount 
+			FROM 
+			( SELECT snid,gameid,equips,dnu,dau_total,dau,payer,total_amount,start_time,finish_time,DAY
+			 
+			FROM realtime_by_hour 
+			
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_3" />
+			</if>
+			
+			GROUP BY  finish_time ORDER BY finish_time DESC )a
+			RIGHT JOIN   
+			(SELECT snid,gameid,equips,dnu,dau_total,dau,payer,total_amount,start_time,finish_time,DAY FROM realtime_by_hour 
+			 
+			<if test="_parameter != null">
+				<include refid="Vo_Where_Clause_2" />
+			</if>
+			
+			GROUP BY  finish_time  ORDER BY finish_time DESC)b
+			ON a.finish_time=b.finish_time 
+			
+			
+
+
+
+	</select>
+	
+	
+	
+ <select id="selectGameSources" parameterType="com.hoolai.bi.report.vo.RealTimeGameVo" resultType="java.lang.String">
+    select distinct install_creative 
+    from realtime_source_by_hour
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+	
+	
+	
+	<insert id="saveRealTimeDataList" parameterType="java.util.List">
+		insert  into realtime_by_hour (snid,gameid,dnu,dau,payer,total_amount,start_time,finish_time,day,equips,status,dau_total,payer_total)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.snid},#{item.gameid},#{item.dnu},#{item.dau},#{item.payer},#{item.total_amount},#{item.start_time},#{item.finish_time},#{item.day},#{item.equips},#{item.status},#{item.dau_total},#{item.payer_total})
+		</foreach>
+	</insert>
+	
+	<!---
+	<insert id="saveList" parameterType="java.util.List">
+		insert into hour_ltv_source_daily_report 
+		(snid, gameid, day, end_day, hour, minute, source, reg, 
+		d0, d1, d2, d3, d4, d5, d6, d7, type)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.snid}, #{item.gameid}, #{item.day}, #{item.endDay}, #{item.hour}, #{item.minute}, #{item.source}, #{item.reg},
+				#{item.d0}, #{item.d1}, #{item.d2}, #{item.d3}, #{item.d4}, #{item.d5}, #{item.d6}, #{item.d7}, #{item.type})
+		</foreach>
+	</insert>
+	-->
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.SourceCpaDailyReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.SourceCpaDailyReport" >
+   <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="day" property="day" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="dau" property="dau" jdbcType="INTEGER" />
+    <result column="dnu" property="dnu" jdbcType="INTEGER" />
+    <result column="new_equip" property="newEquip" jdbcType="INTEGER" />
+    <result column="loyal_user" property="loyalUser" jdbcType="INTEGER" />
+    <result column="d1" property="d1" jdbcType="DOUBLE" />
+    <result column="pay_rate" property="payRate" jdbcType="DOUBLE" />
+    <result column="arpu" property="arpu" jdbcType="DOUBLE" />
+    <result column="arppu" property="arppu" jdbcType="DOUBLE" />
+    <result column="pu" property="pu" jdbcType="INTEGER" />
+    <result column="payment" property="payment" jdbcType="DOUBLE" />
+    <result column="payment_times" property="paymentTimes" jdbcType="INTEGER" />
+    <result column="new_pu" property="newPu" jdbcType="INTEGER" />
+    <result column="new_payment" property="newPayment" jdbcType="DOUBLE" />
+    <result column="install_pu" property="installPu" jdbcType="INTEGER" />
+    <result column="install_pay_amount" property="installPayAmount" jdbcType="DOUBLE" />
+    <result column="install_pay_rate" property="installPayRate" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, day, source, dau, dnu,new_equip, loyal_user, d1, pay_rate, arpu, arppu, 
+    pu, payment, payment_times, new_pu, new_payment, install_pu, install_pay_amount, 
+    install_pay_rate, create_time
+  </sql>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.source != null and entity.source != ''">
+					 <![CDATA[ and source = #{entity.source} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and day = #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="Vo_Where_Clause_cps">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.source != null and entity.source != ''">
+					 <![CDATA[ and source in( ${entity.source}) ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and day = #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<insert id="saveCpaSourceDailysReport" parameterType="java.util.List">
+		insert into cpa_source_daily_report
+		(snid, gameid, source, day, dnu, new_equip)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.snid}, #{item.gameid}, #{item.source}, #{item.day}, #{item.dnu}, #{item.newEquip})
+		</foreach>
+	</insert>
+
+	<select id="selectGameSources" parameterType="com.hoolai.bi.report.vo.SourceCpaDailyReportVO"
+		resultType="java.lang.String">
+		select distinct source
+		from cpa_source_daily_report
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+	</select>
+
+	<select id="selectListBySource" parameterType="com.hoolai.bi.report.vo.SourceCpaDailyReportVO"
+		resultMap="BaseResultMap">
+		select *
+		from cpa_source_daily_report
+		<if test="_parameter != null and multiSource == 'multi'">
+			<include refid="Vo_Where_Clause_cps" />
+		</if>
+		<if test="_parameter != null and multiSource == 'single'">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<if test="searchValue != null">
+			and (source like concat('%', #{searchValue}, '%'))
+		</if>
+		group by source
+		${orderValue}
+		<if test="queryType == 'limit'">
+			limit #{offset},#{rows}
+		</if>
+	</select>
+
+	<select id="selectBySourceCount" parameterType="com.hoolai.bi.report.vo.SourceCpaDailyReportVO"
+		resultType="java.lang.Long">
+		select count(1)
+		from(
+		select source
+		from cpa_source_daily_report
+		<if test="_parameter != null and multiSource == 'multi'">
+			<include refid="Vo_Where_Clause_cps" />
+		</if>
+		<if test="_parameter != null and multiSource == 'single'">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		<if test="searchValue != null">
+			and (source like concat('%', #{searchValue}, '%'))
+		</if>
+		group by source)a
+	</select>
+	
+	<delete id="delSourceDailyReportByDay" parameterType="com.hoolai.bi.report.vo.SourceCpaDailyReportVO">
+		delete from cpa_source_daily_report
+		where snid=#{entity.snid} and gameid=#{entity.gameid} and day=#{entity.day}
+		<if test="entity.createTime != null and entity.createTime != ''">
+			and date(create_time)=#{entity.createTime}
+		</if>
+	</delete>
+  
+</mapper>

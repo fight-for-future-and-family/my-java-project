@@ -1,0 +1,72 @@
+body, ol, ul, h1, h2, h3, h4, h5, h6, p, th, td, dl, dd, form, fieldset, legend, input, textarea, select{margin:0;padding:0}body{font:12px "宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}a{text-decoration:none}a:hover{text-decoration:underline}em{font-style:normal}li{list-style:none}img{border:0;vertical-align:middle}table{border-collapse:collapse;border-spacing:0}p{word-wrap:break-word}.undis{display:none}.dis{display:block}.ind{text-indent:2em}.Q-red a, a.Q-red{color:#bd0a01}.Q-black a, a.Q-black{color:#000}.layout:after, .hd:after, .bd:after, .ft:after, .cf:after, .Q-tList:after, .Q-tList ul:after, .Q-tList ol:after, .Q-pList:after, .Q-pList ul:after, .Q-tpList:after, .Q-tpList ul:after, .Q-tpWrap:after{content:"";display:table;clear:both}.layout, .hd, .bd, .ft, .cf, .Q-tList, .Q-tList ul, .Q-tList ol, .Q-pList, .Q-pList ul, .Q-tpList, .Q-tpList ul, .Q-tpWrap{*zoom:1}@media screen{.fl, .layout .fl, .chief{float:left;display:inline}.fr, .layout .fr, .extra{float:right;display:inline}.layout{width:960px;margin:0 auto}.Q-g4 .chief{width:780px}.Q-g4 .extra{width:170px}.Q-g8 .chief{width:637px}.Q-g8 .main,.Q-g8 .extra{width:313px}.Q-g8 .sub{width:314px}.Q-g12 .chief, .Q-g12 .extra{width:475px}.Q-g14 .chief{width:570px}.Q-g14 .extra{width:380px}.Q-g16 .chief{width:640px}.Q-g16 .main{width:380px}.Q-g16 .sub{width:250px}.Q-g16 .extra{width:310px}.Q-g17a .chief, .Q-g17b .chief , .Q-g17c .chief{width:700px}.Q-g17a .main{width:380px}.Q-g17a .sub{width:310px}.Q-g17a .extra, .Q-g17b .extra, .Q-g17c .extra{width:250px}.Q-g17b .main, .Q-g17b .sub{width:345px}.Q-g17c .main{ width:440px}.Q-g17c .sub{width:250px}.Q-g24 .chief{width:960px}.Q-g16a-a .chief{width:650px}.Q-g16a-a .main{width:370px}.Q-g16a-a .sub{width:260px}.Q-g16a-a .extra,.Q-g16a-b .extra,.Q-g16a-c .extra,.Q-g16b-a .extra,.Q-g16b-b .extra{width:300px}.Q-g16a-b .chief,.Q-g16a-c .chief{width:680px}.Q-g16a-b .main{width:380px}.Q-g16a-b .sub{width:280px}.Q-g16a-c .main{width:350px}.Q-g16a-c .sub{width:310px}.Q-g16a-d .chief{width:710px}.Q-g16a-d .main{width:360px}.Q-g16a-d .sub{width:330px}.Q-g16a-d .extra{width:250px}.Q-g16b-a .chief{width:640px}.Q-g16b-b .chief{width:660px}.hd h2, .hd h3{float:left;display:inline}.f12{font-size:12px}.f14{font-size:14px}.f16{font-size:16px}.f18{font-size:18px}.f20{font-size:20px}.l16{line-height:16px}.l17{line-height:17px}.l18{line-height:18px}.l19{line-height:19px}.l20{line-height:20px}.l21{line-height:21px}.l22{line-height:22px}.l23{line-height:23px}.l24{line-height:24px}.l25{line-height:25px}.l26{line-height:26px}.l27{line-height:27px}.l28{line-height:28px}.l29{line-height:29px}.l30{line-height:30px}.Q-hot, .Q-tList{margin:0 10px}.Q-hot h2{font:normal 18px/28px simhei;text-align:center}.Q-hot h2.l30{font-size:20px}.Q-tList span, .Q-tpList li span{float:right}.Q-pList li{float:left;display:inline;text-align:center}.Q-pList a{display:block}.Q-pList p a{display:inline}.Q-tpList em{font-weight:bold}.Q-tpList .pic{float:left;margin-right:10px;overflow:hidden;display:inline;text-align:center}.Q-tpList .pic img{border:1px solid #cbcbcb;display:block}.Q-vBg{width:100%;height:21px;position:relative;margin-top:-21px;font:12px/21px "宋体","Arial Narrow",HELVETICA;background:rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient( Q-gradientType = 0, startColorstr = '#80000000', endColorstr = '#80000000') \9;text-align:right;cursor:pointer}.Q-vBg b{display:block;position:absolute;width:21px;height:21px;top:0;left:0;cursor:pointer}.Q-vBg span{padding:0 5px;color:#fff;cursor:pointer}.Q-line{height:0;font:0/0 Arial;overflow:hidden;clear:both;border-bottom:1px dashed #ccc}.Q-iDot li, .Q-iDotBlue li, .Q-iDotGray li, .Q-iTqq li, .Q-iVideo li, .Q-iVideoBlue li, .Q-iVideoDeep li, .Q-iVideoGreen li{background:url(http://mat1.gtimg.com/news/base2011/img/i.png) no-repeat}.Q-iDotBlue li{background-position:0 -30px}.Q-iTqq li{background-position:0 -60px}.Q-iVideo li{background-position:0 -90px}.Q-iVideoBlue li{background-position:0 -120px}.Q-iVideoDeep li{background-position:0 -210px}.Q-iDotGray li{background-position:0 -180px}.Q-iVideoGreen li{background-position:0 -240px}.mt10{margin-top:10px}.mb10{margin-bottom:10px}}/*  |xGv00|8dad2e4e157648a4dc51659fdbf94229 */
+
+/*主导航 */
+#channel_nav{ margin:0 auto; width:960px; position: relative; z-index: 900; line-height:35px; font-size:14px; color:#fff; font-family:微软雅黑,黑体; zoom:1; background:#fff;}
+#channel_nav .hd{height:50px; clear:both; overflow:hidden;}
+#channel_nav .logo{float:left;padding:10px 16px 10px 0;}
+#channel_nav .sub{float:left;padding-top:10px;}
+#channel_nav a.rss{margin-right:50px;padding-left:16px;color:#666; text-decoration:none;font-size:11px; font-family:Arial,sans-serif;background:url(http://mat1.gtimg.com/www/images/channel_logo/rss_logo.png) left 1px no-repeat;}
+#channel_nav a.rss:hover{color:#666; text-decoration:underline;}
+#channel_nav .link{float:left;padding-top:9px;margin-left:10px;color:#d4d4d4;}
+#channel_nav .link a{color:#333; text-decoration:none;}
+#channel_nav .link a:hover{color:#333; text-decoration:underline;}
+
+#channel_nav .link_index{float:left;padding-top:9px;color:#d4d4d4;}
+#channel_nav .link_wb_logo{background:url("http://mat1.gtimg.com/sports/nbafinals2013/images/iconWb3.png") no-repeat 0 22px; padding-left:15px;}
+#channel_nav .link_index a{color:#333; text-decoration:none;}
+#channel_nav .link_index a:hover{color:#333; text-decoration:underline;}
+
+#channel_nav .linkml30{margin-left:30px}
+#channel_nav .toolbar{float:right;}
+#channel_nav .Form-Crumbs-Article-QQ { float:right;padding-top:14px;}
+#channel_nav .Form-Crumbs-Article-QQ .submit {float:right;width:75px;height:22px;background:url(http://mat1.gtimg.com/news/2009/final/split_v2.png) no-repeat 0 -372px;border:0px;line-height:20px;padding:0 0 2px 0;*padding:2px 0 0 0;padding:2px 0 0 0\0;font-size:12px;cursor:pointer}
+#channel_nav .Form-Crumbs-Article-QQ .inputWarp {float:right;width:202px;height:21px;background:url(http://mat1.gtimg.com/news/imgcss_article_qq/split_v4.1.png) no-repeat 0px -344px;;margin-right:3px;_display:inline;padding-top:1px;padding-top:2px\0;text-align:center;}
+#channel_nav .Form-Crumbs-Article-QQ .txtArea {width:166px;border:0px;height:16px;margin:3px 8px 0 0;padding:0;line-height:16px;font-size:13px;}
+#channel_nav .Form-Crumbs-Article-QQ .SosoLogo {width:24px;height:16px;margin-top:3px; float:left;}
+#channel_nav .Form-Crumbs-Article-QQ .SosoLogo span {display:none}
+
+#channel_nav .cf{background:#000;}
+#channel_nav li{ float:left;  border-left:1px solid #333;  }
+#channel_nav .tip { background: #d81b00; width: 960px; height: 35px; color:#fff; position: absolute; left: 0px; top: 85px; font-family: 宋体; font-size: 13px;display: none;}
+#channel_nav .tip a{  margin: 0 14px; }
+#channel_nav .tip a.icon_xx{background:url(http://mat1.gtimg.com/fashion/images/icon_xingxing.jpg) top right no-repeat; padding-right:12px;}
+#channel_nav a {color: #fff;}
+#channel_nav .sub-nav a{ float: left; color:#fff;padding:0 24px;}
+#channel_nav .sub-nav a:hover {text-decoration: none; color: #fff;}
+#channel_nav .on {background-color:#d81b00;}
+#channel_nav .on .tip {display: block;}
+#channel_nav .tip1 { text-indent:3em;}/*服饰文字间距移动*/
+#channel_nav .home {border-left: none;}
+#channel_nav .tip2 { text-indent: 2em;}/*美容文字间距移动*/
+#channel_nav .tip3 { text-indent: 2em;}/*偶像文字间距移动*/
+#channel_nav .tip4 { text-indent: 20em;}/*乐活文字间距移动*/
+#channel_nav .tip5 { text-indent: 23em;}/*男士文字间距移动*/
+#channel_nav .tip6 { text-indent: 25em;}/*视觉文字间距移动*/
+#channel_nav .tip7 { text-indent: 20em;} /*视频文字间距移动*/
+#channel_nav .tip8 { text-indent:18em;}/*活动文字间距移动*/
+#channel_nav .tip9 { text-indent: 32em;}/*专题文字间距移动*/
+#channel_nav .tip10 { text-indent:30em;}/*分享文字间距移动*/
+#channel_nav .tip11 { text-indent:63em;}
+/*update -013-9-18
+#channel_nav #nav13 .sub-nav a{padding: 0 15px 0 19px;}*/
+#channel_nav #nav13 .sub-nav a{padding: 0 24px;}
+#weiboIcon,#qzoneIcon,#mailIcon { z-index:800;}
+
+#channel_nav .Form-Crumbs-Article-QQ .submit {float:right;width:50px;height:26px;border:none;font-size:12px;background: url(http://mat1.gtimg.com/www/images/qq2012/sogouNewUi_v1.png) left bottom no-repeat;cursor:pointer;}
+#channel_nav .Form-Crumbs-Article-QQ .inputWarp{float:right;width:229px;height:24px;margin:0;padding:0;line-height:22px;background:none;border:#c9c9c9 1px solid;border-right:none;}
+#channel_nav .Form-Crumbs-Article-QQ .txtArea{width:200px;height: 20px;margin:2px auto 0 2px;font-size:14px;line-height:20px;border:none;color:#424242;outline:none;inline:none;}
+#channel_nav .Form-Crumbs-Article-QQ .SosonLogo{float:right;width:18px;height:18px;margin:3px 3px 0 0;background:url(http://mat1.gtimg.com/www/images/qq2012/sogouNewUi_v1.png) left top no-repeat;}
+#channel_nav .Form-Crumbs-Article-QQ .SosonLogo span{display:none;}
+
+/*=S soso smart */
+/* 整个smartbox 样式 */ 
+.soso-smart-m{position:absolute;z-index:9999;margin:0;background:#fff;border:1px solid #ccc;cursor:default;}
+.soso-smart-m td{font-size:13px;line-height:22px;font-family:"宋体";}
+/* 未选中行的样式 */
+.soso-smart-a{}
+/* 选择行的样式 */
+.soso-smart-b{background:#D8ECFF;}
+/* 文本样式 */
+.soso-smart-c{padding-left:3px;white-space:nowrap;text-align:left;overflow:hidden;}
+/*=E soso smart */
+/*主导航 end*/

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;dbip-city-2018-03.csv.gz&apos; to &apos;IpResolve0321/src/com.hoolai.bi&apos;&#x0D;&#x0A;- Original project: &apos;IpResolve0321&apos;&#x0D;&#x0A;- Destination element: &apos;IpResolve0321/src/com.hoolai.bi&apos;&#x0D;&#x0A;- Original element: &apos;dbip-city-2018-03.csv.gz&apos;" description="Copy file" destination="/src&lt;com.hoolai.bi" element1="target/dbip-city-2018-03.csv.gz" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1521646597791" units="0" version="1.0"/>
+</session>

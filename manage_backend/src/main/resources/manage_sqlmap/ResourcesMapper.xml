@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.Resources" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.Resources" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="RESOURCE_PATTERN_EXPRESSION" property="resourcePatternExpression" jdbcType="VARCHAR" />
+    <result column="RESOURCE_DESC" property="resourceDesc" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="PRIORITY" property="priority" jdbcType="INTEGER" />
+    <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+    <result column="RESOURCE_TYPE" property="resourceType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RESOURCE_PATTERN_EXPRESSION, RESOURCE_DESC, VERSION, STATUS, PRIORITY, RESOURCE_NAME, 
+    RESOURCE_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from resources
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.Resources" >
+    insert into resources (ID, RESOURCE_PATTERN_EXPRESSION, RESOURCE_DESC, 
+      VERSION, STATUS, PRIORITY, 
+      RESOURCE_NAME, RESOURCE_TYPE)
+    values (#{id,jdbcType=BIGINT}, #{resourcePatternExpression,jdbcType=VARCHAR}, #{resourceDesc,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, 
+      #{resourceName,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.Resources" >
+    insert into resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="resourcePatternExpression != null" >
+        RESOURCE_PATTERN_EXPRESSION,
+      </if>
+      <if test="resourceDesc != null" >
+        RESOURCE_DESC,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME,
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="resourcePatternExpression != null" >
+        #{resourcePatternExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDesc != null" >
+        #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.Resources" >
+    update resources
+    <set >
+      <if test="resourcePatternExpression != null" >
+        RESOURCE_PATTERN_EXPRESSION = #{resourcePatternExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDesc != null" >
+        RESOURCE_DESC = #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        PRIORITY = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.Resources" >
+    update resources
+    set RESOURCE_PATTERN_EXPRESSION = #{resourcePatternExpression,jdbcType=VARCHAR},
+      RESOURCE_DESC = #{resourceDesc,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      PRIORITY = #{priority,jdbcType=INTEGER},
+      RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectUserAuth" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from `resources` r 
+     where id in (select ar.RESOURCE_ID from `authority_resources` ar where ar.AUTHORITIES_ID in(
+     select ag.AUTHORITY_ID from `authority_group` ag 
+     where group_id in (select group_id from `group_users` where user_id = #{userId,jdbcType=BIGINT})))
+  </select>
+</mapper>

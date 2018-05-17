@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.Platforms" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.Platforms" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, code, status, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from platforms
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from platforms
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.Platforms" >
+    insert into platforms (id, name, code, 
+      status, create_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+       <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.Platforms" >
+    insert into platforms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.Platforms" >
+    update platforms
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.Platforms" >
+    update platforms
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+      <where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.code != null and entity.code != ''">
+					 <![CDATA[ and code = #{entity.code} ]]>
+				</if>
+				<if test="entity.name != null  and entity.name != ''">
+					 <![CDATA[ and name = #{entity.name} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectPlatforms" parameterType="com.hoolai.manage.vo.PlatformsVO" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from platforms
+	where status = 1
+	<![CDATA[ order by create_time desc ]]>
+</select>
+  
+  <select id="selectMatchList" parameterType="com.hoolai.manage.vo.PlatformsVO" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from platforms
+	<if test="searchValue != null">
+	    where (name like concat('%', #{searchValue}, '%') 
+	    or code like concat('%', #{searchValue}, '%') )
+	</if>
+	<![CDATA[ order by create_time desc ]]>
+	<if test="rows != 0">
+	   limit #{offset},#{rows}
+	</if>
+</select>
+
+  <select id="selectCount" parameterType="com.hoolai.manage.vo.PlatformsVO" resultType="java.lang.Long">
+	select count(1)
+	<include refid="Base_Column_List" />
+	from platforms
+	<if test="searchValue != null">
+	    where (name like concat('%', #{searchValue}, '%') 
+	    or code like concat('%', #{searchValue}, '%') )
+	</if>
+</select>
+
+	<select id="getByCodeAndName" parameterType="com.hoolai.manage.vo.PlatformsVO" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from platforms
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+	</select>
+</mapper>

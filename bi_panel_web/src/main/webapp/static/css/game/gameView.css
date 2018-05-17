@@ -1,0 +1,106 @@
+.kong {
+	width: 100%;
+	height: 50px;
+}
+
+.data_table {
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 20px;
+}
+
+.zhibiao {
+	width: 25%;
+	height: 210px;
+	float: left;
+	margin-top: 20px;
+	border-left: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-radius: 10px;
+}
+
+.zhibiao_left {
+	width: 25%;
+	height: 210px;
+	float: left;
+	margin-top: 20px;
+	border-left: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-radius: 10px;
+}
+
+.zhibiao_right {
+	width: 25%;
+	height: 210px;
+	float: left;
+	margin-top: 20px;
+	border-radius: 10px;
+	border: 1px solid #ebebeb;
+}
+
+.ir_biao {
+	width: 100%;
+	height: 200px;
+	float: left;
+	margin-top: 20px;
+}
+
+.ir_biao_table {
+	width: 25%;
+	height: 200px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 2%;
+	border-left: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+	border-radius: 10px;
+}
+
+.pay_text_zhong {
+	width: 23%;
+	height: 200px;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-left: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+	border-radius: 10px;
+}
+
+.pay_text_hou {
+	width: 25%;
+	height: 200px;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #ebebeb;
+	border-radius: 10px;
+}
+
+.data_ul li {
+	padding-top: 10px;
+}
+
+.data_ul title {
+	font-size: 20px;
+	text-align: center;
+}
+
+.tu {
+	width: 100%;
+	height: 30%;
+}
+
+.dateSelect{
+	display: inline-block;
+	height: 30px;
+	text-align: left;
+	margin-top: 10px;
+	margin-left: 1px;
+	border: 1px solid #ebebeb;
+	border-radius: 5px;
+}

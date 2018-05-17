@@ -1,0 +1,739 @@
+
+/* CSS Document by annan#tencent.com 2013-02-22 */
+/*公共样式*/
+
+.wrapper{ width:960px; margin:0 auto; padding-top:20px; line-height:22px; color:#222222;}
+a{ color:#222222;}
+a:hover{ color:#c00;}
+
+.navdetail{ font-size:18px; font-family:微软雅黑,黑体; padding-bottom:35px;}
+
+
+.leftSide{ width:640px; float:left; }
+.rgtSide{ width:300px; float:right;}
+
+.mod1{ border-top:4px solid #000; padding-bottom:10px;}
+.mod1 .modTitle1{ height:40px; border-bottom:0px solid #ccc; line-height:40px; }
+.mod1 .modTitle1 h2{ font-size:16px; font-family:微软雅黑,黑体;}
+.mod1 .modTitle1 h2 span{ color:#d81b00;}
+.mod1 .modTitle1 .fr a{color:#d81b00;}
+.mod1 .bd .bot{ text-align:right;}
+.mod1 .bd .bot span{ padding-right:20px;}
+.sharewb{ border-right:1px solid #ccc; padding-right:10px; margin-right:10px;}
+
+.mod2 .hd{ height:25px; line-height:25px; margin:20px 0 5px;}
+.mod2 .hd h2{ background:#000; color:#fff; font-size:14px; font-family:微软雅黑,黑体;}
+.mod2 .hd .fr a{color:#d81b00;}
+.mod2 .hd h2 a{ color:#fff;}
+.mod2 .bd h3{ padding:10px 0 5px; font-family:微软雅黑,黑体; font-size:16px;}
+.mod2 .bd p{ color:#8c8c8c;}
+.mod2 .bd .bot{ text-align:right;}
+.mod2 .bd .bot span{ padding-right:20px;}
+.mod2 .bd .bot .sharewb{ padding-right:10px;}
+
+
+.mod3{ padding-bottom:30px;}
+
+.mod4{ position:relative;}
+.mod4 .txt{ position:absolute; left:0; top:-45px; width:172px; height:86px;}
+.mod4 .txt p{position:absolute; left:0; top:0;width:152px; height:76px; padding:10px 10px 0; color:#fff; z-index:10; font-family:微软雅黑,黑体; font-size:14px;}
+.mod4 .txt p a{ color:#fff;}
+.mod4 .dicover{  width:172px; height:86px;position:absolute; left:0; top:0; z-index:9;}
+
+.mod5{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/bg1.png) no-repeat; width:300px; height:419px;}
+.mod5 .modTitle1{ border:0; margin-bottom:5px;}
+.mod5 .bd{ font-size:14px; font-family:微软雅黑,黑体; padding-left:56px;}
+.mod5 .bd li{ height:35px; line-height:35px;}
+
+.Q-tpList em{ font-family:微软雅黑,宋体,黑体; font-weight:400;}
+
+.txtlist li{ font-size:14px; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/allone.png) no-repeat 0 -225px; padding-left:10px; line-height:26px;}
+
+.hdmod10{ clear:both; padding-top:30px;}
+.hdmod10 h2 a{ display:none;}
+.hdmod10 .other{ font-family:微软雅黑,宋体,黑体; font-size:14px; text-align:center; display:block; padding:10px 0; clear:both; border-bottom:1px solid #dbdbdb; margin-bottom:30px;background:#fff; }
+.hdmod10 .other a{ margin:0 10px;}
+
+.leftPart{ width:640px; float:left; border-right:0px solid #ebebeb;  padding-bottom: 5px;}
+.leftPart li{
+	float:left;margin-right:21px;
+}
+.midPart{ width:180px; float:left; padding:0 20px 0px 10px;}
+.rgtPart{ width:300px; float:right;}
+.lmPart{ width:700px; float:left;}
+.lmBot{ clear:both; padding-top:20px;}
+
+.lanmu{ color:#8c8c8c;}
+.lanmu a{ color:#8193ae;}
+.lanmu a:hover{ color:#c00;}
+.lm a{color:#8193ae;}
+.lm a:hover{ color:#c00;}
+.lmshare{ text-align:right;}
+.lmshare .lm{ float:left; color:#8c8c8c;}
+
+.twlb{ border-bottom:0px solid #ebebeb; margin:10px 0 0 0; padding-bottom:19px;}
+
+.mod6 li{ padding-bottom:10px;}
+.mod6 .dtitle{ text-align:center; font-size:16px; font-family:微软雅黑,黑体;}
+.mod6 .dtitle img{ margin-bottom:5px; display:block;}
+.mod6 .lanmu{ padding-top:5px;}
+.mod6 .info{ color:#8c8c8c; padding-top:10px;}
+
+.mod7{ background:#f9f9f9; border-top:1px solid #000; border-right:4px solid #000; border-bottom:1px solid #dbdbdb;border-left:1px solid #dbdbdb; padding-bottom:4px;}
+.mod7 .hd{ position:relative; height:46px; line-height:36px;}
+.mod7 .hd h2{ width:78px; height:46px; position:absolute; left:-10px; color:#fff; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/titleBar.png) no-repeat;  padding-left: 10px; font-family:微软雅黑,黑体; font-size:16px; top:-1px; font-weight: normal;}
+.mod7 .hd h2 a{ color:#fff;}
+.mod7 .hd .fr{ padding-right:15px;}
+.mod7 .hd .fr a{ color:#d81b00;}
+.mod7 .bd{ padding:0 15px; margin-top:-10px;}
+.mod7 .bd li{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/dotline2.png) repeat-x 0 bottom; padding-top:15px; padding-bottom:0; position:relative; height:80px;}
+.mod7 .Q-tpList .pic{ float:right; position:absolute; right:0; bottom:0; margin:0;}
+.mod7 .Q-tpList em,.mod7 .Q-tpList p{ width:160px; display:block;}
+.mod7 .bd .last{ background:none;}
+
+
+.mod9{ position:relative;}
+.mod9 .hd{position:absolute; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/redBarIcoBg.png) no-repeat; _background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/redBarIcoBg.png'); width:71px; height:95px; text-align:center; font-size:18px; font-family:微软雅黑,黑体; line-height:24px; color:#fff; top:-30px;
+z-index: 10;
+}
+.mod9 .hd h2{   font-size: 20px;font-weight: 400;padding-left: 8px;padding-top: 15px;text-align: center; width: 58px;}
+.mod9 .hd a{ color:#fff;}
+.mod9 h3{ font-size:16px; font-family:微软雅黑,黑体; padding:20px 0 5px 0;}
+.mod9 h3 span{ color:#cc240c;}
+.mod9 p{ color:#8c8c8c;}
+
+.nobotborder{ border-bottom:0;}
+.wbIco{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/gouico.png) no-repeat right center; padding-right:15px; color:#8193ae;}
+.wbname{ color:#8193ae;}
+.wbname:hover{ color:#c00;}
+.rbjiao{ background:#F9F9F9 url(http://mat1.gtimg.com/fashion/fashion_index/images/jiaorb.png) no-repeat right bottom;}
+
+.btag{ background:#000; color:#fff; padding:25px 0px 20px 5px; }
+.btag dl{border:1px solid #363636; overflow:hidden; zoom:1;margin-right:0px; *margin-right:5px; display: inline-block;
+*display: inline; margin-bottom:5px;*margin-bottom:10px;}
+.btag dt{  background:#363636; float:left; font-family:微软雅黑,黑体; font-size:14px; padding:0 5px;}
+.btag dd{ color:#979797; float:left; padding:0 5px;}
+.btag .addAttention { color: #fff;}
+.btag .delAttention {color: #ccc;}
+.mod15{ width:330px;}
+.mod15 .hd{ padding-bottom:10px;}
+.mod15 .hd h2{ font-size:16px; font-family:微软雅黑,黑体; color:#222; font-weight:400;}
+.mod15 .hd h2 span{ color:#d81b00;}
+.mod15 .bd .pic{ float:left; padding-right:15px; padding-top:7px;}
+.mod15 .bd .txtlist{/* float:left;*/ margin-left: 93px; }
+
+.mod16{ padding-top:20px;}
+.mod16 .hd{ padding-bottom:10px;}
+.mod16 .hd h2{ font-family:微软雅黑,黑体; font-size:16px; font-weight:400;}
+.mod16 .hd .fr a{ color:#d81b00;}
+.mod16 .hd .fr a:hover{ color:#c00;}
+
+/*主导航*/
+.mainNav{ margin:0 auto; width:960px; position: relative; z-index: 9999; height:35px; background:#000; line-height:35px; font-size:14px; color:#fff; font-family:微软雅黑,黑体; zoom:1;}
+.mainNav li{ float:left;  border-left:1px solid #333;  }
+.mainNav .tip { background: #d81b00; width: 960px; height: 35px; color:#fff; position: absolute; left: 0px; top: 35px; font-family: 宋体; font-size: 13px;display: none;}
+.mainNav .tip a{  margin: 0 14px; }
+.mainNav a {color: #fff;}
+.mainNav .sub-nav a{ float: left; color:#fff;padding:0 25px;}
+.mainNav .sub-nav a:hover {text-decoration: none; color: #fff; background-color:#d81b00;}
+.mainNav .on {background-color:#d81b00;}
+.mainNav .on .tip {display: block;}
+.mainNav .tip1 {}
+.mainNav .home {border-left: none;}
+.mainNav .tip2 { text-indent: 2em;}
+.mainNav .tip3 { text-indent: 2em;}
+.mainNav .tip4 { text-indent: 20em;}
+.mainNav .tip5 { text-indent: 30em;}
+.mainNav .tip6 { text-indent: 25em;}
+.mainNav .tip7 { text-indent: 30em;}
+.mainNav .tip8 { text-indent:48em;}
+.mainNav .tip9 { text-indent: 55em;}
+/*首屏焦点图*/
+.fs_G2{ height:380px; position:relative; background:#fff;width:640px; position:relative;  }  
+.fs_G2 .G2fBt{ position:absolute; top:310px; right:0; overflow:hidden; zoom:1; }  
+.fs_G2  .fcon{ position:relative; height:380px; width:640px; float:left; }  
+.fs_G2 .shadow{ width:660px; position:absolute; bottom:0; left:0px; height:80px; background:rgba(0,0,0,0.6);    
+filter:progid:DXImageTransform.Microsoft.gradient( GradientType = 0,startColorstr = '#80000000',endColorstr = '#80000000')\9;  display:block; text-align:center; line-height:80px;}  
+.fs_G2 .shadow a{ text-decoration:none; color:#fff; font-size:18px;  overflow:hidden; float:left;/* width:250px;*/ padding-left:15px;  font-family:微软雅黑,黑体;}  
+.fs_G2 .G2fBt li{ float:left; font-size:14px; display:inline; width:120px; height:60px; cursor:pointer; text-align:right; }  
+.fs_G2 .G2fBt li img{ display:block; width:100px; height:50px; border:5px solid #dbdcde; float:right;}  
+.fs_G2 .G2fBt li.current{ cursor:pointer;}   
+.fs_G2 .G2fBt li.current img{ border:5px solid #fe534c;}  
+.fs_G2 .fcon img{ height:323px; width:640px; display:block; }  
+.fs_G2 .prev{ width:6px;height:12px;right:54px;top:15px;  background:url(http://mat1.gtimg.com/news/base2011/foucs/img/I_btn_left.png); overflow:hidden;font-size:12px; position:absolute; cursor:pointer; display:none;}  
+.fs_G2 .next{ width:6px;height:12px;right:14px;top:15px;  background:           url(http://mat1.gtimg.com/news/base2011/foucs/img/I_btn_right.png); overflow:hidden;font-size:12px; position:absolute; cursor:pointer; display:none;}  
+.fs_G2 .fPs{ height:380px; position:relative; overflow:hidden; width:640px; }  
+.fs_G2 .fPic{  position:absolute; }  
+.G2Num{ position:absolute; z-index:10; color:#ccc;  top:14px; left:305px; font-family:宋体; display:none;}   
+#curNum{ color:#FFA800; }  
+.fs_G2 .fix{ position:relative; width:9999px; height:359px;  }    
+
+
+/*今日热闻*/
+#jrrw{ margin-top:50px; width:640px; }
+#jrrw .hd{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/titlebg1.png) repeat-x 0 bottom;}
+#jrrw .hd h2{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/jrtwTitle.png) no-repeat 0 0; width:270px; height:29px;}
+#jrrw .hd h2 a{ display:none;}
+#jrrw .hd .fr{ background-image:url(http://mat1.gtimg.com/fashion/fashion_index/images/allone.png); background-repeat:no-repeat; background-position:-120px -30px; width:86px; height:24px; line-height:24px; text-indent:2.2em;}
+#jrrw .hd .fr a{ color:#8193ae;}
+#jrrw .hd .fr a:hover{ color:#c00;}
+
+#jrrw .jrNum1{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/num1.png) no-repeat;_background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/num1.png'); width:22px; height:49px; display:block;}
+#jrrw .num{ width:48px; float:left;}
+#jrrw .nrtxt{ width:400px; float:left;}
+#jrrw .jrrwTxt{ width:450px; height:160px;background:url(http://mat1.gtimg.com/fashion/fashion_index/images/dotline.png) repeat-x 0 bottom; padding-bottom:25px; overflow:hidden; zoom:1; float:left; padding-top:28px;}
+#jrrw .txtbox{ width:450px; float:left; overflow: hidden;}
+#jrrw .jrrwTxt p a{ color:#8193ae;}
+#jrrw .jrrwTxt p a:hover{ color:#c00; padding-top:28px;}
+#jrrw .bd li{ float: left;width: 100%;}
+#jrrw2  li{height:142px;}
+#jrrw .jrrwPic{ float:right; padding:10px 10px 0px 0px;}
+
+#jrrw h2{ font-size:20px; font-family:微软雅黑,黑体; font-weight:400;}
+#jrrw h2 a span{ color:#db2a11;}
+#jrrw p{ color:#8c8c8c; line-height:22px; padding-top:4px;}
+#jrrw .tbch{ border-top:1px solid #ebebeb;}
+#jrrw .nrtxt h2 { line-height: 32px; }
+
+
+.tbch{ border-top:1px solid #ebebeb; overflow:hidden; zoom:1; margin-top:20px; padding-top:25px;}
+.tbch h3{ width:78px; float:left; color:#8c8c8c; font-size:16px; font-family:微软雅黑,宋体,黑体;}
+.tbch .tbchList{ width:225px; float:left; color:#ccc;}
+.tbch .tbchList a{ margin:0 2px; padding:2px 3px;}
+.tbch .tbchList a:hover{ background:#d81b00; color:#fff; text-decoration:none;}
+
+#jrrw .jrNum2{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/num2.png) no-repeat;_background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/num2.png'); width:35px; height:49px; display:block;}
+#jrrw .jrNum3{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/num3.png) no-repeat;_background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/num3.png'); width:32px; height:49px; display:block;}
+#jrrw .jrNum4{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/num4.png) no-repeat;_background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/num4.png'); width:32px; height:49px; display:block;}
+#jrrw .jrNum5{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/num5.png) no-repeat;_background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/num5.png'); width:35px; height:49px; display:block;}
+
+#jrrw .jrhtlast .jrrwTxt{ background:none;}
+
+.plist2 p{ color:#8c8c8c;}
+.plist2 li{ margin-bottom:17px;}
+
+.ljrrw{  clear:both;}
+.jrPic2,.jrPic3,.jrPic4,.jrPic5{ position:absolute;}
+.jrPic2{ top:0; right:0;}
+.jrPic3{ top:45px; right:138px;}
+.jrPic4{ top:277px; right:0;}
+.jrPic5{ top:323px; right:138px;}
+
+/*独家策划*/
+#djch{ clear:both; width:640px; overflow:hidden;margin-top:22px;}
+#djch .hd{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/titlebg1.png) repeat-x 0 bottom;}
+#djch .hd h2{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/djceTitle1.png) no-repeat; width:229px; height:35px;}
+#djch .hd h2 a{ display:none;}
+#djch .bd{ width:640px;}
+#djch .bd li{ width:200px; float:left; padding-right:13px; padding-top:20px; text-align:center;font-family:微软雅黑,宋体,黑体; font-size:14px;}
+#djch .bd h3{ font-size:16px; padding-bottom:8px; text-align:left; overflow:hidden; zoom:1; }
+#djch .bd h3 a{ float:left;}
+#djch .bd h3 span{ font-family:"宋体"; font-size:12px; font-weight:400; float:right;}
+#djch .bd h3 span a{ color:#d81b00;}
+#djch .bd h3 span a:hover{ color:#c00;}
+#djch .bd img{ margin-bottom:5px; display:block;}
+
+/*达人现场*/
+#drxc dt{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/allone.png) no-repeat 0 -272px; padding-left:30px; font-family:微软雅黑,宋体,黑体; font-size:14px; line-height:28px;}
+#drxc dd{ padding-bottom:25px; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/botline1.png) no-repeat 0 bottom; }
+#drxc dd .wg{ display:block; width:94px; height:24px; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/allone.png) no-repeat -120px 0; text-indent:2em; line-height:24px; color:#8193ae; float:left; margin-right:7px;}
+#drxc dd a{ color:#8193ae;}
+#drxc dd a:hover{ color:#c00;}
+#drxc dd p{ color:#ccc; padding:5px 0 20px;}
+#drxc .video_pos {position:relative; display:block;  width:300px; height:170px;}
+#drxc .video_ico { position:absolute; cursor:pointer; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/video_ioc.png) no-repeat; _background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="http://mat1.gtimg.com/fashion/fashion_index/images/video_ioc.png");width:300px; height:67px;left:0px; top:103px;}
+
+
+
+
+/*来抢用*/
+#lqy .Q-tpList{ padding-top:15px;}
+#lqy .Q-tpList em{ font-family:微软雅黑,宋体,黑体;}
+#lqy .Q-tpList em span{ color:#8193ae;}
+#lqy .Q-tpList em .line{ color:#ccc; overflow:hidden; margin:0 10px;}
+#lqy .Q-tpList p{ color:#8c8c8c;}
+#lqy .mfsq{ color:#fff; background:#3e3e3e; padding:2px 5px;}
+#lqy .txtlist{ margin-top:5px; display:none;}
+#lqy .txtlist .line{ color:#ccc; margin:0 10px;}
+#lqy .tjbg{ color:#8193ae; margin-left:20px; font-size:12px;}
+#lqy .tjbg:hover{ color:#c00;}
+
+.zbplList{background:url(http://mat1.gtimg.com/fashion/fashion_index/images/dotline.png) repeat-x 0 0; clear:both; padding:15px 0; clear:both; margin-top:20px; zoom:1;}
+.zbplList .Q-tpList{ padding:5px 10px 5px 15px; color:#8c8c8c;}
+.zbplList .Q-tpList em{ color:#ccc; overflow:hidden; zoom:1;}
+.zbplList .Q-tpList .uname{ float:left;}
+.zbplList .Q-tpList em a{ color:#8193ae; }
+.zbplList .Q-tpList em .uname{font-family:微软雅黑,黑体; font-size:14px;}
+.zbplList .Q-tpList em span{ float:right;}
+.zbplList .Q-tpList em span a{ margin:0 10px; font-size:12px;}
+.zbplList .Q-tpList p{ clear:both;}
+.clearfix{ clear:both; overflow:hidden; zoom:1; font-size:1px; height:1px;}
+.zbplList .txt{ float:left; width:180px;}
+
+.ads{ padding:30px 0; clear:both; overflow: hidden;}
+
+
+.zr_type .bd h3{ margin-top:10px;}
+.zr_type .pic{ position:relative;}
+
+#apps_svy_digg{margin:auto; position:absolute; left:10px; top:176px; width:400px;}
+#apps_svy_digg .option{float:left;/*width:89px;*/height:44px; width:120px;}
+#apps_svy_digg .count{text-align:center;font-family:"Verdana";font-size:12px;color:#333532;line-height:44px; width:89px;height:44px; position:absolute; z-index:9; left:40px; text-align:left;  color:#fff;}
+#apps_svy_digg .digg{text-align:center;font-size:12px;color:#ccc;line-height:20px;width:85px; height:44px; position:absolute; z-index:10; left:0; display:block; line-height:25px;}
+#apps_svy_digg .digg a{ display:block;width:85px; height:44px; }
+.lcopt,.rcopt{ position:relative;}
+.lcopt .lc,.rcopt .rc{ width:89px;height:44px; position:absolute; left:0; top:0; display:none;}
+.lcopt .lc{background:url(http://mat1.gtimg.com/fashion/fashion_index/images/lcbg.png) no-repeat; _background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/lcbg.png');}
+.rcopt .rc{background:url(http://mat1.gtimg.com/fashion/fashion_index/images/rcbg.png) no-repeat; _background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/rcbg.png');}
+.rcopt{ margin-left:160px; }
+#apps_svy_digg .lcopt {background:url(http://mat1.gtimg.com/fashion/fashion_index/images/lcbg1.png) left 0px no-repeat; }
+#apps_svy_digg .lcopt .count {background:url(http://mat1.gtimg.com/fashion/fashion_index/images/lcbg1.png) right -45px no-repeat; left:37px; top:0px;_top:1px; padding-right:8px;  width:auto;}
+#apps_svy_digg .rcopt {background:url(http://mat1.gtimg.com/fashion/fashion_index/images/lcbg1.png) left -90px no-repeat; }
+#apps_svy_digg .rcopt .count {background:url(http://mat1.gtimg.com/fashion/fashion_index/images/lcbg1.png) right -135px no-repeat; left:37px;top:0px; padding-right:8px;  width:auto;}
+
+
+.zr_type h3{ font-size:16px; font-family:微软雅黑,黑体; padding:20px 0 5px 0;}
+.zr_type h3 span{ color:#cc240c;}
+.zr_type p{ color:#8c8c8c;}
+
+/*街拍*/
+.jpsnap{ width:260px; height:270px; position:relative; float:left;}
+.jpsnap li{ float:left; width:120px; margin-right:10px;}
+.jpsnap li a{ color:#666;}
+.jpsnap li img{ margin-bottom:5px;}
+.jpsnap li a:hover{ color:#c00;}
+.jpsnap .tipcover{background:url(http://mat1.gtimg.com/fashion/fashion_index/images/jpsnap.png) no-repeat; _background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/jpsnap.png'); width:118px; height:94px; position:absolute; left:0; bottom:0;}
+
+/*一日一look*/
+.yryl{ position:relative; width:340px; height:270px; float:left; margin-left:70px;}
+.yryl .tipcover{background:url(http://mat1.gtimg.com/fashion/fashion_index/images/onelook.png) no-repeat; _background-image: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://mat1.gtimg.com/fashion/fashion_index/images/onelook.png'); width:118px; height:94px; position:absolute; left:0; bottom:0;} 
+
+#fscl .lmBot{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/dotline3.png) no-repeat 253px 20px; overflow:hidden; zoom:1; padding-top:17px;}
+
+/*最佳秀场*/
+#zjxc{}
+#zjxc .hd{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/xiuchaTitle.png) no-repeat; height:105px; color:#999; position:relative;}
+#zjxc .hd h2{ width:64px; text-align:center; color:#ef1e00; padding-top:22px; font-family:微软雅黑,黑体; font-weight:400; font-size:16px;}
+#zjxc .hd h2 span{ display:block; color:#fff;}
+#zjxc .hd ul{ padding:22px 0 0 73px;}
+#zjxc .hd li{ overflow:hidden; zoom:1; padding-bottom:3px;}
+#zjxc .hd li label{ display:block; float:left; width:76px; text-align:justify;}
+#zjxc .hd li select{ color:#999; width:130px;}
+#zjxc .bd{ border:1px solid #dbdbdb; border-top:0; overflow:hidden; width:297px;}
+.scrollBox{ position:relative;width:255px; margin:0 auto; height:205px; overflow:hidden; }
+.scrollPic{ }
+.scrollPic .item{ position:absolute; z-index:10; background-color:#000; }
+.scrollPic .item img{ opacity:0.8; filter:alpha(opacity=80);}
+.scrollPic .item a{ border:0;text-decoration:none;}
+.scrollPic .current img{ opacity:1; filter:alpha(opacity=100);}
+.scrollPic .iText{ width:300px; line-height:40px; position:absolute; z-index:999; top:165px; text-align:center; display:none; font-size:16px; font-family:微软雅黑,黑体; left:-110px;}
+.scrollPic .iText a{ }
+.scrollPic .current .iText{ display:block; }
+
+
+.prevCur,.nextCur{ width:9px; height:136px;position:absolute; top:15px;  font-size:40px; cursor:pointer; text-align:center; line-height:99px; z-index:99999;} 
+.prevCur{ left:73px; }
+.nextCur{ right:73px;}
+.prevCur a,.nextCur a,.prevCur a:hover,.nextCur a:hover{ color:#fff;text-decoration:none; display:block}
+.prevCur a:hover{}
+.nextCur a:hover{}
+  
+.scrollDot{ position:absolute; bottom:8px; left:390px; display:none;}
+.scrollDot span{  padding:5px; display:inline-block; margin:0 5px; cursor:pointer; font-size:0; overflow:hidden; background:red;}
+.scrollDot span.on{ background:blue;}
+
+/*新品速递*/
+#xpsd{ width:660px;}
+#xpsd .hd{ padding-bottom:7px; *padding-bottom:8px;}
+#xpsd .hd h2{ color:#222; font-family:微软雅黑,黑体; font-size:16px;}
+#xpsd .hd h2 span{ color:#d81b00;}
+#xpsd .hd .fr a{ color:#d81b00;}
+#xpsd .hd .fr a:hover{ color:#c00;}
+#xpsd .bd{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/xpsdBg.png) no-repeat; width:660px; height:170px; padding:24px 0 0 0;}
+#xpsd .txtlist{ float:left;}
+
+#xpsd .piclist{ float:right; margin-right:-1px;}
+#xpsd .piclist li{ width:120px; float:left; text-align:center; margin-left:20px; display:inline;}
+#xpsd .piclist img{ margin-bottom:5px; display:block;}
+#xpsd .piclist a{ color:#666;}
+
+
+
+#xpsd .piclist a:hover{ color:#c00;}
+
+/*生活家*/
+.shjlohas{ width:660px; position:relative; }
+.shjlohas a { display: block; text-decoration: none;}
+.shjlohas .title{ position:absolute; left:252px; top:0;}
+.shjlohas .opic1{ position:absolute; left:0; top:0; width:250px; height:160px;}
+.shjlohas .opic2{ position:absolute; left:0; top:162px; width:250px; height:160px;}
+.shjlohas .opic3{ position:absolute; left:252px; top:122px; width:200px; height:200px;}
+.shjlohas .opic4{ position:absolute; left:454px; top:0;width:206px; height:322px;}
+
+.shjlohas .pbox{ position:relative;}
+#lxsh .txt1,#lxsh .txt2,#lxsh .txt3,#lxsh .txt4{ position:absolute; background:#000; opacity:0.3; filter:alpha(opacity=30); left:0; top:0; z-index:9;width: 100%; height: 100%; zoom:1; display:none; cursor: pointer; }
+#lxsh .wz1,#lxsh .wz2,#lxsh .wz3,#lxsh .wz4{ position:absolute; color:#fff; font-family:微软雅黑,黑体; font-size:16px; z-index:99; left:0; top:0; padding:0 20px; display:none; cursor: pointer;}
+.shjlohas .txt1,.shjlohas .txt2,.shjlohas .txt3,.shjlohas .txt4{ width:100%; height:100%;}
+
+#lxsh .txt1{_height:160px; }
+#lxsh .ssgc .txt1{_height:240px; }
+#lxsh .dtitle .txt1{_height:180px; }
+#lxsh .txt2{ _height:160px;}
+#lxsh .txt3{ _height:200px;}
+#lxsh .txt4{_height:322px; }
+#lxsh .wz1,#lxsh .wz2,#lxsh .wz3,#lxsh .wz4 { height: 22px; top: 100%; margin-top: -25px; text-decoration: none;}
+#lxsh  .video_ioc { position: absolute; left: 50%; top: 50%;  width: 38px; height: 38px; background: url(http://mat1.gtimg.com/fashion/fashion_index/images/video_ioc_new.png) no-repeat;
+	margin-left: -19px; margin-top:-19px;
+	display: none;cursor: pointer;
+ }
+
+/*#lxsh .lmBot{ padding-top:7px; *zoom:1;}
+@-moz-document url-prefix() { #lxsh .lmBot { padding-top:4px; } }*/
+/*风度男士*/
+#fdns .mod7 .bd li{ height:93px;}
+#fdns .leftPart { padding-bottom:4px;}
+/*媒体活动*/
+#mthd .mod15{ float:left;}
+#mthd .rgtPart .attentBoxWrap{ }
+#mthd .rgtPart .attentBoxWrap a{ background:#000; color:#fff; padding:3px 5px;}
+#mthd .btag{ padding-top:10px; padding-bottom:9px;}
+@-moz-document url-prefix() { #mthd .btag{ padding-bottom:10px;} }
+#mthd .btag .txtlist a{ color:#fff;}
+
+#mthd #mtlist{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/mtbg.png) no-repeat; width:660px; height:194px;  clear: both;}
+
+/*合作伙伴*/
+.copyrights{ background:#f9f9f9; border-top:1px solid #dbdbdb; clear:both;}
+.copyrights .inner{ width:960px; margin:0 auto; padding-top:20px; line-height:30px;}
+.copyrights .inner .hd h2{ font-size:16px; font-family:微软雅黑,黑体;}
+.copyrights .inner .bd span{ padding:0 10px;}
+.copyrights .adsinner{ padding:15px 0; border-bottom:1px solid #d7d7d7;}
+.copyrights .ads{ border-bottom:1px solid #fff; }
+
+/*返回顶部*/
+.goTop{ width:54px; height:54px; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/topBtn.png) no-repeat; position:fixed; bottom:80px; right:30px;_position:absolute;}
+.goTop a{ display:block; width:54px; height:54px;}
+.goTop a:hover{ background:url(http://mat1.gtimg.com/fashion/fashion_index/images/topBtnHover.png) no-repeat;}
+
+.mod6 li,#jrrw .nrtxt h2 {*zoom:1;}
+#jrrw .nrtxt h2  {position: relative; margin-top: -12px;*margin-top: -11px;}
+.leftPart .Q-tpList p {color:#8c8c8c;}
+
+#jrrw .bd {position:relative;}
+.jrPic2 {top:220px;}
+.jrPic3 {top:265px;}
+.jrPic4 {top:497px;}
+.jrPic5 {top:543px;}
+
+/*微博和品论图标样式*/
+.comment {color:#ccc;}
+.copyright .inner .bd a {display:inline-block;}
+
+ .lmshare .sharewb ,.lmshare .comment  {
+float:right; display:block;  position: relative;
+ height: 16px; line-height: 16px; 
+  background: url(http://mat1.gtimg.com/fashion/fashion_index/images/weibo_ioc.png) no-repeat;}
+.lmshare .sharewb  { margin-top: 5px; font-size:0px; line-height:0px; color:#fff; width: 16px; background-position: 0px -27px;}
+.lmshare .sharewb:hover {background-position: 0px -83px; color:#fff;}
+.lmshare .comment { padding-top: 5px; padding-left: 16px;background-position: 0px 5px;}
+.lmshare .comment:hover {background-position: 0px -49px; text-decoration: none;}
+.leftPart .mod9 .lmshare .comment {  }
+.leftPart .Q-tpList p { margin-left: 91px;}
+#jrrw .jrrwTxt { padding-bottom: 20px;}
+
+#lqy {/* padding-bottom: 10px;*/padding-bottom: 0px;*padding-bottom: 5px; }
+.pdTop0 {padding-top: 0px;}
+
+
+
+#fgrx .mod7 .bd li { /*padding-bottom: 5px;*/}
+.ads2 { padding-top: 10px;}
+#mthd .rgtPart .nobotborder  li { padding-bottom: 5px;}
+.mid-hr { clear: both; height: 21px; overflow: hidden;}
+.fashion_ad {width: 960px; margin:0px auto; padding: 15px 0px; text-align: center;}
+.hdmod10 .other {width:100%;}
+.rightAikanTab .bd dd .cf a {color:#8193AE;}
+#fgrx .leftPart {padding-bottom:3px;}
+
+
+
+/*美容先锋样式*/
+
+#mrxfnew  .bd li {
+    background: url("http://mat1.gtimg.com/fashion/two_level_page/mr_images/dotline.png") no-repeat scroll left bottom transparent;
+    height: 80px;
+    padding-top:15px;
+    font-family: 微软雅黑,宋体,黑体;
+    font-weight: 400;
+    font-size: 14px;
+}
+#mrxfnew  .bd li .mod4 img {width: 80px; height: 80px;}
+#mrxfnew  .bd .mod4 {
+    float: right;
+   
+}
+
+#mrxfnew  .bd p {
+    color: #8193AE;
+}
+
+#mrxfnew  .bd .last {
+    background: none repeat scroll 0 0 transparent;
+}
+#mrxfnew { height: 226px; overflow: hidden;}
+.btag .attentBoxWrap { display: inline;}
+.leftPart .Q-tpList p a,.mod9 .bd p a  {color:#8193AE}
+.shjlohas .wz1, .shjlohas .wz2, .shjlohas .wz3, .shjlohas .wz4 {cursor:pointer; font-size: 16px; }
+.lmshare .lm a,.lanmu a  {padding-right:5px;}
+.archive_type_part p a {color:#8193AE;}
+/*首页导航样式*/
+#channel_nav #nav01 {border:none;} 
+
+
+ /*美妆先锋栏目同步 样式*/
+#mzxf .hd {
+    height: 46px;
+    line-height: 36px;
+    position: relative;
+    border: none;
+}
+
+#mzxf .hd h2 {
+    background: url("http://mat1.gtimg.com/fashion/fashion_index/images/titleBar.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    font-family: 微软雅黑,黑体;
+    font-size: 16px;
+    height: 46px;
+    left: -10px;
+    position: absolute;
+    text-indent: 1em;
+    top: -1px;
+    width: 88px;
+    font-weight: normal;
+}
+#mzxf .hd h2 a {
+    color: #FFFFFF;
+}
+
+#mzxf .hd .fr {
+    padding-right: 15px;
+}
+
+#mzxf .hd .fr a {
+    color: #D81B00;
+}
+#mzxf .bd .mod6 .bd {
+    padding: 0 15px;
+}
+#mzxf .bd .mod6 .hd { display: none;}
+#mzxf .bd .mod6 .bd li {
+    background: url("http://mat1.gtimg.com/fashion/two_level_page/mr_images/dotline.png") no-repeat scroll left bottom transparent;
+    font-family: 微软雅黑,宋体,黑体;
+    font-size: 14px;
+    font-weight: 400;
+    height: 80px;
+    padding-top: 15px;
+     position: relative;
+     padding-bottom: 0px;
+}
+
+
+#mzxf .bd .mod6 .bd .mod4 {
+    float: right;
+}
+#mrxfnew .bd .mod6 .bd p {
+    color: #8193AE;
+}
+#mzxf  .lastNone { display:none;}
+#mzxf .bd .mod6 .bd  .last {  background: none;}  
+#mzxf {height: 226px;overflow: hidden;
+background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #000000 #000000 #DBDBDB #DBDBDB;
+    border-style: solid;
+    border-width: 1px 4px 1px 1px;
+    padding-bottom: 20px;
+}
+#mzxf .bd li .mod4 img  { height: 80px; width: 80px; border: 1px solid #CBCBCB;
+    display: block;}
+#mzxf .Bd { margin-top: -10px;}
+#mzxf  .modTitle1 h2 span {color: #fff;}
+#mzxf  .mod6 .bd li p {color: #8193AE;}
+
+/**视觉焦点同步样式**/
+.pic1,.pic2,.pic3,.pic4,.pic5,.pic6 { display: none;}
+#focus .pic0 img {width:210px;}
+#focus .inner .newPic  { display:block; padding: 16px 15px;}
+#focus .pic0 {border-left:1px solid #f2f2f2; border-top:1px solid #f2f2f2; border-right:1px solid #e3e3e3; border-bottom:1px solid #e3e3e3; margin-bottom:15px;}
+#focus .undis { display: block;padding: 11px 15px 12px;  border-top: 1px solid #EBEBEB;}
+
+
+#jrrw .jrrwPic {position:relative;}
+#jrrw2 .t,#jrrw .t { background:url(http://mat1.gtimg.com/fashion/fashion_index/images/z_ioc.png) no-repeat;
+display:none;left:0px; position:absolute; font-size:18px; overflow:hidden; padding-left:5px; font-weight:bold; width:51px; height:50px; line-height:42px; color:#fff; font-family: Arial,Microsoft Yahei,黑体;}
+#jrrw2 .t0 {top:225px; background-position: 0px -52px;}
+#jrrw2 .t1 {top:225px; background-position: 0px -103px;}
+#jrrw2 .t2 {top:225px; background-position: 0px -154px;}
+#jrrw2 .t3 {top:148px; background-position: 0px -205px;}
+#jrrw .t6 {top:148px; background-position: 0px 0px;}
+#jrrw .txtboxs {float: left;overflow: hidden;width: 430px;}
+
+#xgcmthd .Q-tpWrap { padding-top:5px;}
+#xgcmthd .Q-tpWrap  em {width:auto; float:left;}
+#xgcmthd .Q-tpWrap .q-title {}
+#xgcmthd .Q-tpWrap .attentBoxWrap { margin-left:10px; display:inline;  line-height: 24px;}
+#mthd .rgtPart .attentBoxWrap a {padding: 2px 5px;}
+#xgcmthd .bd li {height:105px;}
+#mthd .rgtPart .nobotborder li {padding-bottom:0px; padding-top:20px;}
+#xgcmthd .Q-tpWrap p a {color:#8193ae;}
+#drxc dd .wg {padding-left:25px;background:url("http://mat1.gtimg.com/fashion/fashion_index/images/allone1.png")  left -79px  no-repeat; width:auto;  text-indent:0em;}
+#drxc dd .wg .t {display:block; height:24px; line-height: 24px; padding-right:5px;background:url("http://mat1.gtimg.com/fashion/fashion_index/images/allone1.png")  right -104px  no-repeat; float:left; }
+
+#mzxf .mod4 .txt {display: block!important;padding: 2px 5px; background: none repeat scroll 0 0 #000000;
+    color:#FFFFFF; width:auto; height:auto; top:0px; left:-105px;}
+#mzxf .mod4 .txt .dicover,#mzxf .mod4 .txt  p {display:none;}
+
+
+/*乐享生活栏目改版样式*/
+#lxsh  .mod9 h3 { padding-top: 0px; padding-bottom: 0px; margin-bottom: 8px; margin-top:25px;background: url(http://mat1.gtimg.com/fashion/fashion_index/images/video_ioc_x.png) left 4px no-repeat; padding-left: 26px;}
+#lxsh .leftPart { padding-bottom: 30px;}
+#lxsh .leftPart .bd .ssgc  {display: block; position: relative; height: 240px;}
+/*.lmshare .sharewb {border: none;}
+.lmshare .b {width: 1px; margin-top: 5px; overflow: hidden; float: right; background: #000; height: 12px;}*/
+#lxsh  .mod6 .dtitle {display: block; text-align: left; position: relative; height: 180px;margin-bottom: 9px; }
+#lxsh  .mod6  .i {background: url(http://mat1.gtimg.com/fashion/fashion_index/images/video_ioc_x.png) left 4px no-repeat; padding-left: 25px; display: block; font-size: 16px; font-family: Microsoft YaHei,黑体;}
+#lxsh  .mod6 .dtitle img {}
+#lxsh  .mod6 .lanmu {padding-top: 10px;}
+#lxsh  .mod6 .lanmus { padding-top: 8px;}
+#lxsh .lmBot {padding-top: 0px;}
+#lxsh .rbjiao {background-image: none;}
+.mod_list {padding-top: 20px; position: relative;}
+.mod_list li { width: 100%; float: left;  font-size: 14px;font-family: Microsoft YaHei,黑体; line-height: 36px;  }
+.mod_list  .number {width:25px; text-align:left;float:left;font-family:宋体; font-size: 22px; font-style: oblique; line-height: 36px;}
+.mod_list .rb_pic {float: left; width: 116px; height: 65px;   position:relative; overflow: hidden;}
+.mod_list  .rb_t {  position: relative; margin-top: -6px; _margin-top: -2px;  line-height: 24px; display: block; } 
+.mod_list  .bf { font-size: 12px;font-family: Tahoma;line-height: 22px; color: #8c8c8c;}
+#lxsh .mod7 .bd li {height: auto;padding: 0px;}
+#lxsh .mod7 .bd .oRed  .number{color: #d81b00;}
+#lxsh .mod7 .bd .first { line-height: 0px; padding-bottom: 10px;  }
+#lxsh  .nobotborder { padding-bottom: 35px;}
+#lxsh  .mod13 h3 {font-family: 微软雅黑,黑体;
+    font-size: 16px;font-weight: normal;background: url("http://mat1.gtimg.com/fashion/fashion_index/images/video_ioc_x.png") no-repeat scroll left 4px transparent;
+    margin-bottom: 8px;
+    margin-top: 11px;
+    padding-bottom: 0;
+    padding-left: 26px;
+    padding-top: 0;}
+.act_pic {width: 260px; height: 145px; position: relative; overflow: hidden;}
+.mod_list .mod_rb {margin-left:150px; }
+
+/*2014..7*/
+#djkk .newDak { height:56px; overflow:hidden; }
+#djkk .bd { height:95px; overflow:hidden; position:relative;}
+
+#ruliu{border: 1px solid #CCC;border-top:1px #99cc00 solid; position:relative;margin-top:-2px;}
+#ruliu .hd { padding-left:75px; height:58px; line-height:58px; position:relative; background:#eeeeee;  }
+#ruliu .hd h2 {font-size:18px; font-family:Microsoft YaHei,黑体; font-weight:normal; float:left;}
+#ruliu  .fr {width:45px; line-height:74px; height:58px; overflow:hidden; }
+#ruliu  .fr a {color:#c00;}
+.ruliu_logo { width:61px; height:78px; background:url(http://mat1.gtimg.com/fashion/fashion_index/images/ruliu_logo.png) no-repeat; position:absolute; left:-1px; top:-1px;}
+#ruliu .newDak { background:none; padding-top:15px; }
+#ruliu .bd {padding-left:5px; padding-bottom:16px;}
+#ruliu .newDak li {padding-left:5px;}/*  |xGv00|fc59a12e3f1ea0166da11605f87c82d6 */
+
+
+  /*返回顶部*/
+.goTop{ display:none;background: none;  width:54px; height:110px;  position:fixed; bottom:80px; right:30px;_position:absolute;}
+.goTop a{ display:block; width:54px; height:54px;background:url(http://mat1.gtimg.com/fashion/fashion_index/images/xszy.png) no-repeat;}
+.goTop .guideLink {background-position: 0px 0px; margin-bottom: 2px;}
+.goTop .guideLink:hover {background:url(http://mat1.gtimg.com/fashion/fashion_index/images/xszy.png) -56px 0px no-repeat;}
+.goTop .aScroll {background-position: 0px -56px;}
+.goTop .aScroll:hover{background:url(http://mat1.gtimg.com/fashion/fashion_index/images/xszy.png) -56px -56px no-repeat;}
+
+/*box1*/
+.box1{ width:960px; margin:0px auto 25px; overflow:hidden}
+.current .dian{ display:none}
+.current .gengduo{ display:block!important}
+.box1 .hd .more .gengduo a{ color:#3498db}
+.current .gengduo a:hover{ text-decoration:none}
+.box1 .hd .fr{ line-height:44px; font-size:14px; font-family:"微软雅黑","黑体"; font-weight:normal;}
+.box1 .hd .fr a{ margin-left:20px;}
+.h3bg{ display:block; width:245px; height:40px; line-height:30px; margin:0px auto 10px; overflow:hidden; text-align:center; font-size:16px; font-family:"微软雅黑","黑体"; font-weight:normal; color:#fff; cursor:pointer}
+.h3bg a{ color:#fff}
+.h3bg a:hover{ color:#fff!important; text-decoration:none}
+.h01,.h02,.h03,.h04,.h3bg:hover{ background:url(http://mat1.gtimg.com/sports/photo/2014photo/hdSprite.png) no-repeat}
+.h01{ background-position:0px 0px;}
+.h02{ background-position:0px -40px;}
+.h03{ background-position:0px -80px;}
+.h04{ background-position:0px -120px;}
+.h3bg:hover{ background-position:0px -160px;}
+.tuList{ width:960px; overflow:hidden}
+.tuList li{ position:relative; float:left; width:192px; height:192px; overflow:hidden}
+.tuList li.fr{ float:right}
+.tuList li img{ width:192px; height:192px}
+.tuList li .txt{ position:absolute; left:0px; bottom:-30px; width:192px; height:28px; line-height:28px; text-align:center; font-size:14px; font-family:"微软雅黑","黑体"; font-weight:normal; overflow:hidden; background:#e8ece7; z-index:99}
+.tuList li.current .txt{ bottom:0px; transition: bottom 0.5s;-moz-transition: bottom 0.5s;-webkit-transition:bottom 0.5s;-o-transition: bottom 0.5s;}
+.tuList li.current{ padding:2px; width:188px; height:188px}
+.tuList li.current img{ width:188px; height:188px}
+.tuList li.current .txt{ left:2px; width:188px}
+
+.todayTuList{ width:300px; overflow:hidden;margin-top:2px;}
+.todayTuList li{ position:relative; float:left; width:150px; height:104px; overflow:hidden}
+.todayTuList li.fr{ float:right}
+.todayTuList li img{ width:150px; height:104px}
+.todayTuList li .txt{ position:absolute;text-align;center; left:0px; bottom:-30px; width:150px; height:28px; line-height:28px; text-align:center; font-size:14px; font-family:"微软雅黑","黑体"; font-weight:normal; overflow:hidden; background:#e8ece7; z-index:99}
+.todayTuList li.current .txt{ bottom:0px; transition: bottom 0.5s;-moz-transition: bottom 0.5s;-webkit-transition:bottom 0.5s;-o-transition: bottom 0.5s;}
+.todayTuList li.current{ padding:2px; width:146px; height:100px}
+.todayTuList li.current img{ width:146px; height:100px}
+.todayTuList li.current .txt{ left:2px; width:146px}
+
+/*精华推荐*/
+.jinghuaList{
+	width:300px;
+}
+.jinghuaList .txt{
+	text-align:center;
+}
+.jinghuaList li {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline;
+    float: left;
+    font-size: 13px;
+    height: 110px;
+    margin-right: 2px;
+    overflow: hidden;
+    padding-bottom: 7px;
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+    width: 140px;
+    z-index: 0;
+}
+.jinghuaList img{
+	display: block;
+    height: 80px;
+    margin: 2px 2px 1px;
+    width: 140px;
+}
+/*精华推荐end*/
+
+
+.Q-tpWrap .Q-tpPic{
+	float:left;
+	width:190px;
+}
+.Q-tpWrap .Q-tpTxt{
+	float:right;
+	width:230px;
+}
+
+.Q-tpWrap .Q-tpTxt p{
+	margin:0px;
+}
+
+.Q-tpWrap .Q-tpTags{
+	float:left;
+	width:420px;
+	margin-top:10px;
+}
+
+

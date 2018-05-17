@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.ConsumeDimension" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.ConsumeDimension" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameId" jdbcType="VARCHAR" />
+    <result column="consume_code" property="consumeCode" jdbcType="VARCHAR" />
+    <result column="consume_name" property="consumeName" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, consume_code, consume_name, update_user_id, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from consume_dimension
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from consume_dimension
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.ConsumeDimension" >
+    insert into consume_dimension (id, snid, gameid, 
+      consume_code, consume_name, update_user_id, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameId,jdbcType=VARCHAR}, 
+      #{consumeCode,jdbcType=VARCHAR}, #{consumeName,jdbcType=VARCHAR}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.ConsumeDimension" >
+    insert into consume_dimension
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameId != null" >
+        gameid,
+      </if>
+      <if test="consumeCode != null" >
+        consume_code,
+      </if>
+      <if test="consumeName != null" >
+        consume_name,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeCode != null" >
+        #{consumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeName != null" >
+        #{consumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.ConsumeDimension" >
+    update consume_dimension
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameId != null" >
+        gameid = #{gameId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeCode != null" >
+        consume_code = #{consumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeName != null" >
+        consume_name = #{consumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.ConsumeDimension" >
+    update consume_dimension
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameId,jdbcType=VARCHAR},
+      consume_code = #{consumeCode,jdbcType=VARCHAR},
+      consume_name = #{consumeName,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameId != null and entity.gameId != ''">
+					 <![CDATA[ and gameid = #{entity.gameId} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+  
+  <select id="selectList" parameterType="com.hoolai.bi.report.vo.ConsumeDimensionVO" resultMap="BaseResultMap">
+	   select 
+       <include refid="Base_Column_List" /> 
+	   from consume_dimension
+	   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		 <if test="searchValue != null">
+	      and (consume_code like concat('%', #{searchValue}, '%') or consume_name like concat('%', #{searchValue}, '%'))
+	     </if>
+	    ${orderValue} 
+	     limit #{offset},#{rows}
+	</select>
+	
+	<select id="selectCount" parameterType="com.hoolai.bi.report.vo.ConsumeDimensionVO" resultType="java.lang.Long">
+	   select count(1) 
+	   from consume_dimension
+	   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		 <if test="searchValue != null">
+	      and (consume_code like concat('%', #{searchValue}, '%') or consume_name like concat('%', #{searchValue}, '%'))
+	     </if>
+	</select>
+	
+	<select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.ConsumeDimensionVO" resultMap="BaseResultMap">
+	   select 
+       <include refid="Base_Column_List" /> 
+	   from consume_dimension
+	   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+	</select>
+	
+	<select id="getByGameId" parameterType="com.hoolai.bi.report.model.entity.ConsumeDimension" resultType="com.hoolai.bi.report.model.entity.ConsumeDimension">
+	   select 
+	   <include refid="Base_Column_List" /> 
+	   from consume_dimension
+	   <if test="_parameter != null">
+			<where>
+				<if test="id != null ">
+					 <![CDATA[ and id = #{id} ]]>
+				</if>
+				<if test="snid != null and snid != ''">
+					 <![CDATA[ and snid = #{snid} ]]>
+				</if>
+				<if test="gameId != null and gameId != ''">
+					 <![CDATA[ and gameid = #{gameId} ]]>
+				</if>
+				  <if test="consumeCode != null and consumeCode != ''">
+					 <![CDATA[ and consume_code = #{consumeCode} ]]>
+				</if>
+		   </where>
+		</if>
+		 limit 0,1
+	</select>
+</mapper>

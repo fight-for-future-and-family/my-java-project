@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Thu Aug 10 15:28:06 CST 2017
+org.eclipse.jst.jee.server\:/binary\:D\:\\Program\ Files\\maven\\hl\\org\\springframework\\spring-web\\4.3.7.RELEASE\\spring-web-4.3.7.RELEASE.jar=WEB-INF/lib/spring-web-4.3.7.RELEASE.jar
+org.eclipse.jst.j2ee.server\:123----TrackingAPI--123=WEB-INF/lib/TrackingAPI-rc_4.0.3-SNAPSHOT.jar

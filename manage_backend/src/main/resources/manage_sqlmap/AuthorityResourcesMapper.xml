@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.AuthorityResources" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.AuthorityResources" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="RESOURCE_ID" property="resourceId" jdbcType="BIGINT" />
+    <result column="AUTHORITIES_ID" property="authoritiesId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RESOURCE_ID, AUTHORITIES_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from authority_resources
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from authority_resources
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.AuthorityResources" >
+    insert into authority_resources (ID, RESOURCE_ID, AUTHORITIES_ID
+      )
+    values (#{id,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT}, #{authoritiesId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.AuthorityResources" >
+    insert into authority_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="resourceId != null" >
+        RESOURCE_ID,
+      </if>
+      <if test="authoritiesId != null" >
+        AUTHORITIES_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=BIGINT},
+      </if>
+      <if test="authoritiesId != null" >
+        #{authoritiesId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.AuthorityResources" >
+    update authority_resources
+    <set >
+      <if test="resourceId != null" >
+        RESOURCE_ID = #{resourceId,jdbcType=BIGINT},
+      </if>
+      <if test="authoritiesId != null" >
+        AUTHORITIES_ID = #{authoritiesId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.AuthorityResources" >
+    update authority_resources
+    set RESOURCE_ID = #{resourceId,jdbcType=BIGINT},
+      AUTHORITIES_ID = #{authoritiesId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

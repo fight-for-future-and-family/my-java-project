@@ -1,0 +1,291 @@
+package com.hoolai.bi.collectdata.client;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.hoolai.bi.collectdata.client.AdTrackingCallbackManager.AdInstallNotifer;
+import com.hoolai.bi.collectdata.client.core.Constant;
+import com.hoolai.bi.collectdata.client.metrics.Install;
+import com.hoolai.bi.collectdata.client.metrics.TrackBase;
+import com.hoolai.bi.report.job.SystemThreadPoolExecutor;
+
+/** 
+ * <b>类说明：</b>
+ * <blockquote>
+ *   
+ * </blockquote> 
+ * @author jiangqm E-mail: jiangqiming@jiangqiming.cn
+ * @version 创建时间：2015年12月10日 下午6:17:25  
+ */
+
+public class AnalyInstallFileProcesser {
+	private static Log log = LogFactory.getLog(AnalyInstallFileProcesser.class);
+	
+	private final AdTrackingCallbackManager adTrackingCallbackManager;
+	
+	private final AtomicInteger detectTimes=new AtomicInteger(0);
+	
+	public AnalyInstallFileProcesser(AdTrackingCallbackManager adTrackingCallbackManager){
+		this.adTrackingCallbackManager = adTrackingCallbackManager;
+	}
+	
+	public void detect() {
+		try {
+					
+					String executorName = "install-to-adtracing-AnalyProcesser-"+detectTimes.incrementAndGet();
+					
+					SystemThreadPoolExecutor systemThreadPoolExecutor = new SystemThreadPoolExecutor(executorName, 1);
+					
+					log.info("AnalyProcesser-executorName:" + executorName+" is created!");
+					
+					class AsyncDetectMatchFilesThread implements Runnable{
+						@Override
+						public void run() {
+							doDetect();
+						}
+					}
+					
+					systemThreadPoolExecutor.submit(new AsyncDetectMatchFilesThread());
+					systemThreadPoolExecutor.getExecutor().shutdown();
+					systemThreadPoolExecutor.getExecutor().awaitTermination(Constant.MAX_DETECT_FILES_MINUTES, TimeUnit.MINUTES);
+				} catch (Exception e) {
+					log.error(e.getMessage(), e);
+				}
+	}
+	
+	private void doDetect(){
+		try {
+			Iterator<File> iterator=this.matchFiles();
+			while(iterator.hasNext()){
+				File file=iterator.next();
+				this.processFile(file);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}finally{
+			log.info("AnalyInstallFileProcesser doDetect finished!");
+		}
+	}
+	
+	private void processFile(File file){
+		try {
+			long begin = System.currentTimeMillis();
+			boolean isSucc = this.analysisFile(file);
+			if(isSucc){
+				this.processSendSuccFile(file);
+			}
+			long end = System.currentTimeMillis();
+			log.info("send install data :" + file.getAbsolutePath() + " finished spendMills:" + (end - begin));
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+	
+	private Boolean analysisFile(File file){
+		String fileNmae = file.getName();
+		String[] parms = fileNmae.split("_");
+		String snId = parms[1];
+		String gameId = parms[2];
+		String ds = parms[3];
+        try {
+        	List<String> lineList = FileUtils.readLines(file, "UTF-8");
+        	boolean status = file.toString().contains("install");
+        	if(null == lineList || lineList.isEmpty()){
+        		return Boolean.TRUE;
+        	}
+        	for(String lineStr : lineList){
+    			AdInstallNotifer adInstallNotifer = buildAdInstallNotifer(lineStr, snId, gameId, ds, status);
+            	if(null != adInstallNotifer && null != adInstallNotifer.getInstall()){
+            		adTrackingCallbackManager.tracking(adInstallNotifer);
+            	}
+    		}
+            return Boolean.TRUE;
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("read install file error!" + file.getAbsolutePath());
+            return Boolean.FALSE;
+        }
+	}
+	
+	
+	private AdInstallNotifer buildAdInstallNotifer(String lineStr, String snId, String gameId, String ds, boolean status) {
+		AdInstallNotifer adInstallNotifer = null;
+		try {
+			if(StringUtils.isNotEmpty(lineStr)){
+				adInstallNotifer = new AdInstallNotifer();
+				adInstallNotifer.setSnId(snId);
+				adInstallNotifer.setGameId(gameId);
+				adInstallNotifer.setDs(ds);
+				
+				Install install = new Install();
+				String[] installArray = lineStr.split(TrackBase.FIELD_SEPARATOR);
+//				udid、userid	、source	、affiliate、creative、clientid、kingdom、classfield、family、simulator、clientVersion、adGameInstallDate、adGameInstallTime、extra
+				install.setExtra(installArray[15]);
+				install.fromExtra();
+				String idfa = installArray[0];
+				if(StringUtils.isEmpty(idfa)){
+					idfa = install.getExtraValue("udid");
+				}
+				install.addExtra("IDFA", idfa);
+				install.setUserId(installArray[1]);
+				install.setSource(installArray[2]);
+				install.setAffiliate(installArray[3]);
+				install.setCreative(installArray[4]);
+				adInstallNotifer.setClientId(installArray[5]);
+				install.addExtra("kingdom", installArray[6]);
+				install.addExtra("classfield", installArray[7]);
+				install.setFamily(installArray[8]);
+				install.addExtra("simulator", installArray[9]);
+				install.addExtra("client_version", installArray[10]);
+				install.setInstall_date(installArray[11]);
+				install.setInstall_time(installArray[12]);
+				install.addExtra("phone_type", installArray[13]);
+				install.addExtra("phone_version", installArray[14]);
+				
+				
+//				if(status){
+//					install.setUserId(installArray[0]);
+//					adInstallNotifer.setClientId(installArray[1]);
+//					install.setSource(installArray[2]);
+//					install.setAffiliate(installArray[3]);
+//					install.setCreative(installArray[4]);
+//					install.setFamily(installArray[5]);
+//					install.setGenus(installArray[6]);
+//					install.setFrom_uid(installArray[7]);
+//					install.setInstall_date(installArray[8]);
+//					install.setInstall_time(installArray[9]);
+//					install.setExtra(installArray[10]);
+//					install.fromExtra();
+//					String idfa = install.getExtraValue("IDFA");
+//					//兼容中超风云 11_147
+//					if(StringUtils.isEmpty(idfa)){
+//						String udid = install.getExtraValue("udid");
+//						if(StringUtils.isNotEmpty(udid)){
+//							install.addExtra("IDFA", udid);
+//						}else{
+//							return null;
+//						}
+//					}
+//				}else{
+//					adInstallNotifer.setClientId(installArray[1]);
+//					install.setSource("");
+//					install.setAffiliate("");
+//					install.setCreative(installArray[10]);
+//					install.setFamily(installArray[6]);
+//					install.setGenus(installArray[7]);
+//					install.setInstall_date(installArray[15]);
+//					install.setInstall_time(installArray[16]);
+//					install.setExtra(installArray[17]);
+//					install.fromExtra();
+//					install.addExtra("IDFA", installArray[0]);
+//					install.addExtra("adsource", "equipment");
+//					String userid = install.getExtraValue("USERID");
+//					if(StringUtils.isNotEmpty(userid)){
+//						install.setUserId(userid);
+//					}
+//				}
+				
+				adInstallNotifer.setInstall(install);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("buildAdInstallNotifer is error! lineStr = " + lineStr);
+		}
+		return adInstallNotifer;
+	}
+
+	private void processSendSuccFile(File file){
+		if(Constant.IS_DELETE_SOURCE_FILE){
+			this.deleteSendSuccFile(file);
+		}else{
+			this.renameSendSuccFile(file);
+		}
+	}
+	
+	private void deleteSendSuccFile(File file){
+		try {
+			file.delete();
+			log.info("delete source file :"+file.getAbsolutePath());
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+	private void renameSendSuccFile(File file){
+		try {
+			if(null == file){
+				return ;
+			}
+			String currPath = file.getPath();
+			String newPath = currPath.replace(Constant.SEND_MATCH_FILE_AD_SUBFIX, "rowdata.AD.COMPLATED");
+			File dest = new File(newPath);
+			boolean renamed = file.renameTo(dest);
+			if (renamed) {
+				log.debug("Successfully rolled file " + file.getPath());
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+	private Iterator<File> matchFiles() {
+		List<File> candidateFiles = Collections.emptyList();
+
+		FileFilter filter = new FileFilter() {
+			public boolean accept(File candidate) {
+				String fileName = candidate.getName();
+				for(int i=0;i<Constant.SEND_MATCH_FILE_INDEX.length;i++){
+					if( (fileName.startsWith(Constant.SEND_MATCH_FILE_INDEX[i]))
+							&&(fileName.endsWith(Constant.SEND_MATCH_FILE_AD_SUBFIX)) ){
+						return true;
+					}
+				}
+//				if ( (fileName.startsWith(Constant.SEND_MATCH_FILE_INDEX[0])||
+//						fileName.startsWith(Constant.SEND_MATCH_FILE_INDEX[1])) &&
+//						fileName.endsWith(Constant.SEND_MATCH_FILE_AD_SUBFIX)) {
+//					return true;
+//				}
+				return false;
+			}
+		};
+		
+		File spoolDirectory = new File(Constant.DETECT_PATH);
+		candidateFiles = Arrays.asList(spoolDirectory.listFiles(filter));
+		Collections.sort(candidateFiles, new Comparator<File>() {
+			@Override
+			public int compare(File o1, File o2) {
+				long compare = o1.lastModified() - o2.lastModified();
+				if (compare == 0) {
+					long cl = o1.length() - o2.length();
+					if (cl > 0) {
+						return 1;
+					} else if (cl < 0) {
+						return -1;
+					}
+				} else if (compare > 0) {
+					return 1;
+				} else {
+					return -1;
+				}
+				return 0;
+			}
+		});
+		List<File> subCandidateFiles = candidateFiles.subList(0, candidateFiles.size() > 1000 ? 1000:candidateFiles.size());
+		
+		return subCandidateFiles.iterator();
+	}
+}

@@ -1,0 +1,127 @@
+package com.hoolai.loader.task;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IOUtils;
+import org.apache.hadoop.io.compress.CompressionCodec;
+import org.apache.hadoop.io.compress.CompressionOutputStream;
+import org.apache.hadoop.util.ReflectionUtils;
+import org.apache.log4j.Logger;
+
+import com.hoolai.loader.dao.PartitionDao;
+import com.hoolai.loader.dao.RelationDao;
+import com.hoolai.loader.util.Constant;
+import com.hoolai.loader.util.MemcacheUtil;
+import com.hoolai.loader.util.StringUtil;
+
+/**
+ * 上传文件到hdfs任务
+ * @author ruijie
+ * @date 2013-9-13
+ * @version V1.0
+ */
+public class LoadTask implements Runnable {
+	
+	private static Logger log = Logger.getLogger(LoadTask.class);
+
+	private String filePath;
+	
+	public LoadTask(String filePath){
+		this.filePath = filePath;
+	}
+	
+	@Override
+	public void run() {
+		String hdfsLzoFilePath = null;
+		try {
+			FileSystem hdfs = FileSystem.get(new Configuration());
+			
+			File localFile = new File(filePath);
+			
+			String path = localFile.getParentFile().getName();
+			String oldFilePath = "";
+			if(StringUtil.isRevision(path)){
+				String param[] = StringUtil.getParams(path, true);
+				
+				hdfsLzoFilePath = "/user/hive/warehouse/nt_" + param[0] +"/snid=" + param[1] + "/gameid=" + param[2] + "/ds=" + param[3] + "/" + localFile.getName() + Constant.lzoSuffix;
+				
+			} else {
+				hdfsLzoFilePath = filePath.substring(0, filePath.lastIndexOf("/")+1)+"."+filePath.substring(filePath.lastIndexOf("/")+1, filePath.length());
+				oldFilePath = filePath.replace(Constant.localRootDir, Constant.hdfsRootDir) + Constant.lzoSuffix;
+			}
+			
+			Path hdfsLzoFile = new Path(hdfsLzoFilePath);
+			Path oldFile = new Path(oldFilePath);
+			
+			Class<?> codecClass = Class.forName(Constant.lzoClass);
+			CompressionCodec codec = (CompressionCodec)ReflectionUtils.newInstance(codecClass, new Configuration());
+			
+			//获得hdfs的文件输出流
+			FSDataOutputStream os = hdfs.create(hdfsLzoFile, true);
+			CompressionOutputStream out = codec.createOutputStream(os);
+			
+			//获得本地文件的文件输入流
+			FileInputStream fis = new FileInputStream(localFile);
+			
+			// 提前记录，预防在传输过程中，原始文件被改变，造成文件大小不一直的情况
+			long localFileLength=localFile.length();
+			
+			//将本地文件拷贝至hdfs并用lzo压缩算法压缩
+			IOUtils.copyBytes(fis, out, 4096, true);
+			
+			if(hdfs.exists(hdfsLzoFile) && hdfs.getFileStatus(hdfsLzoFile).getLen() > 42){
+				log.info("load local file SUCCESS from: [" + filePath + "] to: [" + hdfsLzoFilePath + "]");
+				TimeUnit.SECONDS.sleep(20);
+				
+				hdfs.delete(oldFile);
+				hdfs.rename(hdfsLzoFile, oldFile);
+				
+				//将本地文件大小写入meta文件中
+				File metafile = new File(localFile.getParent() + File.separator + "." + localFile.getName() + "_META");
+				fileWrite(metafile, localFileLength + "");
+				
+				
+//				判断文件的父目录 是否存在与 memcache中，如果不存在，那么就添加分区，然后再 添加到 memcache当中
+				if(!MemcacheUtil.getInstance().exist(path)){
+					PartitionDao.newInstance().addPartition(path);
+					RelationDao.newInstance().addRelation(path);
+					MemcacheUtil.getInstance().set(path);
+				}
+			}else{//文件拷贝结束但文件在hdfs上不存在
+				log.warn("load local file FAILD from: [" + filePath + "] to: [" + hdfsLzoFilePath + "]");
+			}
+			
+		} catch (IOException e) {
+			log.error("load local file FAILD from: [" + filePath + "] to: [" + hdfsLzoFilePath + "]", e);
+			return ;
+		}catch(Exception e){
+			log.error("load local file FAILD from: [" + filePath + "] to: [" + hdfsLzoFilePath + "]", e);
+			return ;
+		}
+	}
+	
+	/**
+	 * 将内容写入文件中
+	 * @param file
+	 * @param str
+	 */
+	private static void fileWrite(File file, String str){
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(str);
+			writer.close();
+		} catch (IOException e) {
+			log.error("local meta file write error", e);
+		}
+	}
+
+}

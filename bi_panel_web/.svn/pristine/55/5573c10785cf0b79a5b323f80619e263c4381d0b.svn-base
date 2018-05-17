@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+	        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+	        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<bean id="realTimeJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref local="realTimeDataSource" />
+		</property>
+	</bean>
+
+	<bean id="realTimeDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="url" value="${realTime.jdbc.url}" />
+		<property name="username" value="${realTime.jdbc.username}" />
+		<property name="password" value="${realTime.jdbc.password}" />
+		<property name="connectionProperties" value="${realTime.jdbc.connectionProperties}" />
+		<property name="initialSize" value="${realTime.jdbc.initialSize}" />
+		<property name="minIdle" value="${realTime.jdbc.minIdle}" />
+		<property name="maxActive" value="${realTime.jdbc.maxActive}" />
+		<property name="maxWait" value="${realTime.jdbc.maxWait}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${realTime.jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${realTime.jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="filters" value="config" />
+		<property name="proxyFilters">
+			<list>
+				<ref bean="stat-filter" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="realTimeTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		abstract="false" lazy-init="default">
+		<property name="dataSource" ref="realTimeDataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="realTimeTransactionManager" />
+
+	<!-- 创建SqlSessionFactory，同时指定数据源 -->
+	<bean id="realTimeSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="realTimeDataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:realtime_report_sqlmaps/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="realTimeSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="realTimeSqlSessionFactory" />
+	</bean>
+
+
+</beans>

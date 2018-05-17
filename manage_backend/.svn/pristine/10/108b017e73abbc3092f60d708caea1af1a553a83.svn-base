@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.Groups" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.Groups" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="group_desc" property="groupDesc" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_name, group_desc,version, parent_id
+  </sql>
+  <insert id="insert" parameterType="com.hoolai.manage.model.Groups" >
+    insert into groups (id, group_name, group_desc, 
+      version, parent_id)
+    values (#{id,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{groupDesc,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.Groups" >
+    insert into groups
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="groupDesc != null" >
+        group_desc,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDesc != null" >
+        #{groupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getGroupsByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    g.*
+    from group_users gu,groups g
+    where gu.group_id = g.id and gu.user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectAllList" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from groups order by id;
+  </select>
+  
+  <select id="getGroupsByGameId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    g.*
+    from user_game ug,group_users gu,groups g
+    where ug.user_id=gu.user_id and gu.group_id=g.id
+	 and
+	 ug.game_id= #{gameId,jdbcType=BIGINT}
+	 group by group_id
+  </select>
+  
+</mapper>

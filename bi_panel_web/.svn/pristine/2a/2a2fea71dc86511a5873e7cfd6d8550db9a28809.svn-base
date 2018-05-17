@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<!--预警监控定时任务-->
+	<bean id="monitorMetricsJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.panel.web.job.MonitorMetricsJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			
+			<value>0 20 * * * ?</value>
+		</property>
+	</bean>
+
+	<!--实时定时任务-->
+	<bean id="RealTimeGameDatasJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.panel.web.job.RealTimeGamesJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			
+			<value>0 15 * * * ?</value>
+		</property>
+	</bean>
+	
+		<!--按小时分渠道任务-->
+	<bean id="RealTimeSourceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.panel.web.job.RealTimeSourceJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>0 20 * * * ?</value>
+		</property>
+	</bean>
+	
+	<!--按小时分服任务-->
+	<bean id="RealTimeClientJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.panel.web.job.RealTimeClientJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>0 20 * * * ?</value>
+		</property>
+	</bean>
+	<!-- 系列总览任务 -->
+	<bean id="seriesGameDatasJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.panel.web.job.SeriesGamesJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>0 0 08 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- start 文章索引任务 -->
+	<bean id="syncReportDatasJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.bi.hive2mysql.job.SyncReportDatasJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>0 0 9 * * ?</value>
+		</property>
+	</bean>
+	<!-- end 文章索引采集任务 -->
+	
+	<!-- start 同步监控数据任务
+	<bean id="monitorMetricRecordJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.bi.monitor.job.MonitorMetricRecordJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>30 10/2 * * * ?</value>
+		</property>
+	</bean> -->
+	<!-- end 同步监控数据任务 -->
+	
+	<!-- start 监控数据任务
+	<bean id="monitorMetricJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.bi.monitor.job.MonitorMetricJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>50 15/2 * * * ?</value>
+		</property>
+	</bean> -->
+	<!-- end 监控数据任务 -->
+	
+	<!-- start 每天触发所有有效游戏计算elt引擎计算任务 -->
+	<bean id="dailyTriggerAllGamesETLEngineJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.bi.report.job.etl.DailyTriggerAllGamesETLEngineJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>20 10/30 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end 每天触发所有有效游戏计算elt引擎计算任务  -->
+	
+	<!-- start 每天每小时触发所有有效游戏计算elt引擎计算任务 -->
+	<!-- <bean id="adtrackingRealTimeTriggerAllGamesETLEngineJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+				depends-on="messageSource">
+				<property name="targetObject">
+					<bean class="com.hoolai.bi.report.job.etl.AdtrackingRealTimeTriggerAllGamesETLEngineJob"></bean>
+				</property>
+				<property name="targetMethod">
+					<value>execute</value>
+				</property>
+				<property name="concurrent" value="false" />
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>50 25 09-23 * * ?</value>
+		</property>
+	</bean> -->
+	<!-- end 每天每小时触发所有有效游戏计算elt引擎计算任务  -->
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="RealTimeSourceJobTrigger"/>
+				<ref bean="RealTimeClientJobTrigger"/>
+				<ref bean="monitorMetricsJobTrigger"/>
+				<ref bean="RealTimeGameDatasJobTrigger"/>
+				<ref bean="seriesGameDatasJobTrigger"/>
+				<!--<ref bean="syncReportDatasJobTrigger"/> -->
+				<!-- <ref bean="monitorMetricRecordJobTrigger"/>
+				<ref bean="monitorMetricJobTrigger"/> -->
+				<ref bean="dailyTriggerAllGamesETLEngineJobTrigger"/>
+				<!-- <ref bean="adtrackingRealTimeTriggerAllGamesETLEngineJobTrigger"/> -->
+			</list>
+		</property>
+	</bean>
+</beans>

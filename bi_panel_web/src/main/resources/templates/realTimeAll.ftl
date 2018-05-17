@@ -1,0 +1,99 @@
+select dnu,dau,payer,total_amount,equips,dau_total,payer_total,snid,gameid,day,finish_time,start_time,status
+from  
+(select dnu,dau,payer,total_amount,equips,'${snid}' as snid,'${gameid}' as gameid,'${ds}' as day,'${finish_time}' as finish_time,'${start_time}' as start_time,'${status}' as status
+from 
+(select count(distinct t1.userid) as dnu 
+from 
+(select userid
+from default.nt_install
+where  snid='${snid}' and gameid='${gameid}' and ds='${ds}'   and install_time <='${finish_time}'   and install_time >'${start_time}'
+group by userid)t1
+left outer join 
+(select userid
+from aggr.a_user_new
+where snid='${snid}' and gameid='${gameid}' and date(ds)=date_add('day',-2,date'${ds}')
+union all
+select userid
+from default.nt_install
+where  snid='${snid}' and gameid='${gameid}'  and  date(ds)=date_add('day',-1,date'${ds}')
+union all
+select userid
+from default.nt_install
+where  snid='${snid}' and gameid='${gameid}' and ds='${ds}' and  install_time <='${start_time}'
+
+)t2
+on t1.userid=t2.userid
+where t2.userid is null)t1
+
+left outer join 
+
+(select count(distinct userid) as dau
+from 
+(select userid from default.nt_install where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and install_time <='${finish_time}' and install_time >'${start_time}'
+union all 
+select userid from default.nt_dau where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and dau_time <='${finish_time}' and dau_time >'${start_time}'
+union all
+select userid from default.nt_counter where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and counter_time <='${finish_time}' and counter_time >'${start_time}'
+union all
+select userid from default.nt_economy where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and economy_time <='${finish_time}' and economy_time >'${start_time}')t )t1
+on 1=1
+left outer join 
+(select count(distinct t1.userid) as payer,sum(amount/rate/if(exchange_rate is null,1,exchange_rate)) as total_amount
+from 
+(select snid,gameid,userid,currency,cast(amount as double) as amount
+from default.nt_payment
+where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and payment_time <='${finish_time}' and payment_time >'${start_time}' and  cast(amount as double)>0)t1
+left outer join 
+(select snid,gameid,cast(rate as double) as rate
+from dimension.all_game_name)t2
+on t1.snid=t2.snid and t1.gameid=t2.gameid
+left outer join
+(select currency,cast(exchange_rate as double) as exchange_rate
+from dimension.d_exchange_rate where date(ds)=date_add('day',-1,date'${ds}') and currency<>'CNY')t3
+on t1.currency=t3.currency)t3
+on 1=1
+
+left outer join 
+(select count(distinct a.udid) as equips
+from 
+(select udid
+from default.nt_equipment
+where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and eq_time <='${finish_time}'  and eq_time >'${start_time}'
+group by udid)a
+left outer join 
+(select udid
+from aggr.a_equipment
+where snid='${snid}' and gameid='${gameid}' and date(ds)=date_add('day',-2,date'${ds}')
+union all
+select udid
+from default.nt_equipment
+where snid='${snid}' and gameid='${gameid}' and date(ds)=date_add('day',-1,date'${ds}')
+union all
+select udid
+from default.nt_equipment
+where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and eq_time <='${start_time}'
+group by udid )b
+on a.udid=b.udid
+where b.udid is null)t4
+on 1=1)a 
+
+left outer join 
+
+
+(select count(distinct userid) as dau_total
+from 
+(select userid from default.nt_install where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and install_time <='${finish_time}'
+union all 
+select userid from default.nt_dau where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and dau_time <='${finish_time}'
+union all
+select userid from default.nt_counter where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and counter_time <='${finish_time}'
+union all
+select userid from default.nt_economy where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and economy_time <='${finish_time}')t 
+)b 
+on 1=1
+
+left outer join 
+
+(select count(distinct userid) as payer_total
+from default.nt_payment where snid='${snid}' and gameid='${gameid}' and ds='${ds}' and payment_time <='${finish_time}')c
+on 1=1

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.SourceClientDailyReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.SourceClientDailyReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="VARCHAR" />
+    <result column="payment_amount" property="paymentAmount" jdbcType="DOUBLE" />
+    <result column="dau" property="dau" jdbcType="INTEGER" />
+    <result column="install" property="install" jdbcType="INTEGER" />
+    <result column="dnu" property="dnu" jdbcType="INTEGER" />
+    <result column="arpu" property="arpu" jdbcType="DOUBLE" />
+    <result column="arppu" property="arppu" jdbcType="DOUBLE" />
+    <result column="pu" property="pu" jdbcType="INTEGER" />
+    <result column="payment_cnt" property="paymentCnt" jdbcType="INTEGER" />
+    <result column="pay_rate" property="payRate" jdbcType="REAL" />
+    <result column="roll_users" property="rollUsers" jdbcType="INTEGER" />
+    <result column="roll_pay_users" property="rollPayUsers" jdbcType="INTEGER" />
+    <result column="roll_amount" property="rollAmount" jdbcType="DOUBLE" />
+    <result column="new_pu" property="newPu" jdbcType="INTEGER" />
+    <result column="new_pay_amount" property="newPayAmount" jdbcType="DOUBLE" />
+    <result column="install_pu" property="installPu" jdbcType="INTEGER" />
+    <result column="install_pay_amount" property="installPayAmount" jdbcType="DOUBLE" />
+    <result column="d1" property="d1" jdbcType="REAL" />
+    <result column="d3" property="d3" jdbcType="REAL" />
+    <result column="d7" property="d7" jdbcType="REAL" />
+    <result column="acu" property="acu" jdbcType="DOUBLE" />
+    <result column="avg_user_time" property="avgUserTime" jdbcType="INTEGER" />
+    <result column="pcu" property="pcu" jdbcType="DOUBLE" />
+    <result column="day" property="day" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, source, clientid, payment_amount, dau, install, dnu, arpu, arppu, 
+    pu, payment_cnt, pay_rate, roll_users, roll_pay_users, roll_amount, new_pu, new_pay_amount, 
+    install_pu, install_pay_amount, d1, d3, d7, acu, avg_user_time, pcu, day, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from source_client_daily_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from source_client_daily_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.SourceClientDailyReport" >
+    insert into source_client_daily_report (id, snid, gameid, 
+      source, clientid, payment_amount, 
+      dau, install, dnu, 
+      arpu, arppu, pu, payment_cnt, 
+      pay_rate, roll_users, roll_pay_users, 
+      roll_amount, new_pu, new_pay_amount, 
+      install_pu, install_pay_amount, d1, 
+      d3, d7, acu, avg_user_time, 
+      pcu, day, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{clientid,jdbcType=VARCHAR}, #{paymentAmount,jdbcType=DOUBLE}, 
+      #{dau,jdbcType=INTEGER}, #{install,jdbcType=INTEGER}, #{dnu,jdbcType=INTEGER}, 
+      #{arpu,jdbcType=DOUBLE}, #{arppu,jdbcType=DOUBLE}, #{pu,jdbcType=INTEGER}, #{paymentCnt,jdbcType=INTEGER}, 
+      #{payRate,jdbcType=REAL}, #{rollUsers,jdbcType=INTEGER}, #{rollPayUsers,jdbcType=INTEGER}, 
+      #{rollAmount,jdbcType=DOUBLE}, #{newPu,jdbcType=INTEGER}, #{newPayAmount,jdbcType=DOUBLE}, 
+      #{installPu,jdbcType=INTEGER}, #{installPayAmount,jdbcType=DOUBLE}, #{d1,jdbcType=REAL}, 
+      #{d3,jdbcType=REAL}, #{d7,jdbcType=REAL}, #{acu,jdbcType=DOUBLE}, #{avgUserTime,jdbcType=INTEGER}, 
+      #{pcu,jdbcType=DOUBLE}, #{day,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.SourceClientDailyReport" >
+    insert into source_client_daily_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="paymentAmount != null" >
+        payment_amount,
+      </if>
+      <if test="dau != null" >
+        dau,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="dnu != null" >
+        dnu,
+      </if>
+      <if test="arpu != null" >
+        arpu,
+      </if>
+      <if test="arppu != null" >
+        arppu,
+      </if>
+      <if test="pu != null" >
+        pu,
+      </if>
+      <if test="paymentCnt != null" >
+        payment_cnt,
+      </if>
+      <if test="payRate != null" >
+        pay_rate,
+      </if>
+      <if test="rollUsers != null" >
+        roll_users,
+      </if>
+      <if test="rollPayUsers != null" >
+        roll_pay_users,
+      </if>
+      <if test="rollAmount != null" >
+        roll_amount,
+      </if>
+      <if test="newPu != null" >
+        new_pu,
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount,
+      </if>
+      <if test="installPu != null" >
+        install_pu,
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount,
+      </if>
+      <if test="d1 != null" >
+        d1,
+      </if>
+      <if test="d3 != null" >
+        d3,
+      </if>
+      <if test="d7 != null" >
+        d7,
+      </if>
+      <if test="acu != null" >
+        acu,
+      </if>
+      <if test="avgUserTime != null" >
+        avg_user_time,
+      </if>
+      <if test="pcu != null" >
+        pcu,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null" >
+        #{paymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="dau != null" >
+        #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=INTEGER},
+      </if>
+      <if test="dnu != null" >
+        #{dnu,jdbcType=INTEGER},
+      </if>
+      <if test="arpu != null" >
+        #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="arppu != null" >
+        #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="pu != null" >
+        #{pu,jdbcType=INTEGER},
+      </if>
+      <if test="paymentCnt != null" >
+        #{paymentCnt,jdbcType=INTEGER},
+      </if>
+      <if test="payRate != null" >
+        #{payRate,jdbcType=REAL},
+      </if>
+      <if test="rollUsers != null" >
+        #{rollUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollPayUsers != null" >
+        #{rollPayUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollAmount != null" >
+        #{rollAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="newPu != null" >
+        #{newPu,jdbcType=INTEGER},
+      </if>
+      <if test="newPayAmount != null" >
+        #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPu != null" >
+        #{installPu,jdbcType=INTEGER},
+      </if>
+      <if test="installPayAmount != null" >
+        #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="d1 != null" >
+        #{d1,jdbcType=REAL},
+      </if>
+      <if test="d3 != null" >
+        #{d3,jdbcType=REAL},
+      </if>
+      <if test="d7 != null" >
+        #{d7,jdbcType=REAL},
+      </if>
+      <if test="acu != null" >
+        #{acu,jdbcType=DOUBLE},
+      </if>
+      <if test="avgUserTime != null" >
+        #{avgUserTime,jdbcType=INTEGER},
+      </if>
+      <if test="pcu != null" >
+        #{pcu,jdbcType=DOUBLE},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.SourceClientDailyReport" >
+    update source_client_daily_report
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null" >
+        payment_amount = #{paymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="dau != null" >
+        dau = #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=INTEGER},
+      </if>
+      <if test="dnu != null" >
+        dnu = #{dnu,jdbcType=INTEGER},
+      </if>
+      <if test="arpu != null" >
+        arpu = #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="arppu != null" >
+        arppu = #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="pu != null" >
+        pu = #{pu,jdbcType=INTEGER},
+      </if>
+      <if test="paymentCnt != null" >
+        payment_cnt = #{paymentCnt,jdbcType=INTEGER},
+      </if>
+      <if test="payRate != null" >
+        pay_rate = #{payRate,jdbcType=REAL},
+      </if>
+      <if test="rollUsers != null" >
+        roll_users = #{rollUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollPayUsers != null" >
+        roll_pay_users = #{rollPayUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollAmount != null" >
+        roll_amount = #{rollAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="newPu != null" >
+        new_pu = #{newPu,jdbcType=INTEGER},
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPu != null" >
+        install_pu = #{installPu,jdbcType=INTEGER},
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="d1 != null" >
+        d1 = #{d1,jdbcType=REAL},
+      </if>
+      <if test="d3 != null" >
+        d3 = #{d3,jdbcType=REAL},
+      </if>
+      <if test="d7 != null" >
+        d7 = #{d7,jdbcType=REAL},
+      </if>
+      <if test="acu != null" >
+        acu = #{acu,jdbcType=DOUBLE},
+      </if>
+      <if test="avgUserTime != null" >
+        avg_user_time = #{avgUserTime,jdbcType=INTEGER},
+      </if>
+      <if test="pcu != null" >
+        pcu = #{pcu,jdbcType=DOUBLE},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.SourceClientDailyReport" >
+    update source_client_daily_report
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=VARCHAR},
+      payment_amount = #{paymentAmount,jdbcType=DOUBLE},
+      dau = #{dau,jdbcType=INTEGER},
+      install = #{install,jdbcType=INTEGER},
+      dnu = #{dnu,jdbcType=INTEGER},
+      arpu = #{arpu,jdbcType=DOUBLE},
+      arppu = #{arppu,jdbcType=DOUBLE},
+      pu = #{pu,jdbcType=INTEGER},
+      payment_cnt = #{paymentCnt,jdbcType=INTEGER},
+      pay_rate = #{payRate,jdbcType=REAL},
+      roll_users = #{rollUsers,jdbcType=INTEGER},
+      roll_pay_users = #{rollPayUsers,jdbcType=INTEGER},
+      roll_amount = #{rollAmount,jdbcType=DOUBLE},
+      new_pu = #{newPu,jdbcType=INTEGER},
+      new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      install_pu = #{installPu,jdbcType=INTEGER},
+      install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      d1 = #{d1,jdbcType=REAL},
+      d3 = #{d3,jdbcType=REAL},
+      d7 = #{d7,jdbcType=REAL},
+      acu = #{acu,jdbcType=DOUBLE},
+      avg_user_time = #{avgUserTime,jdbcType=INTEGER},
+      pcu = #{pcu,jdbcType=DOUBLE},
+      day = #{day,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

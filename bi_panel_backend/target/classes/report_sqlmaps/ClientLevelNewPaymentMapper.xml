@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.ClientLevelNewPayment" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.ClientLevelNewPayment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="INTEGER" />
+    <result column="user_level" property="userLevel" jdbcType="INTEGER" />
+    <result column="new_payers" property="newPayers" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, ds, clientid, user_level, new_payers, amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from client_level_new_payment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from client_level_new_payment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.ClientLevelNewPayment" >
+    insert into client_level_new_payment (id, snid, gameid, 
+      ds, clientid, user_level, 
+      new_payers, amount, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{ds,jdbcType=VARCHAR}, #{clientid,jdbcType=INTEGER}, #{userLevel,jdbcType=INTEGER}, 
+      #{newPayers,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.ClientLevelNewPayment" >
+    insert into client_level_new_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="userLevel != null" >
+        user_level,
+      </if>
+      <if test="newPayers != null" >
+        new_payers,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="userLevel != null" >
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="newPayers != null" >
+        #{newPayers,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.ClientLevelNewPayment" >
+    update client_level_new_payment
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="userLevel != null" >
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="newPayers != null" >
+        new_payers = #{newPayers,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.ClientLevelNewPayment" >
+    update client_level_new_payment
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      ds = #{ds,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=INTEGER},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      new_payers = #{newPayers,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <resultMap id="LevelResultMap" type="com.hoolai.bi.report.model.entity.LevelInstallDauReport" >
+	    <result column="user_level" property="level" jdbcType="INTEGER" />
+	    <result column="day1" property="day1" jdbcType="DOUBLE" />
+		<result column="day2" property="day2" jdbcType="DOUBLE" />
+		<result column="day3" property="day3" jdbcType="DOUBLE" />
+		<result column="day4" property="day4" jdbcType="DOUBLE" />
+		<result column="day5" property="day5" jdbcType="DOUBLE" />
+		<result column="day6" property="day6" jdbcType="DOUBLE" />
+		<result column="day7" property="day7" jdbcType="DOUBLE" />
+		<result column="day8" property="day8" jdbcType="DOUBLE" />
+		<result column="day9" property="day9" jdbcType="DOUBLE" />
+		<result column="day10" property="day10" jdbcType="DOUBLE" />
+		<result column="day11" property="day11" jdbcType="DOUBLE" />
+		<result column="day12" property="day12" jdbcType="DOUBLE" />
+		<result column="day13" property="day13" jdbcType="DOUBLE" />
+		<result column="day14" property="day14" jdbcType="DOUBLE" />
+		<result column="day15" property="day15" jdbcType="DOUBLE" />
+	</resultMap>
+  
+  
+  <select id="getLevelNewPayReportList" parameterType="com.hoolai.bi.report.vo.ClientLevelNewPaymentVO" resultMap="LevelResultMap">
+    <if test="dateString != null">
+			${dateString}
+	   </if>
+  </select>
+  
+  <select id="selectClientids"  parameterType="com.hoolai.bi.report.vo.ClientLevelNewPaymentVO" resultType="java.lang.Integer">
+      <![CDATA[ 
+     select distinct clientid
+     from client_level_new_payment
+     where snid=#{entity.snid} and gameid=${entity.gameid}
+     and ds>=#{beginDate} and ds<=#{endDate}
+     order by clientid+0 desc
+     ]]>
+  </select>
+</mapper>

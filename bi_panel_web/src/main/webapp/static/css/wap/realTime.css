@@ -1,0 +1,68 @@
+
+.data_table {
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 20px;
+	overflow: hidden;
+}
+
+.zhibiao {
+	width: 20%;
+	height: 80px;
+	float: left;
+	border: 1px solid #ebebeb;
+}
+
+.zhibiao_left {
+	width: 20%;
+	height: 80px;
+	float: left;
+	border-left: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.zhibiao_right {
+	width: 20%;
+	height: 80px;
+	float: left;
+	border-left: 1px solid #ebebeb;
+	border-right: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.data_ul li {
+	padding-top: 10px;
+}
+
+.data_ul title {
+	font-size: 20px;
+	text-align: center;
+}
+
+#selectDate span.ui-selected,#tabs li.ui-selected {
+	background: #56C887;
+	color: white;
+}
+
+#selectDate span.last,#tabs li.last {
+	border-right: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+}
+
+#selectDate span,#tabs li {
+	float: left;
+	width: 80px;
+	margin: -3px auto;
+	text-align: center;
+	font-size: 14px;
+	line-height: 27px;
+	border-left: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+}
+
+#tabs {
+	margin-top: 20px;
+}
+

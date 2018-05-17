@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.manage.model.PlatformsParams" >
+  <resultMap id="BaseResultMap" type="com.hoolai.manage.model.PlatformsParams" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="platforms_id" property="platformsId" jdbcType="BIGINT" />
+    <result column="platforms_code" property="platformsCode" jdbcType="VARCHAR" />
+    <result column="platforms_name" property="platformsName" jdbcType="VARCHAR" />
+    <result column="mapper_type" property="mapperType" jdbcType="INTEGER" />
+    <result column="mapper_column" property="mapperColumn" jdbcType="VARCHAR" />
+    <result column="params_code" property="paramsCode" jdbcType="VARCHAR" />
+    <result column="is_extra_params" property="isExtraParams" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platforms_id, platforms_code, platforms_name, mapper_type, mapper_column, params_code, 
+    is_extra_params, status, create_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from platforms_params
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from platforms_params
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.manage.model.PlatformsParams" >
+    insert into platforms_params (id, platforms_id, platforms_code, 
+      platforms_name, mapper_type, mapper_column, 
+      params_code, is_extra_params, status, 
+      create_time, remark)
+    values (#{id,jdbcType=BIGINT}, #{platformsId,jdbcType=BIGINT}, #{platformsCode,jdbcType=VARCHAR}, 
+      #{platformsName,jdbcType=VARCHAR}, #{mapperType,jdbcType=INTEGER}, #{mapperColumn,jdbcType=VARCHAR}, 
+      #{paramsCode,jdbcType=VARCHAR}, #{isExtraParams,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+      <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.manage.model.PlatformsParams" >
+    insert into platforms_params
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="platformsId != null" >
+        platforms_id,
+      </if>
+      <if test="platformsCode != null" >
+        platforms_code,
+      </if>
+      <if test="platformsName != null" >
+        platforms_name,
+      </if>
+      <if test="mapperType != null" >
+        mapper_type,
+      </if>
+      <if test="mapperColumn != null" >
+        mapper_column,
+      </if>
+      <if test="paramsCode != null" >
+        params_code,
+      </if>
+      <if test="isExtraParams != null" >
+        is_extra_params,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="platformsId != null" >
+        #{platformsId,jdbcType=BIGINT},
+      </if>
+      <if test="platformsCode != null" >
+        #{platformsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformsName != null" >
+        #{platformsName,jdbcType=VARCHAR},
+      </if>
+      <if test="mapperType != null" >
+        #{mapperType,jdbcType=INTEGER},
+      </if>
+      <if test="mapperColumn != null" >
+        #{mapperColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsCode != null" >
+        #{paramsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isExtraParams != null" >
+        #{isExtraParams,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.manage.model.PlatformsParams" >
+    update platforms_params
+    <set >
+      <if test="platformsId != null" >
+        platforms_id = #{platformsId,jdbcType=BIGINT},
+      </if>
+      <if test="platformsCode != null" >
+        platforms_code = #{platformsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformsName != null" >
+        platforms_name = #{platformsName,jdbcType=VARCHAR},
+      </if>
+      <if test="mapperType != null" >
+        mapper_type = #{mapperType,jdbcType=INTEGER},
+      </if>
+      <if test="mapperColumn != null" >
+        mapper_column = #{mapperColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsCode != null" >
+        params_code = #{paramsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isExtraParams != null" >
+        is_extra_params = #{isExtraParams,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.manage.model.PlatformsParams" >
+    update platforms_params
+    set platforms_id = #{platformsId,jdbcType=BIGINT},
+      platforms_code = #{platformsCode,jdbcType=VARCHAR},
+      platforms_name = #{platformsName,jdbcType=VARCHAR},
+      mapper_type = #{mapperType,jdbcType=INTEGER},
+      mapper_column = #{mapperColumn,jdbcType=VARCHAR},
+      params_code = #{paramsCode,jdbcType=VARCHAR},
+      is_extra_params = #{isExtraParams,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.platformsId != null and entity.platformsId != ''">
+					 <![CDATA[ and platforms_id = #{entity.platformsId} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+  
+  <select id="selectList" parameterType="com.hoolai.manage.vo.PlatformsParamsVO" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from platforms_params
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+  
+  <delete id="removeByPlatformId" parameterType="java.lang.Long">
+  	delete from platforms_params
+  	where platforms_id = #{platformId}
+  </delete>
+  
+  <update id="modifyByPlatforms" parameterType="com.hoolai.manage.vo.PlatformsParamsVO">
+  update platforms_params
+  set platforms_code = #{entity.platformsCode,jdbcType=VARCHAR},
+   platforms_name = #{entity.platformsName,jdbcType=VARCHAR}
+  where platforms_id = #{entity.platformsId}
+  </update>
+</mapper>

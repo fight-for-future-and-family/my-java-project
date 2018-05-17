@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="INTEGER" />
+    <result column="gameid" property="gameid" jdbcType="INTEGER" />
+    <result column="platform_id" property="platformId" jdbcType="BIGINT" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="platform_code" property="platformCode" jdbcType="VARCHAR" />
+    <result column="ad_place" property="adPlace" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="app_url" property="appUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="redirect" property="redirect" jdbcType="INTEGER" />
+    <result column="match_rule" property="matchRule" jdbcType="INTEGER" />
+    <result column="terminal_type" property="terminalType" jdbcType="INTEGER" />
+    <result column="system_type" property="systemType" jdbcType="INTEGER" />
+    <result column="encrypt_key" property="encryptKey" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, game_id, snid, gameid, platform_id, platform_name, platform_code, ad_place,sign, app_url, 
+    status, redirect,match_rule,terminal_type,system_type,encrypt_key,create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_short_url
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ad_short_url
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="updateById"  parameterType="java.lang.Long" >
+  	update ad_short_url
+  	set status='-1'
+  	where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" >
+    insert into ad_short_url (id, game_id, snid, 
+      gameid, platform_id, platform_name, 
+      platform_code, ad_place,sign, app_url, 
+      status, redirect,match_rule,terminal_type,
+      system_type,encrypt_key,create_time)
+    values (#{id,jdbcType=BIGINT}, #{gameId,jdbcType=BIGINT}, #{snid,jdbcType=INTEGER}, 
+      #{gameid,jdbcType=INTEGER}, #{platformId,jdbcType=BIGINT}, #{platformName,jdbcType=VARCHAR}, 
+      #{platformCode,jdbcType=VARCHAR}, #{adPlace,jdbcType=VARCHAR},#{sign,jdbcType=VARCHAR}, #{appUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{redirect,jdbcType=INTEGER},#{matchRule,jdbcType=INTEGER},
+      #{terminalType,jdbcType=INTEGER}, #{systemType,jdbcType=INTEGER},#{encryptKey,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP})
+      <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" >
+    insert into ad_short_url
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="platformName != null" >
+        platform_name,
+      </if>
+      <if test="platformCode != null" >
+        platform_code,
+      </if>
+      <if test="adPlace != null" >
+        ad_place,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="appUrl != null" >
+        app_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="redirect != null" >
+        redirect,
+      </if>
+      <if test="matchRule != null" >
+        match_rule,
+      </if>
+      <if test="terminalType != null" >
+        terminal_type,
+      </if>
+      <if test="systemType != null" >
+        system_type,
+      </if>
+      <if test="encryptKey != null" >
+        encrypt_key,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=INTEGER},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=INTEGER},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=BIGINT},
+      </if>
+      <if test="platformName != null" >
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCode != null" >
+        #{platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="adPlace != null" >
+        #{adPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="appUrl != null" >
+        #{appUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="redirect != null" >
+        #{redirect,jdbcType=INTEGER},
+      </if>
+      <if test="matchRule != null" >
+        #{match_rule,jdbcType=INTEGER},
+      </if>
+      <if test="terminalType != null" >
+        #{terminal_type,jdbcType=INTEGER},
+      </if>
+      <if test="systemType != null" >
+        #{system_type,jdbcType=INTEGER},
+      </if>
+      <if test="encryptKey != null" >
+        #{encrypt_key,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <selectKey resultType="long" keyProperty="id">
+		<![CDATA[select @@IDENTITY AS id]]>
+		</selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" >
+    update ad_short_url
+    <set >
+      <if test="gameId != null" >
+        game_id = #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=INTEGER},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=INTEGER},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=BIGINT},
+      </if>
+      <if test="platformName != null" >
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCode != null" >
+        platform_code = #{platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="adPlace != null" >
+        ad_place = #{adPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="appUrl != null" >
+        app_url = #{appUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="redirect != null" >
+        redirect = #{redirect,jdbcType=INTEGER},
+      </if>
+      <if test="matchRule != null" >
+        match_rule = #{matchRule,jdbcType=INTEGER},
+      </if>
+      <if test="terminalType != null" >
+        terminal_type = #{terminalType,jdbcType=INTEGER},
+      </if>
+      <if test="systemType != null" >
+        system_type = #{systemType,jdbcType=INTEGER},
+      </if>
+      <if test="encryptKey != null" >
+        encrypt_key = #{encryptKey,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" >
+    update ad_short_url
+    set game_id = #{gameId,jdbcType=BIGINT},
+      snid = #{snid,jdbcType=INTEGER},
+      gameid = #{gameid,jdbcType=INTEGER},
+      platform_id = #{platformId,jdbcType=BIGINT},
+      platform_name = #{platformName,jdbcType=VARCHAR},
+      platform_code = #{platformCode,jdbcType=VARCHAR},
+      ad_place = #{adPlace,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      app_url = #{appUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      redirect = #{redirect,jdbcType=INTEGER},
+      match_rule = #{matchRule,jdbcType=INTEGER},
+      terminal_type = #{terminalType,jdbcType=INTEGER},
+      system_type = #{systemType,jdbcType=INTEGER},
+      encrypt_key = #{encryptKey,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+      <where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.gameId != null ">
+					 <![CDATA[ and game_id = #{entity.gameId} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.platformId != null and entity.platformId != ''">
+					 <![CDATA[ and platform_id = #{entity.platformId} ]]>
+				</if>
+				<if test="entity.adPlace != null and entity.adPlace != ''">
+					 <![CDATA[ and ad_place = #{entity.adPlace} ]]>
+				</if>
+				<if test="entity.terminalType != null">
+					 <![CDATA[ and terminal_type = #{entity.terminalType} ]]>
+				</if>
+				<if test="entity.systemType != null">
+					 <![CDATA[ and system_type = #{entity.systemType} ]]>
+				</if>
+				<if test="entity.encryptKey != null and entity.encryptKey != ''">
+					 <![CDATA[ and  encrypt_key = #{entity.encryptKey} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+  <select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.AdShortUrlVO" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from ad_short_url
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	and status='1'
+	<if test="searchValue != null">
+	    and (platform_name like concat('%', #{searchValue}, '%') 
+	    or platform_code like concat('%', #{searchValue}, '%')
+	    or app_url like concat('%', #{searchValue}, '%')
+	    or sign like concat('%', #{searchValue}, '%') 
+	    or id like concat('%', #{searchValue}, '%') )
+	</if>
+	<![CDATA[ order by id desc ]]>
+	<if test="rows != 0">
+	   limit #{offset},#{rows}
+	</if>
+</select>
+
+	<select id="selectShortUrlByPlatform" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl" resultMap="BaseResultMap">
+		select * from ad_short_url where snid=#{snid} and gameid=#{gameid} and platform_code=#{platformCode} 
+		and status=1 order by id desc limit 1
+	</select>
+
+    <select id="selectCount" parameterType="com.hoolai.bi.report.vo.AdShortUrlVO" resultType="java.lang.Long">
+	select count(1)
+	<include refid="Base_Column_List" />
+	from ad_short_url
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (platform_name like concat('%', #{searchValue}, '%') 
+	    or platform_code like concat('%', #{searchValue}, '%')
+	    or app_url like concat('%', #{searchValue}, '%')
+	    or sign like concat('%', #{searchValue}, '%') 
+	    or id like concat('%', #{searchValue}, '%') )
+	</if>
+</select>
+
+	<select id="getByGameId" parameterType="com.hoolai.bi.report.vo.AdShortUrlVO" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from ad_short_url
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	</select>
+	
+	<select id="delByPlatforms" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl">
+	delete from ad_short_url
+	where platform_id = #{platformId}
+	</select>
+	
+	<select id="modifyByPlatforms" parameterType="com.hoolai.bi.report.model.entity.adtracking.AdShortUrl">
+	update ad_short_url
+   <set >
+      <if test="status != null" >
+         status = #{status},
+      </if>
+      <if test="platformCode != null" >
+         platform_code = #{platformCode},
+      </if>
+      <if test="platformName != null" >
+         platform_name = #{platformName},
+      </if>
+    </set>
+    where platform_id = #{platformId}
+	</select>
+	
+	
+	<select id="selectList" parameterType="com.hoolai.bi.report.vo.AdShortUrlVO" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from ad_short_url
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (platform_name like concat('%', #{searchValue}, '%') 
+	    or platform_code like concat('%', #{searchValue}, '%')
+	    or app_url like concat('%', #{searchValue}, '%')
+	    or sign like concat('%', #{searchValue}, '%') 
+	    or id like concat('%', #{searchValue}, '%') )
+	</if>
+	<![CDATA[ order by id asc ]]>
+	<if test="rows != 0">
+	   limit #{offset},#{rows}
+	</if>
+</select>
+</mapper>

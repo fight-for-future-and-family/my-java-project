@@ -1,0 +1,297 @@
+
+.lp-container {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 15px;
+}
+
+.data-container-main {
+	margin: 0 auto;
+	width: 100%;
+	min-height: 500px;
+	align: center;
+	background-color: #fff;
+	text-align: center;
+	position: relative;
+}
+
+@media (max-width: 767px){
+.game {
+	float: left;
+	position: relative;
+	width: 45%;
+	height: 110px;
+	margin-left: 3%;
+	margin-bottom: 8px;
+	border: 2px solid #ebebeb;
+	border-radius: 15px;
+	cursor: pointer;
+}
+}
+
+@media (min-width: 768px){
+	.game {
+	float: left;
+	position: relative;
+	width: 139px;
+	height: 110px;
+	margin-left: 5px;
+	margin-bottom: 8px;
+	border: 2px solid #ebebeb;
+	border-radius: 15px;
+	cursor: pointer;
+}
+}
+
+@media (max-width: 767px){
+.gameTypeCls {
+	float: left;
+	position: relative;
+	width: 41%;
+	height: 125px;
+	margin-left: 4%;
+	margin-top: 8px;
+	border: 2px solid #ebebeb;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.nameCls{
+      height: 70px;
+	  font-size: 14px;
+	  display: block;
+	  line-height: 20px;
+	}
+	
+.nameCls i{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.nameCls span{
+	display: inline-block;
+	vertical-align: middle;
+}
+.nameCls div{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	padding: 15px 10px;
+}
+}
+
+@media (min-width: 768px){
+.gameTypeCls {
+	float: left;
+	position: relative;
+	width: 165px;
+	height: 130px;
+	margin-left: 20px;
+	margin-top: 8px;
+	border: 2px solid #ebebeb;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.nameCls{
+      height: 80px;
+	  font-size: 14px;
+	  display: block;
+	  line-height: 20px;
+	}
+	
+.nameCls i{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.nameCls span{
+	display: inline-block;
+	vertical-align: middle;
+}
+.nameCls div{
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	padding: 20px 10px;
+}
+}
+
+
+
+.installCls {
+	text-align: left;
+	padding-left: 4%;
+	font-size: 12px;
+	font-weight:bold;
+	padding-bottom: 5%;
+	 color: rgba(51, 51, 51, 0.75);
+	 display: block;
+}
+
+.paymentCls {
+	text-align: left;
+	padding-left: 4%;
+	font-size: 12px;
+	font-weight:bold;
+	 color: rgba(51, 51, 51, 0.75);
+	display: block;
+}
+
+#theme-popover-div .name {
+	padding-top: 15%;
+	padding-bottom: 10px;
+	font-size: 14px;
+}
+
+#theme-popover-div .install {
+	text-align: left;
+	padding-left: 4%;
+	font-size: 12px;
+	font-weight:bold;
+	padding-bottom: 3%;
+	 color: rgba(51, 51, 51, 0.75);
+	 display: block;
+}
+
+#theme-popover-div .payment {
+	text-align: left;
+	padding-left: 4%;
+	font-size: 12px;
+	font-weight:bold;
+	padding-bottom: 5%;
+	 color: rgba(51, 51, 51, 0.75);
+	 display: block;
+}
+
+.theme-popover {
+	z-index: 9999;
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	width: 85%;
+	height: 410px;
+	margin: -150px 0 0 -42%;
+	border-radius: 5px;
+	border: solid 2px #666;
+	background-color: #fff;
+	display: none;
+	box-shadow: 0 0 10px #666;
+	overflow-y:scroll;
+	overflow: hidden;
+}
+
+.dform {
+	padding: 10px 3px;
+	text-align: center;
+}
+
+.gameValue {
+	position: relative;
+	top: 40%;
+}
+
+.nologin {
+	float: right;
+	line-height: 7px;
+	margin-right: 1%;
+	font-size: 12px;
+}
+
+.header-inner {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	padding: 8px 0;
+}
+
+.navbar {
+	height: 50px !important;
+	border-radius: 0 !important;
+	margin-bottom: 0 !important;
+	width: 100%;
+	background-color: #3CB371 !important;
+}
+
+.detail-left {
+	display: inline-block;
+	width: 80%;
+	height: 30px;
+	text-align: left;
+	padding-top: 8px;
+	padding-left: 5px;
+}
+
+.detail-left-append {
+	height: 30px;
+	text-align: left;
+	padding-top: 9px;
+	padding-left: 5px;
+}
+
+.detail-right {
+	display: inline-block;
+	height: 30px;
+	width: 12%;
+	padding-top: 5px;
+	float: right;
+}
+
+.highlight {
+	background-color: #99f21b !important;
+}
+
+.shouye {
+	border-radius: 0 !important;
+	margin-bottom: 0 !important;
+	padding-top: 15px;
+	padding-left: 80%;
+}
+
+.template_cache {
+	display: none;
+}
+
+.template_cache_money {
+	display: none;
+}
+
+.detail-table {
+	border: 1px solid #ebebeb;
+	border-radius: 10px;
+	width: 100%;
+	overflow: auto;
+}
+
+.detail-nav {
+	height: 44px;
+	margin-top: 10px;
+	background-color: #F7F7F7;
+	border-radius: 10px;
+}
+
+.detail-nav li {
+	float: left;
+	height: 44px;
+	*height: 24px;
+	padding: 10px 10px;
+	border-right: 1px solid #ebebeb;
+	cursor: pointer;
+}
+
+
+.dataTables_wrapper .dataTables_filter {
+	margin-left: 10px;
+	z-index: 1;
+	position: absolute;
+}
+
+.dataTables_wrapper .dataTables_filter input{
+	width: 176px;
+}
+table{
+	font-size:13px; 
+}

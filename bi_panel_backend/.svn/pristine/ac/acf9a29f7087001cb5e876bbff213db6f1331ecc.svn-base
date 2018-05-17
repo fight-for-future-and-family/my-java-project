@@ -1,0 +1,24 @@
+package com.hoolai.bi.report.dao;
+
+import java.util.List;
+
+import com.hoolai.bi.report.model.entity.RealTimeGameClient;
+import com.hoolai.bi.report.vo.HourClientDailyReportVO;
+import com.hoolai.bi.report.vo.RealTimeGameClientVo;
+import com.hoolai.dao.GenericDao;
+
+public interface RealTimeGameClientidDao extends GenericDao<RealTimeGameClient, Long> {
+	
+	//保存分服实时数据
+	int saveRealTimeClientidDataList(List<RealTimeGameClient> realtTimeGameClientid);
+	//查询分服
+	List<RealTimeGameClientVo> getSelectGamesClientidList(RealTimeGameClientVo realTimeGameClientidVo);
+	//总行数
+	long getSelectGamesClientidCount(RealTimeGameClientVo realTimeGameClientidVo);
+	//清空表数据
+	void deleteRealTimeClientData(RealTimeGameClientVo realTimeGameClientidVo);
+	//查询表中是否有数据
+	long getSelectCountdata(RealTimeGameClientVo realTimeGameClientidVo);
+	
+	List<String> selectGameClients(RealTimeGameClientVo realTimeGameClientidVo);
+}

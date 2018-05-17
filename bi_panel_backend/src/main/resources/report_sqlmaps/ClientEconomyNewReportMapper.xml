@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.ClientEconomyNewReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.ClientEconomyNewReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="INTEGER" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="phylum" property="phylum" jdbcType="VARCHAR" />
+    <result column="classfield" property="classfield" jdbcType="VARCHAR" />
+    <result column="family" property="family" jdbcType="VARCHAR" />
+    <result column="genus" property="genus" jdbcType="VARCHAR" />
+    <result column="users" property="users" jdbcType="INTEGER" />
+    <result column="times" property="times" jdbcType="INTEGER" />
+    <result column="item_num" property="itemNum" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, clientid, ds, phylum, classfield, family, genus, users, times, 
+    item_num, amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from client_economy_new_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from client_economy_new_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.ClientEconomyNewReport" >
+    insert into client_economy_new_report (id, snid, gameid, 
+      clientid, ds, phylum, 
+      classfield, family, genus, 
+      users, times, item_num, 
+      amount, create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{clientid,jdbcType=INTEGER}, #{ds,jdbcType=VARCHAR}, #{phylum,jdbcType=VARCHAR}, 
+      #{classfield,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, #{genus,jdbcType=VARCHAR}, 
+      #{users,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, #{itemNum,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.ClientEconomyNewReport" >
+    insert into client_economy_new_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="phylum != null" >
+        phylum,
+      </if>
+      <if test="classfield != null" >
+        classfield,
+      </if>
+      <if test="family != null" >
+        family,
+      </if>
+      <if test="genus != null" >
+        genus,
+      </if>
+      <if test="users != null" >
+        users,
+      </if>
+      <if test="times != null" >
+        times,
+      </if>
+      <if test="itemNum != null" >
+        item_num,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="phylum != null" >
+        #{phylum,jdbcType=VARCHAR},
+      </if>
+      <if test="classfield != null" >
+        #{classfield,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null" >
+        #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="genus != null" >
+        #{genus,jdbcType=VARCHAR},
+      </if>
+      <if test="users != null" >
+        #{users,jdbcType=INTEGER},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="itemNum != null" >
+        #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.ClientEconomyNewReport" >
+    update client_economy_new_report
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="phylum != null" >
+        phylum = #{phylum,jdbcType=VARCHAR},
+      </if>
+      <if test="classfield != null" >
+        classfield = #{classfield,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null" >
+        family = #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="genus != null" >
+        genus = #{genus,jdbcType=VARCHAR},
+      </if>
+      <if test="users != null" >
+        users = #{users,jdbcType=INTEGER},
+      </if>
+      <if test="times != null" >
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="itemNum != null" >
+        item_num = #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.ClientEconomyNewReport" >
+    update client_economy_new_report
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=INTEGER},
+      ds = #{ds,jdbcType=VARCHAR},
+      phylum = #{phylum,jdbcType=VARCHAR},
+      classfield = #{classfield,jdbcType=VARCHAR},
+      family = #{family,jdbcType=VARCHAR},
+      genus = #{genus,jdbcType=VARCHAR},
+      users = #{users,jdbcType=INTEGER},
+      times = #{times,jdbcType=INTEGER},
+      item_num = #{itemNum,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and ds >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and ds <= #{endDate} ]]>
+				</if>
+			</if>
+			<if test="beginClientid != null and beginClientid != 0 ">
+				 <![CDATA[ and clientid >= #{beginClientid} ]]>
+			</if>
+		    <if test="endClientid != null and endClientid != 0 ">
+				 <![CDATA[ and clientid <= #{endClientid} ]]>
+			</if>
+		</where>
+	</sql>
+	
+	<resultMap id="ItemResultMap" type="com.hoolai.bi.report.model.entity.EconomyItemReport" >
+	    <result column="consume_item" property="consumeItem" jdbcType="VARCHAR" />
+	    <result column="day1" property="day1" jdbcType="DOUBLE" />
+		<result column="day2" property="day2" jdbcType="DOUBLE" />
+		<result column="day3" property="day3" jdbcType="DOUBLE" />
+		<result column="day4" property="day4" jdbcType="DOUBLE" />
+		<result column="day5" property="day5" jdbcType="DOUBLE" />
+		<result column="day6" property="day6" jdbcType="DOUBLE" />
+		<result column="day7" property="day7" jdbcType="DOUBLE" />
+		<result column="day8" property="day8" jdbcType="DOUBLE" />
+		<result column="day9" property="day9" jdbcType="DOUBLE" />
+		<result column="day10" property="day10" jdbcType="DOUBLE" />
+		<result column="day11" property="day11" jdbcType="DOUBLE" />
+		<result column="day12" property="day12" jdbcType="DOUBLE" />
+		<result column="day13" property="day13" jdbcType="DOUBLE" />
+		<result column="day14" property="day14" jdbcType="DOUBLE" />
+		<result column="day15" property="day15" jdbcType="DOUBLE" />
+	</resultMap>
+	
+	<select id="selectItemList4Down" parameterType="com.hoolai.bi.report.vo.ClientEconomyNewReportVO" resultMap="BaseResultMap">
+		select a.snid,a.gameid,a.ds,a.amount,a.users,a.times,a.item_num,
+	          case when b.consume_name is null then a.consume_code else b.consume_name end as phylum
+	  from
+	  (select snid,gameid,ds,${concatStr} as consume_code,sum(amount) amount,sum(users) users,
+	          sum(times) times,sum(item_num) item_num 
+	   from client_economy_new_report
+      <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	   </if>
+		group by snid,gameid,ds,${groupType}
+		) a
+		left outer join 
+        ( select snid,gameid,consume_code,consume_name from consume_dimension
+         where snid=#{entity.snid} and gameid=#{entity.gameid})b 
+        on a.snid=b.snid and a.gameid=b.gameid and a.consume_code = b.consume_code
+	</select>
+	
+	<select id="selectItemList" parameterType="com.hoolai.bi.report.vo.ClientEconomyNewReportVO" resultMap="ItemResultMap">
+	   <if test="dateString != null">
+			${dateString}
+	   </if>
+	</select>
+	
+	<select id="selectItemCount" parameterType="com.hoolai.bi.report.vo.ClientEconomyNewReportVO" resultType="java.lang.Long">
+		select count(1)
+		from
+		(
+		select a.snid,a.gameid 
+		<if test="searchValue != null">
+			,case when b.consume_name is null then a.consume_code else b.consume_name end as consume_name
+		</if>
+	    from
+		(
+		select snid,gameid,${concatStr} as consume_code
+		from client_economy_new_report
+		<if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+		group by snid,gameid,${groupType}
+		) a
+		<if test="searchValue != null"> 
+			left outer join 
+	        ( select snid,gameid,consume_code,consume_name from consume_dimension
+	         where snid=#{entity.snid} and gameid=#{entity.gameid}
+	        )b 
+	        on a.snid=b.snid and a.gameid=b.gameid and a.consume_code = b.consume_code
+		</if>
+		) c    
+		<if test="searchValue != null"> 
+		   where consume_name like concat('%', #{searchValue}, '%')
+		</if>
+	</select>
+  
+  <select id="selectGameClients" parameterType="com.hoolai.bi.report.vo.ClientEconomyNewReportVO" resultType="java.lang.Integer">
+	  select distinct clientid
+	   from client_economy_new_report
+       <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	   </if>
+	   order by clientid+0
+	</select>
+  
+  
+</mapper>

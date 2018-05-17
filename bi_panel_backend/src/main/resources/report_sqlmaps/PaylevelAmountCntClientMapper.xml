@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.PaylevelAmountCntClient" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.PaylevelAmountCntClient" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="VARCHAR" />
+    <result column="paylevel" property="paylevel" jdbcType="INTEGER" />
+    <result column="payer" property="payer" jdbcType="INTEGER" />
+    <result column="total_payment_amount" property="totalPaymentAmount" jdbcType="DOUBLE" />
+    <result column="total_payment_cnt" property="totalPaymentCnt" jdbcType="INTEGER" />
+    <result column="stat_day" property="statDay" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, clientid, paylevel, payer, total_payment_amount, total_payment_cnt, 
+    stat_day, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from paylevel_amount_cnt_client
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from paylevel_amount_cnt_client
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.PaylevelAmountCntClient" >
+    insert into paylevel_amount_cnt_client (id, snid, gameid, 
+      clientid, paylevel, payer, 
+      total_payment_amount, total_payment_cnt, stat_day, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{clientid,jdbcType=VARCHAR}, #{paylevel,jdbcType=INTEGER}, #{payer,jdbcType=INTEGER}, 
+      #{totalPaymentAmount,jdbcType=DOUBLE}, #{totalPaymentCnt,jdbcType=INTEGER}, #{statDay,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.PaylevelAmountCntClient" >
+    insert into paylevel_amount_cnt_client
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="paylevel != null" >
+        paylevel,
+      </if>
+      <if test="payer != null" >
+        payer,
+      </if>
+      <if test="totalPaymentAmount != null" >
+        total_payment_amount,
+      </if>
+      <if test="totalPaymentCnt != null" >
+        total_payment_cnt,
+      </if>
+      <if test="statDay != null" >
+        stat_day,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="paylevel != null" >
+        #{paylevel,jdbcType=INTEGER},
+      </if>
+      <if test="payer != null" >
+        #{payer,jdbcType=INTEGER},
+      </if>
+      <if test="totalPaymentAmount != null" >
+        #{totalPaymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPaymentCnt != null" >
+        #{totalPaymentCnt,jdbcType=INTEGER},
+      </if>
+      <if test="statDay != null" >
+        #{statDay,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.PaylevelAmountCntClient" >
+    update paylevel_amount_cnt_client
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="paylevel != null" >
+        paylevel = #{paylevel,jdbcType=INTEGER},
+      </if>
+      <if test="payer != null" >
+        payer = #{payer,jdbcType=INTEGER},
+      </if>
+      <if test="totalPaymentAmount != null" >
+        total_payment_amount = #{totalPaymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPaymentCnt != null" >
+        total_payment_cnt = #{totalPaymentCnt,jdbcType=INTEGER},
+      </if>
+      <if test="statDay != null" >
+        stat_day = #{statDay,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.PaylevelAmountCntClient" >
+    update paylevel_amount_cnt_client
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=VARCHAR},
+      paylevel = #{paylevel,jdbcType=INTEGER},
+      payer = #{payer,jdbcType=INTEGER},
+      total_payment_amount = #{totalPaymentAmount,jdbcType=DOUBLE},
+      total_payment_cnt = #{totalPaymentCnt,jdbcType=INTEGER},
+      stat_day = #{statDay,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.clientid != null and entity.clientid!= ''">
+					 <![CDATA[ and clientid = #{entity.clientid} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and stat_day >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and stat_day <= #{endDate} ]]>
+				</if>
+				
+			</if>
+		</where>
+	</sql>
+  
+  <sql id="basePayHorizontal">
+    select stat_day,
+	max(case paylevel when 1 then total_payment_amount else 0 end) LP_0_10,
+	max(case paylevel when 2 then total_payment_amount else 0 end) LP_10_50,
+	max(case paylevel when 3 then total_payment_amount else 0 end) LP_50_100,
+	max(case paylevel when 4 then total_payment_amount else 0 end) LP_100_200,
+	max(case paylevel when 5 then total_payment_amount else 0 end) LP_200_500,
+	max(case paylevel when 6 then total_payment_amount else 0 end) LP_500_1000,
+	max(case paylevel when 7 then total_payment_amount else 0 end) LP_1000_2000,
+	max(case paylevel when 8 then total_payment_amount else 0 end) LP_2000_up
+	
+	from paylevel_amount_cnt_client
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	group by stat_day
+	
+  </sql>
+  
+  <sql id="baseUserHorizontal">
+    select stat_day,
+	max(case paylevel when 1 then payer else 0 end) LP_0_10,
+	max(case paylevel when 2 then payer else 0 end) LP_10_50,
+	max(case paylevel when 3 then payer else 0 end) LP_50_100,
+	max(case paylevel when 4 then payer else 0 end) LP_100_200,
+	max(case paylevel when 5 then payer else 0 end) LP_200_500,
+	max(case paylevel when 6 then payer else 0 end) LP_500_1000,
+	max(case paylevel when 7 then payer else 0 end) LP_1000_2000,
+	max(case paylevel when 8 then payer else 0 end) LP_2000_up
+	
+	from paylevel_amount_cnt_client
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	group by stat_day
+	
+  </sql>
+  
+  <resultMap id="LevelPayResultMap" type="com.hoolai.bi.report.vo.PaylevelAmountCntClientVO" >
+       <result column="stat_day" property="levelPay.statDay" jdbcType="VARCHAR" />
+       <result column="clientid" property="levelPay.sourceOrClientName" jdbcType="VARCHAR" />
+       <result column="LP_0_10" property="levelPay.lp10" jdbcType="DOUBLE" />
+       <result column="LP_10_50" property="levelPay.lp50" jdbcType="DOUBLE" />
+       <result column="LP_50_100" property="levelPay.lp100" jdbcType="DOUBLE" />
+       <result column="LP_100_200" property="levelPay.lp200" jdbcType="DOUBLE" />
+        <result column="LP_200_500" property="levelPay.lp500" jdbcType="DOUBLE" />
+       <result column="LP_500_1000" property="levelPay.lp1000" jdbcType="DOUBLE" />
+       <result column="LP_1000_2000" property="levelPay.lp2000" jdbcType="DOUBLE" />
+       <result column="LP_2000_up" property="levelPay.lp2000up" jdbcType="DOUBLE" />
+    </resultMap>
+  
+  <select id="selectHorizontalPayList" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntClientVO"
+		resultMap="LevelPayResultMap">
+	  <include refid="basePayHorizontal" />
+  </select>
+  
+  <select id="selectHorizontalPayView" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntClientVO"
+		resultMap="LevelPayResultMap">
+	 select sum(LP_0_10) LP_0_10, sum(LP_10_50) LP_10_50, 
+	        sum(LP_50_100) LP_50_100, sum(LP_100_200) LP_100_200,
+            sum(LP_200_500) LP_200_500, sum(LP_500_1000) LP_500_1000, 
+            sum(LP_1000_2000) LP_1000_2000, sum(LP_2000_up) LP_2000_up
+      from (
+	     <include refid="basePayHorizontal" />
+	  ) b
+  </select>
+  
+  <select id="selectHorizontalUserList" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntClientVO"
+		resultMap="LevelPayResultMap">
+	  <include refid="baseUserHorizontal" />
+  </select>
+  
+  <select id="selectHorizontalUserView" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntClientVO"
+		resultMap="LevelPayResultMap">
+	 select sum(LP_0_10) LP_0_10, sum(LP_10_50) LP_10_50, 
+	        sum(LP_50_100) LP_50_100, sum(LP_100_200) LP_100_200,
+            sum(LP_200_500) LP_200_500, sum(LP_500_1000) LP_500_1000, 
+            sum(LP_1000_2000) LP_1000_2000, sum(LP_2000_up) LP_2000_up
+      from (
+	     <include refid="baseUserHorizontal" />
+	  ) b
+  </select>
+  
+  <select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntClientVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from paylevel_amount_cnt_client
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+  </select>
+  
+  <select id="selectCount" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntSourceVO" resultType="java.lang.Long">
+    select count(1) 
+    from (
+    select stat_day,clientid
+    from paylevel_amount_cnt_client
+    <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (stat_day like concat('%', #{searchValue}, '%') or clientid like concat('%', #{searchValue}, '%'))
+	</if>
+	group by stat_day,clientid)a
+  </select>
+  
+  <select id="selectUserList" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntSourceVO"
+		resultMap="LevelPayResultMap">
+	 select stat_day,clientid,
+	max(case paylevel when 1 then payer else 0 end) LP_0_10,
+	max(case paylevel when 2 then payer else 0 end) LP_10_50,
+	max(case paylevel when 3 then payer else 0 end) LP_50_100,
+	max(case paylevel when 4 then payer else 0 end) LP_100_200,
+	max(case paylevel when 5 then payer else 0 end) LP_200_500,
+	max(case paylevel when 6 then payer else 0 end) LP_500_1000,
+	max(case paylevel when 7 then payer else 0 end) LP_1000_2000,
+	max(case paylevel when 8 then payer else 0 end) LP_2000_up
+	
+	from paylevel_amount_cnt_client
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (stat_day like concat('%', #{searchValue}, '%') or clientid like concat('%', #{searchValue}, '%'))
+	</if>
+	group by stat_day,clientid
+	${orderValue},clientid+0 desc
+	limit #{offset},#{rows}
+  </select>
+  
+  <select id="selectPayList" parameterType="com.hoolai.bi.report.vo.PaylevelAmountCntSourceVO"
+		resultMap="LevelPayResultMap">
+	select stat_day,clientid,
+	max(case paylevel when 1 then total_payment_amount else 0 end) LP_0_10,
+	max(case paylevel when 2 then total_payment_amount else 0 end) LP_10_50,
+	max(case paylevel when 3 then total_payment_amount else 0 end) LP_50_100,
+	max(case paylevel when 4 then total_payment_amount else 0 end) LP_100_200,
+	max(case paylevel when 5 then total_payment_amount else 0 end) LP_200_500,
+	max(case paylevel when 6 then total_payment_amount else 0 end) LP_500_1000,
+	max(case paylevel when 7 then total_payment_amount else 0 end) LP_1000_2000,
+	max(case paylevel when 8 then total_payment_amount else 0 end) LP_2000_up
+	from paylevel_amount_cnt_client
+	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	<if test="searchValue != null">
+	    and (stat_day like concat('%', #{searchValue}, '%') or clientid like concat('%', #{searchValue}, '%'))
+	</if>
+	group by stat_day,clientid
+	${orderValue},clientid+0 desc
+	limit #{offset},#{rows}
+  </select>
+</mapper>

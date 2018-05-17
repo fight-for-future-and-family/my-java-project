@@ -1,0 +1,15 @@
+server_url=http://records.hoolai.com:11218/bi_server_web
+monitor_sys_emails=guojianjiong@hoolai.com,mahongjie@hoolai.com,zengyaowu@hoolai.com
+detect_path=D:\\logs111\\persistents
+send_match_file_subfix=rowdata
+is_published=true
+compress_type=gzip
+is_delete_source_file=false
+# \u6240\u6709\u5f85\u4f20\u8f93\u6587\u4ef6\uff0c\u6700\u5927\u4f20\u8f93\u65f6\u95f4
+max_detect_files_minutes=5
+#\u62a5\u9001install\u6570\u636e\u65b0\u589e\u52a0
+send_match_file_index=adGameInstall
+send_match_file_ad_subfix=rowdata.COMPLATED
+adtracking_server_url=http://tracking.hoolai.com/callback/
+isrun_install_send=true
+ad_tracking_callback_isopen=true

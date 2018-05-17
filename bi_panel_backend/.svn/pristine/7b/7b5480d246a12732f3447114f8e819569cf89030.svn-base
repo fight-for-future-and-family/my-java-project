@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.equip.EquipModelDay" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.equip.EquipModelDay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="ds" property="ds" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="dau" property="dau" jdbcType="INTEGER" />
+    <result column="new_equip" property="newEquip" jdbcType="INTEGER" />
+    <result column="install" property="install" jdbcType="INTEGER" />
+    <result column="uninstall" property="uninstall" jdbcType="INTEGER" />
+    <result column="pay_equip" property="payEquip" jdbcType="INTEGER" />
+    <result column="new_pay_equip" property="newPayEquip" jdbcType="INTEGER" />
+    <result column="pay_amount" property="payAmount" jdbcType="DOUBLE" />
+    <result column="new_pay_amount" property="newPayAmount" jdbcType="DOUBLE" />
+    <result column="install_pay_amount" property="installPayAmount" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, ds, model, dau, new_equip, install, uninstall,pay_equip, new_pay_equip, pay_amount, 
+    new_pay_amount, install_pay_amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from equip_model_day
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from equip_model_day
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelDay" >
+    insert into equip_model_day (id, snid, gameid, 
+      ds, model, dau, new_equip, 
+      install, uninstall,pay_equip, new_pay_equip, 
+      pay_amount, new_pay_amount, install_pay_amount, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{ds,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{dau,jdbcType=INTEGER}, #{newEquip,jdbcType=INTEGER}, 
+      #{install,jdbcType=INTEGER},#{uninstall,jdbcType=INTEGER}, #{payEquip,jdbcType=INTEGER}, #{newPayEquip,jdbcType=INTEGER}, 
+      #{payAmount,jdbcType=DOUBLE}, #{newPayAmount,jdbcType=DOUBLE}, #{installPayAmount,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelDay" >
+    insert into equip_model_day
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="ds != null" >
+        ds,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="dau != null" >
+        dau,
+      </if>
+      <if test="newEquip != null" >
+        new_equip,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="uninstall != null" >
+        uninstall,
+      </if>
+      <if test="payEquip != null" >
+        pay_equip,
+      </if>
+      <if test="newPayEquip != null" >
+        new_pay_equip,
+      </if>
+      <if test="payAmount != null" >
+        pay_amount,
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount,
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="dau != null" >
+        #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="newEquip != null" >
+        #{newEquip,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=INTEGER},
+      </if>
+      <if test="uninstall != null" >
+        #{uninstall,jdbcType=INTEGER},
+      </if>
+      <if test="payEquip != null" >
+        #{payEquip,jdbcType=INTEGER},
+      </if>
+      <if test="newPayEquip != null" >
+        #{newPayEquip,jdbcType=INTEGER},
+      </if>
+      <if test="payAmount != null" >
+        #{payAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="newPayAmount != null" >
+        #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPayAmount != null" >
+        #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelDay" >
+    update equip_model_day
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="ds != null" >
+        ds = #{ds,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="dau != null" >
+        dau = #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="newEquip != null" >
+        new_equip = #{newEquip,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=INTEGER},
+      </if>
+      <if test="uninstall != null" >
+        uninstall = #{uninstall,jdbcType=INTEGER},
+      </if>
+      <if test="payEquip != null" >
+        pay_equip = #{payEquip,jdbcType=INTEGER},
+      </if>
+      <if test="newPayEquip != null" >
+        new_pay_equip = #{newPayEquip,jdbcType=INTEGER},
+      </if>
+      <if test="payAmount != null" >
+        pay_amount = #{payAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.equip.EquipModelDay" >
+    update equip_model_day
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      ds = #{ds,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      dau = #{dau,jdbcType=INTEGER},
+      new_equip = #{newEquip,jdbcType=INTEGER},
+      install = #{install,jdbcType=INTEGER},
+      uninstall = #{uninstall,jdbcType=INTEGER},
+      pay_equip = #{payEquip,jdbcType=INTEGER},
+      new_pay_equip = #{newPayEquip,jdbcType=INTEGER},
+      pay_amount = #{payAmount,jdbcType=DOUBLE},
+      new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.model!= null and entity.model != ''">
+					 <![CDATA[ and model = #{entity.model} ]]>
+				</if>
+			</if>
+			<if test="beginDate != null">
+				<![CDATA[ and ds >= #{beginDate} ]]>
+			</if>
+			<if test="endDate != null">
+				<![CDATA[ and ds <= #{endDate} ]]>
+			</if>
+		</where>
+	</sql>
+  
+  <select id="selectList" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from equip_model_day
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	 <if test="searchValue != null">
+	  	and (
+	  	ds like concat('%', #{searchValue}, '%') or
+	  	model like concat('%', #{searchValue}, '%')
+	  	)
+	</if>
+	 <if test="orderValue != null">
+	${orderValue}
+	</if>
+	   <if test="queryType == 'limit'">
+	    limit #{offset},#{rows}
+	 </if>
+  </select>
+  
+  <select id="selectCount" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultType="java.lang.Long">
+  	select count(1) from (
+  	select 
+  	<include refid="Base_Column_List" />
+  	from equip_model_day
+  	<if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	</if>
+	 <if test="searchValue != null">
+	  	and (
+	  	ds like concat('%', #{searchValue}, '%') or
+	  	model like concat('%', #{searchValue}, '%')
+	  	)
+	</if>
+	 )a
+  </select>
+  
+  <resultMap id="PieResultMap" type="com.hoolai.bi.report.vo.EquipModelDayVO" >
+       <result column="snid" property="entity.snid" jdbcType="VARCHAR" />
+       <result column="gameid" property="entity.gameid" jdbcType="VARCHAR" />
+       <result column="model" property="entity.model" jdbcType="VARCHAR" />
+       <result column="model_sum_data" property="smSumData" jdbcType="INTEGER" />
+       <result column="sum_data" property="smTotalSumData" jdbcType="DOUBLE" />
+   </resultMap>
+  
+  
+  <select id="selectInsatll4Pie" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultMap="PieResultMap">
+    select b.*,a.s1 as sum_data from (
+      select e.snid,e.gameid,e.model,sum(install) as model_sum_data
+      from equip_model_day e
+      <if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	  </if>
+      group by e.model) b
+      left join 
+      (select snid,gameid,SUM(install) s1 
+       from equip_model_day e1 
+       <if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	   </if>) a
+      on b.snid=a.snid and b.gameid=a.gameid
+      order by b.model_sum_data desc limit 0,5
+  </select>
+  
+  <select id="selectDau4Pie" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultMap="PieResultMap">
+    select b.*,a.s1 as sum_data from (
+      select e.snid,e.gameid,e.model,sum(dau) as model_sum_data
+      from equip_model_day e
+      <if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	  </if>
+      group by e.model) b
+      left join 
+      (select snid,gameid,SUM(dau) s1 
+       from equip_model_day e1 
+       <if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	   </if>) a
+      on b.snid=a.snid and b.gameid=a.gameid
+      order by b.model_sum_data desc limit 0,5
+  </select>
+  
+  <select id="selectNewEquip4Pie" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultMap="PieResultMap">
+    select b.*,a.s1 as sum_data from (
+      select e.snid,e.gameid,e.model,sum(new_equip) as model_sum_data
+      from equip_model_day e
+      <if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	  </if>
+      group by e.model) b
+      left join 
+      (select snid,gameid,SUM(new_equip) s1 
+       from equip_model_day e1 
+       <if test="_parameter != null">
+		<include refid="Vo_Where_Clause" />
+	   </if>) a
+      on b.snid=a.snid and b.gameid=a.gameid
+      order by b.model_sum_data desc limit 0,5
+  </select>
+  
+  <select id="selectDau4Bar" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultType="java.util.Map">
+  ${searchValue}
+  </select>
+  <select id="selectNewEquip4Line" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultType="java.util.Map">
+  ${searchValue}
+  </select>
+  <select id="selectNewEquipRate4Line" parameterType="com.hoolai.bi.report.vo.EquipModelDayVO" resultType="java.util.Map">
+  ${searchValue}
+  </select>
+</mapper>

@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hoolai.bi.report.model.entity.ClientDailyReport" >
+  <resultMap id="BaseResultMap" type="com.hoolai.bi.report.model.entity.ClientDailyReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="snid" property="snid" jdbcType="VARCHAR" />
+    <result column="gameid" property="gameid" jdbcType="VARCHAR" />
+    <result column="clientid" property="clientid" jdbcType="VARCHAR" />
+    <result column="payment_amount" property="paymentAmount" jdbcType="DOUBLE" />
+    <result column="dau" property="dau" jdbcType="INTEGER" />
+    <result column="install" property="install" jdbcType="INTEGER" />
+    <result column="dnu" property="dnu" jdbcType="INTEGER" />
+    <result column="arpu" property="arpu" jdbcType="DOUBLE" />
+    <result column="arppu" property="arppu" jdbcType="DOUBLE" />
+    <result column="pu" property="pu" jdbcType="INTEGER" />
+    <result column="payment_cnt" property="paymentCnt" jdbcType="INTEGER" />
+    <result column="pay_rate" property="payRate" jdbcType="REAL" />
+    <result column="roll_users" property="rollUsers" jdbcType="INTEGER" />
+    <result column="roll_pay_users" property="rollPayUsers" jdbcType="INTEGER" />
+    <result column="roll_amount" property="rollAmount" jdbcType="DOUBLE" />
+    <result column="new_pu" property="newPu" jdbcType="INTEGER" />
+    <result column="new_pay_amount" property="newPayAmount" jdbcType="DOUBLE" />
+    <result column="install_pu" property="installPu" jdbcType="INTEGER" />
+    <result column="install_pay_amount" property="installPayAmount" jdbcType="DOUBLE" />
+    <result column="acu" property="acu" jdbcType="DOUBLE" />
+    <result column="avg_user_time" property="avgUserTime" jdbcType="INTEGER" />
+    <result column="pcu" property="pcu" jdbcType="DOUBLE" />
+    <result column="day" property="day" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, snid, gameid, clientid, payment_amount, dau, install, dnu, arpu, arppu, pu, payment_cnt, 
+    pay_rate, roll_users, roll_pay_users, roll_amount, new_pu, new_pay_amount, install_pu, 
+    install_pay_amount, acu, avg_user_time, pcu, day, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from client_daily_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from client_daily_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hoolai.bi.report.model.entity.ClientDailyReport" >
+    insert into client_daily_report (id, snid, gameid, 
+      clientid, payment_amount, dau, 
+      install, dnu, arpu, 
+      arppu, pu, payment_cnt, 
+      pay_rate, roll_users, roll_pay_users, 
+      roll_amount, new_pu, new_pay_amount, 
+      install_pu, install_pay_amount, acu, 
+      avg_user_time, pcu, day, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{snid,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, 
+      #{clientid,jdbcType=VARCHAR}, #{paymentAmount,jdbcType=DOUBLE}, #{dau,jdbcType=INTEGER}, 
+      #{install,jdbcType=INTEGER}, #{dnu,jdbcType=INTEGER}, #{arpu,jdbcType=DOUBLE}, 
+      #{arppu,jdbcType=DOUBLE}, #{pu,jdbcType=INTEGER}, #{paymentCnt,jdbcType=INTEGER}, 
+      #{payRate,jdbcType=REAL}, #{rollUsers,jdbcType=INTEGER}, #{rollPayUsers,jdbcType=INTEGER}, 
+      #{rollAmount,jdbcType=DOUBLE}, #{newPu,jdbcType=INTEGER}, #{newPayAmount,jdbcType=DOUBLE}, 
+      #{installPu,jdbcType=INTEGER}, #{installPayAmount,jdbcType=DOUBLE}, #{acu,jdbcType=DOUBLE}, 
+      #{avgUserTime,jdbcType=INTEGER}, #{pcu,jdbcType=DOUBLE}, #{day,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hoolai.bi.report.model.entity.ClientDailyReport" >
+    insert into client_daily_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="snid != null" >
+        snid,
+      </if>
+      <if test="gameid != null" >
+        gameid,
+      </if>
+      <if test="clientid != null" >
+        clientid,
+      </if>
+      <if test="paymentAmount != null" >
+        payment_amount,
+      </if>
+      <if test="dau != null" >
+        dau,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="dnu != null" >
+        dnu,
+      </if>
+      <if test="arpu != null" >
+        arpu,
+      </if>
+      <if test="arppu != null" >
+        arppu,
+      </if>
+      <if test="pu != null" >
+        pu,
+      </if>
+      <if test="paymentCnt != null" >
+        payment_cnt,
+      </if>
+      <if test="payRate != null" >
+        pay_rate,
+      </if>
+      <if test="rollUsers != null" >
+        roll_users,
+      </if>
+      <if test="rollPayUsers != null" >
+        roll_pay_users,
+      </if>
+      <if test="rollAmount != null" >
+        roll_amount,
+      </if>
+      <if test="newPu != null" >
+        new_pu,
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount,
+      </if>
+      <if test="installPu != null" >
+        install_pu,
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount,
+      </if>
+      <if test="acu != null" >
+        acu,
+      </if>
+      <if test="avgUserTime != null" >
+        avg_user_time,
+      </if>
+      <if test="pcu != null" >
+        pcu,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="snid != null" >
+        #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null" >
+        #{paymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="dau != null" >
+        #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=INTEGER},
+      </if>
+      <if test="dnu != null" >
+        #{dnu,jdbcType=INTEGER},
+      </if>
+      <if test="arpu != null" >
+        #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="arppu != null" >
+        #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="pu != null" >
+        #{pu,jdbcType=INTEGER},
+      </if>
+      <if test="paymentCnt != null" >
+        #{paymentCnt,jdbcType=INTEGER},
+      </if>
+      <if test="payRate != null" >
+        #{payRate,jdbcType=REAL},
+      </if>
+      <if test="rollUsers != null" >
+        #{rollUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollPayUsers != null" >
+        #{rollPayUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollAmount != null" >
+        #{rollAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="newPu != null" >
+        #{newPu,jdbcType=INTEGER},
+      </if>
+      <if test="newPayAmount != null" >
+        #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPu != null" >
+        #{installPu,jdbcType=INTEGER},
+      </if>
+      <if test="installPayAmount != null" >
+        #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="acu != null" >
+        #{acu,jdbcType=DOUBLE},
+      </if>
+      <if test="avgUserTime != null" >
+        #{avgUserTime,jdbcType=INTEGER},
+      </if>
+      <if test="pcu != null" >
+        #{pcu,jdbcType=DOUBLE},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hoolai.bi.report.model.entity.ClientDailyReport" >
+    update client_daily_report
+    <set >
+      <if test="snid != null" >
+        snid = #{snid,jdbcType=VARCHAR},
+      </if>
+      <if test="gameid != null" >
+        gameid = #{gameid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientid != null" >
+        clientid = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null" >
+        payment_amount = #{paymentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="dau != null" >
+        dau = #{dau,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=INTEGER},
+      </if>
+      <if test="dnu != null" >
+        dnu = #{dnu,jdbcType=INTEGER},
+      </if>
+      <if test="arpu != null" >
+        arpu = #{arpu,jdbcType=DOUBLE},
+      </if>
+      <if test="arppu != null" >
+        arppu = #{arppu,jdbcType=DOUBLE},
+      </if>
+      <if test="pu != null" >
+        pu = #{pu,jdbcType=INTEGER},
+      </if>
+      <if test="paymentCnt != null" >
+        payment_cnt = #{paymentCnt,jdbcType=INTEGER},
+      </if>
+      <if test="payRate != null" >
+        pay_rate = #{payRate,jdbcType=REAL},
+      </if>
+      <if test="rollUsers != null" >
+        roll_users = #{rollUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollPayUsers != null" >
+        roll_pay_users = #{rollPayUsers,jdbcType=INTEGER},
+      </if>
+      <if test="rollAmount != null" >
+        roll_amount = #{rollAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="newPu != null" >
+        new_pu = #{newPu,jdbcType=INTEGER},
+      </if>
+      <if test="newPayAmount != null" >
+        new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="installPu != null" >
+        install_pu = #{installPu,jdbcType=INTEGER},
+      </if>
+      <if test="installPayAmount != null" >
+        install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="acu != null" >
+        acu = #{acu,jdbcType=DOUBLE},
+      </if>
+      <if test="avgUserTime != null" >
+        avg_user_time = #{avgUserTime,jdbcType=INTEGER},
+      </if>
+      <if test="pcu != null" >
+        pcu = #{pcu,jdbcType=DOUBLE},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hoolai.bi.report.model.entity.ClientDailyReport" >
+    update client_daily_report
+    set snid = #{snid,jdbcType=VARCHAR},
+      gameid = #{gameid,jdbcType=VARCHAR},
+      clientid = #{clientid,jdbcType=VARCHAR},
+      payment_amount = #{paymentAmount,jdbcType=DOUBLE},
+      dau = #{dau,jdbcType=INTEGER},
+      install = #{install,jdbcType=INTEGER},
+      dnu = #{dnu,jdbcType=INTEGER},
+      arpu = #{arpu,jdbcType=DOUBLE},
+      arppu = #{arppu,jdbcType=DOUBLE},
+      pu = #{pu,jdbcType=INTEGER},
+      payment_cnt = #{paymentCnt,jdbcType=INTEGER},
+      pay_rate = #{payRate,jdbcType=REAL},
+      roll_users = #{rollUsers,jdbcType=INTEGER},
+      roll_pay_users = #{rollPayUsers,jdbcType=INTEGER},
+      roll_amount = #{rollAmount,jdbcType=DOUBLE},
+      new_pu = #{newPu,jdbcType=INTEGER},
+      new_pay_amount = #{newPayAmount,jdbcType=DOUBLE},
+      install_pu = #{installPu,jdbcType=INTEGER},
+      install_pay_amount = #{installPayAmount,jdbcType=DOUBLE},
+      acu = #{acu,jdbcType=DOUBLE},
+      avg_user_time = #{avgUserTime,jdbcType=INTEGER},
+      pcu = #{pcu,jdbcType=DOUBLE},
+      day = #{day,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="Vo_Where_Clause">
+		<where>
+			<if test="entity!=null">
+				<if test="entity.id != null ">
+					 <![CDATA[ and id = #{entity.id} ]]>
+				</if>
+				<if test="entity.snid != null and entity.snid != ''">
+					 <![CDATA[ and snid = #{entity.snid} ]]>
+				</if>
+				<if test="entity.gameid != null and entity.gameid != ''">
+					 <![CDATA[ and gameid = #{entity.gameid} ]]>
+				</if>
+				<if test="entity.clientid != null and entity.clientid != ''">
+					 <![CDATA[ and clientid = #{entity.clientid} ]]>
+				</if>
+				<if test="beginDate != null">
+					 <![CDATA[ and day >= #{beginDate} ]]>
+				</if>
+				<if test="endDate != null">
+					 <![CDATA[ and day <= #{endDate} ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+  
+  <select id="selectGameClients" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultType="java.lang.String">
+    select distinct clientid 
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+	order by clientid+0 desc;
+  </select>
+  
+  <select id="selectClientMatchList" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultMap="BaseResultMap">
+  		SELECT SUM(payment_amount)AS payment_amount,SUM(dau)AS dau,SUM(INSTALL)AS INSTALL,SUM(dnu)AS dnu,SUM(pu)AS pu,
+		SUM(payment_cnt)AS payment_cnt,SUM(roll_users)AS roll_users,SUM(roll_pay_users)AS roll_pay_users,
+		SUM(roll_amount)AS roll_amount,SUM(new_pu)AS new_pu,SUM(new_pay_amount)AS new_pay_amount,SUM(install_pu)AS install_pu,
+		SUM(install_pay_amount)AS install_pay_amount,SUM(acu)AS acu,SUM(avg_user_time)AS avg_user_time,SUM(pcu)AS pcu,
+		SUM(arpu)AS arpu,SUM(arppu)AS arppu,SUM(payment_cnt)AS payment_cnt,SUM(pay_rate)AS pay_rate FROM (
+			select 
+		     <include refid="Base_Column_List" />
+		     from client_daily_report
+		     <if test="_parameter != null">
+				<include refid="Vo_Where_Clause" />
+			</if>
+		)t
+  </select>
+  
+  <select id="selectMatchList" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from client_daily_report
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+		</if>
+  </select>
+  
+  <resultMap id="PieResultMap" type="com.hoolai.bi.report.vo.ClientDailyReportVO" >
+       <result column="snid" property="entity.snid" jdbcType="VARCHAR" />
+       <result column="gameid" property="entity.gameid" jdbcType="VARCHAR" />
+       <result column="clientid" property="entity.clientid" jdbcType="INTEGER" />
+       <result column="dnuSum" property="dnuSum" jdbcType="INTEGER" />
+       <result column="dauSum" property="dauSum" jdbcType="DOUBLE" />
+       <result column="paymentSum" property="paymentSum" jdbcType="DOUBLE" />
+       <result column="installSum" property="installSum" jdbcType="INTEGER" />
+    </resultMap>
+  
+  <select id="selectInstallForPieList" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultMap="PieResultMap">
+    select snid,gameid,clientid,sum(dnu) dnuSum
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+   group by clientid
+   order by dnuSum desc
+   <![CDATA[ limit 0, 10 ]]>
+  </select>
+  
+  <select id="selectInstallForPieListCount" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultType="java.lang.Long">
+    select sum(dnu) dnuSum
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+  
+  <select id="selectDauForPieListCount" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultType="java.lang.Long">
+    select sum(dau) dauSum
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+  
+  <select id="selectDauForPieList" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultMap="PieResultMap">
+    select snid,gameid,clientid,sum(dau) dauSum
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+   group by clientid
+   order by dauSum desc
+   <![CDATA[ limit 0, 10 ]]>
+  </select>
+  
+  <select id="selectPaymentForPieListCount" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultType="java.lang.Long">
+    select sum(payment_amount) paymentSum
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+  </select>
+  
+  <select id="selectPaymentForPieList" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultMap="PieResultMap">
+    select snid,gameid,clientid,sum(payment_amount) paymentSum
+    from client_daily_report
+   <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+   group by clientid
+   order by paymentSum desc
+   <![CDATA[ limit 0, 10 ]]>
+  </select>
+  
+  <select id="selectInstallForDownLoad" parameterType="com.hoolai.bi.report.vo.ClientDailyReportVO" resultMap="PieResultMap">
+    select clientid,sum(install) installSum
+    from client_daily_report
+    <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	</if>
+    group by clientid
+    order by clientid+0
+  </select>
+  
+  <select id="selectList" parameterType="com.hoolai.bi.report.vo.SourceDailyReportVO" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from client_daily_report
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	 </if>
+	 <if test="searchValue != null">
+	   and (day like concat('%', #{searchValue}, '%') or clientid like concat('%', #{searchValue}, '%'))
+	 </if>
+	  ${orderValue} , clientid+0 desc
+	 limit #{offset},#{rows}
+  </select>
+  
+  <select id="selectCount" parameterType="com.hoolai.bi.report.vo.SourceDailyReportVO" resultType="java.lang.Long">
+     select count(1)
+     from client_daily_report
+     <if test="_parameter != null">
+			<include refid="Vo_Where_Clause" />
+	 </if>
+	 <if test="searchValue != null">
+	    and (day like concat('%', #{searchValue}, '%') or clientid like concat('%', #{searchValue}, '%'))
+	 </if>
+  </select>
+  
+</mapper>
